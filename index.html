@@ -4,227 +4,346 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MILEA Executive Club — Bangkok Thaniya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400&display=swap');
-  * { margin:0; padding:0; box-sizing:border-box; }
-  :root { --gold:#c9a84c; --dark:#08070a; --mid:#12100f; }
-  body { background:var(--dark); color:#d4c9b0; font-family:'Noto Serif JP',serif; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{--gold:#c9a84c;--gold2:#8b6914;--dark:#07060a;--mid:#0f0e14;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--dark);color:#d4c9b0;font-family:'Noto Serif JP',serif;cursor:none;overflow-x:hidden;}
 
-  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 8%; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg,rgba(8,7,10,0.95),transparent); }
-  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:22px; letter-spacing:6px; color:var(--gold); }
-  .nav-links { display:flex; gap:40px; list-style:none; }
-  .nav-links a { font-size:11px; letter-spacing:4px; color:#7a7060; text-decoration:none; text-transform:uppercase; transition:color 0.3s; }
-  .nav-links a:hover { color:var(--gold); }
+  /* Custom cursor */
+  #cursor{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
+  #cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(201,168,76,0.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.12s ease;}
+  body:hover #cursor-ring{opacity:1;}
 
-  .hero { height:100vh; position:relative; display:flex; align-items:center; justify-content:center; }
-  .hero-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1600&q=80') center/cover; filter:brightness(0.3); }
-  .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,7,10,0.3) 0%,rgba(8,7,10,0.7) 100%); }
-  .hero-content { position:relative; text-align:center; padding:40px; }
-  .hero-label { font-size:11px; letter-spacing:8px; color:var(--gold); text-transform:uppercase; margin-bottom:30px; }
-  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(50px,8vw,100px); font-weight:300; color:#fff; letter-spacing:8px; line-height:1; margin-bottom:10px; }
-  .hero-sub { font-family:'Cormorant Garamond',serif; font-size:clamp(14px,2vw,20px); color:var(--gold); letter-spacing:5px; font-style:italic; margin-bottom:40px; }
-  .hero-divider { width:60px; height:1px; background:var(--gold); margin:30px auto; }
-  .hero-desc { font-size:14px; color:#9a9080; letter-spacing:2px; }
-  .scroll-hint { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); font-size:11px; letter-spacing:4px; color:#4a4030; }
+  /* Canvas particles */
+  #particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;}
 
-  section { padding:120px 8%; }
-  .s-label { font-size:11px; letter-spacing:6px; color:var(--gold); text-transform:uppercase; margin-bottom:20px; }
-  .s-title { font-family:'Cormorant Garamond',serif; font-size:clamp(32px,4vw,56px); font-weight:300; color:#e8dfc8; line-height:1.2; margin-bottom:20px; }
-  .s-text { font-size:14px; color:#9a9080; line-height:2; max-width:600px; }
-  .gold-line { width:60px; height:1px; background:var(--gold); margin:30px 0; }
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:24px 8%;display:flex;justify-content:space-between;align-items:center;transition:background 0.4s;}
+  nav.scrolled{background:rgba(7,6,10,0.95);backdrop-filter:blur(10px);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:8px;color:var(--gold);opacity:0;animation:fadeIn 1.5s 0.5s forwards;}
+  .nav-links{display:flex;gap:40px;list-style:none;}
+  .nav-links a{font-size:11px;letter-spacing:4px;color:#6a6050;text-decoration:none;text-transform:uppercase;transition:color 0.3s;position:relative;}
+  .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s;}
+  .nav-links a:hover{color:var(--gold);}
+  .nav-links a:hover::after{width:100%;}
 
-  .concept { background:var(--mid); }
-  .concept-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; margin-top:60px; }
-  .concept-img { position:relative; height:500px; overflow:hidden; }
-  .concept-img img { width:100%; height:100%; object-fit:cover; filter:brightness(0.8); }
-  .concept-img::after { content:''; position:absolute; inset:0; border:1px solid rgba(201,168,76,0.3); margin:20px; pointer-events:none; }
-  .concept-text h3 { font-family:'Cormorant Garamond',serif; font-size:28px; color:var(--gold); font-weight:300; margin-bottom:20px; }
-  .concept-text p { font-size:14px; color:#8a8070; line-height:2.2; margin-bottom:20px; }
+  /* HERO */
+  .hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1920&q=85') center/cover;filter:brightness(0.25);transform:scale(1.1);transition:transform 8s ease;}
+  .hero-bg.loaded{transform:scale(1);}
+  .hero-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(7,6,10,0.8) 100%);}
+  .hero-content{position:relative;z-index:1;text-align:center;padding:40px;}
+  .hero-eyebrow{font-size:11px;letter-spacing:10px;color:var(--gold2);text-transform:uppercase;opacity:0;transform:translateY(20px);transition:all 0.8s;}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(60px,10vw,130px);font-weight:300;color:#fff;letter-spacing:12px;line-height:0.9;opacity:0;transform:translateY(30px);transition:all 1s 0.3s;}
+  .hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,2vw,22px);color:var(--gold);letter-spacing:6px;font-style:italic;opacity:0;transform:translateY(20px);transition:all 0.8s 0.6s;}
+  .hero-line{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:35px auto;transition:width 1.2s 0.9s;}
+  .hero-desc{font-size:13px;color:#7a7060;letter-spacing:3px;opacity:0;transition:all 0.8s 1.1s;}
+  .hero-content.visible .hero-eyebrow,
+  .hero-content.visible .hero-title,
+  .hero-content.visible .hero-sub,
+  .hero-content.visible .hero-desc{opacity:1;transform:translateY(0);}
+  .hero-content.visible .hero-line{width:80px;}
 
-  .atmosphere { background:var(--dark); }
-  .atm-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-top:60px; }
-  .atm-item { position:relative; overflow:hidden; aspect-ratio:3/4; }
-  .atm-item img { width:100%; height:100%; object-fit:cover; filter:brightness(0.7); transition:transform 0.6s,filter 0.6s; }
-  .atm-item:hover img { transform:scale(1.05); filter:brightness(0.9); }
-  .atm-item .overlay { position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(transparent,rgba(8,7,10,0.9)); opacity:0; transition:opacity 0.3s; }
-  .atm-item:hover .overlay { opacity:1; }
-  .atm-item .overlay span { font-size:12px; letter-spacing:3px; color:var(--gold); }
+  /* Scroll indicator */
+  .scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s 2s forwards;}
+  .scroll-indicator span{font-size:10px;letter-spacing:4px;color:#3a3020;}
+  .scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--gold2),transparent);animation:scrollPulse 2s infinite;}
 
-  .cast { background:var(--mid); }
-  .cast-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:60px; }
-  .cast-card img { width:100%; aspect-ratio:2/3; object-fit:cover; filter:brightness(0.75); transition:filter 0.4s; }
-  .cast-card:hover img { filter:brightness(0.9); }
-  .cast-info { padding:15px 0; }
-  .cast-info .name { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); font-weight:300; }
-  .cast-info .detail { font-size:11px; color:#5a5040; letter-spacing:2px; margin-top:5px; }
+  /* Sections */
+  section{position:relative;z-index:1;padding:120px 8%;}
+  .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s,transform 0.8s;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.8s,transform 0.8s;}
+  .reveal-left.visible{opacity:1;transform:translateX(0);}
+  .reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.8s,transform 0.8s;}
+  .reveal-right.visible{opacity:1;transform:translateX(0);}
 
-  .system { background:var(--dark); }
-  .system-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; margin-top:60px; }
-  .sys-item { border:1px solid #1e1a12; padding:40px 30px; text-align:center; transition:border-color 0.3s; }
-  .sys-item:hover { border-color:rgba(201,168,76,0.4); }
-  .sys-item .icon { font-size:32px; margin-bottom:20px; }
-  .sys-item h3 { font-family:'Cormorant Garamond',serif; font-size:22px; color:var(--gold); font-weight:400; margin-bottom:15px; }
-  .sys-item p { font-size:13px; color:#7a7060; line-height:1.9; }
-  .price-tag { display:inline-block; border:1px solid var(--gold); padding:8px 20px; font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--gold); margin-top:15px; }
+  .s-label{font-size:11px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;}
+  .s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,60px);font-weight:300;color:#e8dfc8;line-height:1.2;margin-bottom:20px;}
+  .gold-line{width:60px;height:1px;background:var(--gold);margin:30px 0;}
+  .s-text{font-size:14px;color:#9a9080;line-height:2.2;max-width:600px;}
 
-  .access { background:var(--mid); }
-  .access-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:60px; align-items:start; }
-  .access-info p { font-size:14px; color:#8a8070; line-height:2.5; display:flex; gap:20px; }
-  .access-info p strong { color:var(--gold); font-weight:400; min-width:80px; }
-  .map-placeholder { height:350px; background:#1a1810; display:flex; align-items:center; justify-content:center; border:1px solid #2a2418; }
-  .map-placeholder span { color:#3a3020; letter-spacing:3px; font-size:12px; }
+  /* CONCEPT */
+  .concept{background:var(--mid);}
+  .concept-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px;}
+  .concept-img{position:relative;height:520px;overflow:hidden;}
+  .concept-img img{width:100%;height:100%;object-fit:cover;filter:brightness(0.8);transform:scale(1.05);transition:transform 6s ease;}
+  .concept-img:hover img{transform:scale(1);}
+  .concept-img::before{content:'';position:absolute;inset:15px;border:1px solid rgba(201,168,76,0.2);z-index:1;pointer-events:none;transition:inset 0.4s;}
+  .concept-img:hover::before{inset:8px;}
+  .concept-text h3{font-family:'Cormorant Garamond',serif;font-size:30px;color:var(--gold);font-weight:300;margin-bottom:25px;line-height:1.4;}
+  .concept-text p{font-size:14px;color:#8a8070;line-height:2.4;margin-bottom:20px;}
+  .concept-badge{display:inline-block;border:1px solid var(--gold2);padding:10px 24px;font-size:11px;color:var(--gold);letter-spacing:4px;margin-top:10px;position:relative;overflow:hidden;transition:color 0.3s;}
+  .concept-badge::before{content:'';position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);transition:transform 0.3s;}
+  .concept-badge:hover{color:var(--dark);}
+  .concept-badge:hover::before{transform:translateX(0);}
+  .concept-badge span{position:relative;z-index:1;}
 
-  footer { background:var(--dark); border-top:1px solid #1a1810; padding:80px 8%; text-align:center; }
-  .footer-logo { font-family:'Cormorant Garamond',serif; font-size:28px; letter-spacing:8px; color:var(--gold); margin-bottom:20px; }
-  .footer-sns { display:flex; gap:30px; justify-content:center; margin:30px 0; }
-  .footer-sns a { font-size:11px; letter-spacing:3px; color:#4a4030; text-decoration:none; transition:color 0.3s; }
-  .footer-sns a:hover { color:var(--gold); }
-  .footer-copy { font-size:11px; color:#2a2018; letter-spacing:3px; }
+  /* ATMOSPHERE */
+  .atmosphere{background:var(--dark);}
+  .atm-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;margin-top:60px;height:600px;}
+  .atm-item{position:relative;overflow:hidden;}
+  .atm-item:first-child{grid-row:1/3;}
+  .atm-item img{width:100%;height:100%;object-fit:cover;filter:brightness(0.65);transition:transform 0.7s,filter 0.5s;}
+  .atm-item:hover img{transform:scale(1.06);filter:brightness(0.85);}
+  .atm-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,6,10,0.9) 0%,transparent 50%);opacity:0;transition:opacity 0.4s;}
+  .atm-item:hover .atm-overlay{opacity:1;}
+  .atm-label{position:absolute;bottom:20px;left:20px;font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--gold);letter-spacing:4px;opacity:0;transform:translateY(10px);transition:all 0.4s;}
+  .atm-item:hover .atm-label{opacity:1;transform:translateY(0);}
 
-  @media(max-width:768px) {
-    .concept-grid,.access-grid { grid-template-columns:1fr; gap:40px; }
-    .atm-grid { grid-template-columns:repeat(2,1fr); }
-    .cast-grid { grid-template-columns:repeat(2,1fr); }
-    .system-grid { grid-template-columns:1fr; }
-    nav .nav-links { display:none; }
+  /* CAST */
+  .cast{background:var(--mid);}
+  .cast-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px;}
+  .cast-card{position:relative;overflow:hidden;cursor:pointer;}
+  .cast-card img{width:100%;aspect-ratio:2/3;object-fit:cover;filter:brightness(0.6) grayscale(30%);transition:filter 0.5s,transform 0.6s;}
+  .cast-card:hover img{filter:brightness(0.85) grayscale(0%);transform:scale(1.04);}
+  .cast-info{position:absolute;bottom:0;left:0;right:0;padding:25px 20px;background:linear-gradient(transparent,rgba(7,6,10,0.95));transform:translateY(10px);opacity:0;transition:all 0.4s;}
+  .cast-card:hover .cast-info{opacity:1;transform:translateY(0);}
+  .cast-name{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);font-weight:300;}
+  .cast-detail{font-size:11px;color:#7a7060;letter-spacing:2px;margin-top:5px;}
+
+  /* SYSTEM */
+  .system{background:var(--dark);}
+  .system-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:60px;background:#1a1810;}
+  .sys-item{background:var(--dark);padding:50px 35px;text-align:center;transition:background 0.3s;}
+  .sys-item:hover{background:#0f0e14;}
+  .sys-icon{font-size:36px;margin-bottom:25px;display:block;}
+  .sys-item h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--gold);font-weight:400;margin-bottom:15px;}
+  .sys-item p{font-size:13px;color:#6a6050;line-height:2;}
+  .sys-price{display:inline-block;border:1px solid var(--gold2);padding:8px 20px;font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold);margin-top:20px;}
+
+  /* COUNTER */
+  .counter-section{background:linear-gradient(135deg,#0a0a0a,#12100a,#0a0a0a);padding:80px 8%;text-align:center;}
+  .counter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;max-width:900px;margin:0 auto;}
+  .counter-item .num{font-family:'Cormorant Garamond',serif;font-size:60px;color:var(--gold);font-weight:300;display:block;line-height:1;}
+  .counter-item .unit{font-size:18px;color:var(--gold2);}
+  .counter-item .label{font-size:11px;color:#3a3020;letter-spacing:3px;margin-top:10px;display:block;}
+
+  /* ACCESS */
+  .access{background:var(--mid);}
+  .access-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:60px;align-items:start;}
+  .access-info{display:flex;flex-direction:column;gap:20px;}
+  .access-row{display:flex;gap:20px;align-items:flex-start;padding-bottom:20px;border-bottom:1px solid #1a1810;}
+  .access-row strong{font-size:11px;color:var(--gold);letter-spacing:3px;min-width:80px;padding-top:3px;}
+  .access-row span{font-size:14px;color:#8a8070;line-height:1.8;}
+  .map-frame{height:380px;background:#12100f;border:1px solid #1a1810;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+  .map-frame::before{content:'THANIYA\A BANGKOK';white-space:pre;font-family:'Cormorant Garamond',serif;font-size:20px;color:#2a2418;letter-spacing:6px;text-align:center;line-height:2;}
+
+  /* FOOTER */
+  footer{background:var(--dark);border-top:1px solid #0e0d12;padding:80px 8%;text-align:center;}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:32px;letter-spacing:10px;color:var(--gold);margin-bottom:5px;display:block;}
+  .footer-sub{font-size:11px;color:#2a2418;letter-spacing:5px;margin-bottom:40px;display:block;}
+  .footer-sns{display:flex;gap:35px;justify-content:center;margin-bottom:40px;}
+  .footer-sns a{font-size:11px;letter-spacing:3px;color:#3a3020;text-decoration:none;transition:color 0.3s;}
+  .footer-sns a:hover{color:var(--gold);}
+  .footer-copy{font-size:11px;color:#1a1810;letter-spacing:3px;}
+
+  /* Animations */
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  @keyframes scrollPulse{0%,100%{opacity:1;transform:scaleY(1);}50%{opacity:0.3;transform:scaleY(0.6);}}
+
+  @media(max-width:900px){
+    .concept-grid,.access-grid{grid-template-columns:1fr;gap:40px;}
+    .atm-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;height:auto;}
+    .atm-item:first-child{grid-row:auto;}
+    .cast-grid{grid-template-columns:repeat(2,1fr);}
+    .system-grid{grid-template-columns:1fr;}
+    .counter-grid{grid-template-columns:repeat(2,1fr);}
+    nav .nav-links{display:none;}
+    body{cursor:auto;}
+    #cursor,#cursor-ring{display:none;}
   }
 </style>
 </head>
 <body>
 
-<nav>
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Particles canvas -->
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
   <div class="nav-logo">MILEA</div>
   <ul class="nav-links">
     <li><a href="#concept">Concept</a></li>
+    <li><a href="#atmosphere">Space</a></li>
     <li><a href="#cast">Cast</a></li>
     <li><a href="#system">System</a></li>
     <li><a href="#access">Access</a></li>
   </ul>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-label">Thaniya — Bangkok</div>
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-content" id="heroContent">
+    <div class="hero-eyebrow">Thaniya — Bangkok — Executive Club</div>
     <div class="hero-title">MILEA</div>
-    <div class="hero-sub">Executive Club</div>
-    <div class="hero-divider"></div>
-    <div class="hero-desc">バンコク・タニヤが誇る、特別な夜の空間</div>
+    <div class="hero-sub">特別な夜を、あなたと。</div>
+    <div class="hero-line"></div>
+    <div class="hero-desc">OPEN 18:30 — Soi Thaniya, Silom</div>
   </div>
-  <div class="scroll-hint">SCROLL ↓</div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>SCROLL</span>
+  </div>
 </div>
 
+<!-- CONCEPT -->
 <section class="concept" id="concept">
-  <div class="s-label">Concept</div>
-  <h2 class="s-title">特別な夜を、<br>あなたと。</h2>
-  <div class="gold-line"></div>
+  <div class="s-label reveal">Concept</div>
+  <h2 class="s-title reveal">ミレアという名の夜</h2>
+  <div class="gold-line reveal"></div>
   <div class="concept-grid">
-    <div class="concept-img">
-      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80" alt="Interior">
+    <div class="concept-img reveal-left">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=900&q=85" alt="Interior" loading="lazy">
     </div>
-    <div class="concept-text">
-      <h3>ミレアという名の夜</h3>
-      <p>バンコク・タニヤの中心に位置するMILEA Executive Clubは、日本人男性のための上質な社交空間です。</p>
-      <p>日本語でのおもてなしを心がけた美しいスタッフたちと、上質な空間でカラオケ、ドリンク、そして特別な夜の時間をお過ごしください。</p>
-      <p>ビジネスの接待から、大切な仲間との一夜まで。MILEAは、あなたの夜をより豊かにします。</p>
-      <div style="margin-top:30px;">
-        <span style="display:inline-block;border:1px solid var(--gold);padding:8px 20px;font-size:11px;letter-spacing:3px;color:var(--gold);">JAPANESE HOSPITALITY</span>
-      </div>
+    <div class="reveal-right">
+      <h3>バンコク・タニヤが誇る<br>上質な社交空間</h3>
+      <p>MILEA Executive Clubは、日本人男性のための特別な夜の空間です。バンコク・タニヤの中心に位置し、日本語でのおもてなしを心がけた美しいスタッフたちがお迎えします。</p>
+      <p>ビジネスの接待から、大切な仲間との一夜まで。カラオケ、上質なドリンク、そして忘れられない時間をご用意しています。</p>
+      <div class="concept-badge"><span>JAPANESE HOSPITALITY</span></div>
     </div>
   </div>
 </section>
 
-<section class="atmosphere">
-  <div class="s-label">Atmosphere</div>
-  <h2 class="s-title">空間</h2>
-  <div class="gold-line"></div>
-  <div class="atm-grid">
+<!-- ATMOSPHERE -->
+<section class="atmosphere" id="atmosphere">
+  <div class="s-label reveal">Atmosphere</div>
+  <h2 class="s-title reveal">空 間</h2>
+  <div class="gold-line reveal"></div>
+  <div class="atm-grid reveal">
     <div class="atm-item">
-      <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="">
-      <div class="overlay"><span>LOUNGE</span></div>
+      <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=900&q=80" alt="Lounge" loading="lazy">
+      <div class="atm-overlay"></div>
+      <div class="atm-label">LOUNGE</div>
     </div>
     <div class="atm-item">
-      <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" alt="">
-      <div class="overlay"><span>DRINKS</span></div>
+      <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" alt="Drinks" loading="lazy">
+      <div class="atm-overlay"></div>
+      <div class="atm-label">DRINKS</div>
     </div>
     <div class="atm-item">
-      <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80" alt="">
-      <div class="overlay"><span>KARAOKE</span></div>
+      <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80" alt="Karaoke" loading="lazy">
+      <div class="atm-overlay"></div>
+      <div class="atm-label">KARAOKE</div>
+    </div>
+    <div class="atm-item">
+      <img src="https://images.unsplash.com/photo-1569513586164-80529357ad6f?w=600&q=80" alt="Night" loading="lazy">
+      <div class="atm-overlay"></div>
+      <div class="atm-label">NIGHT</div>
+    </div>
+    <div class="atm-item">
+      <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&q=80" alt="VIP" loading="lazy">
+      <div class="atm-overlay"></div>
+      <div class="atm-label">VIP</div>
     </div>
   </div>
 </section>
 
+<!-- CAST -->
 <section class="cast" id="cast">
-  <div class="s-label">Cast</div>
-  <h2 class="s-title">スタッフ紹介</h2>
-  <div class="gold-line"></div>
-  <p class="s-text">厳選されたスタッフが、心のこもったおもてなしでお迎えします。日本語でのコミュニケーションも安心してお任せください。</p>
+  <div class="s-label reveal">Cast</div>
+  <h2 class="s-title reveal">スタッフ紹介</h2>
+  <div class="gold-line reveal"></div>
+  <p class="s-text reveal">厳選されたスタッフが、心のこもったおもてなしでお迎えします。日本語でのコミュニケーションも安心してお任せください。</p>
   <div class="cast-grid">
-    <div class="cast-card">
-      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80" alt="">
-      <div class="cast-info"><div class="name">Nana</div><div class="detail">日本語 / English OK</div></div>
+    <div class="cast-card reveal">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=500&q=80" alt="" loading="lazy">
+      <div class="cast-info"><div class="cast-name">Nana</div><div class="cast-detail">日本語 / English OK</div></div>
     </div>
-    <div class="cast-card">
-      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80" alt="">
-      <div class="cast-info"><div class="name">Mia</div><div class="detail">日本語 / カラオケ得意</div></div>
+    <div class="cast-card reveal">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80" alt="" loading="lazy">
+      <div class="cast-info"><div class="cast-name">Mia</div><div class="cast-detail">日本語 / カラオケ得意</div></div>
     </div>
-    <div class="cast-card">
-      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80" alt="">
-      <div class="cast-info"><div class="name">Fah</div><div class="detail">English / ダンス得意</div></div>
+    <div class="cast-card reveal">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80" alt="" loading="lazy">
+      <div class="cast-info"><div class="cast-name">Fah</div><div class="cast-detail">English / ダンス得意</div></div>
     </div>
-    <div class="cast-card">
-      <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&q=80" alt="">
-      <div class="cast-info"><div class="name">Anya</div><div class="detail">日本語 / 北部出身</div></div>
+    <div class="cast-card reveal">
+      <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=500&q=80" alt="" loading="lazy">
+      <div class="cast-info"><div class="cast-name">Anya</div><div class="cast-detail">日本語 / 北部出身</div></div>
     </div>
   </div>
 </section>
 
+<!-- COUNTER -->
+<div class="counter-section">
+  <div class="counter-grid">
+    <div class="counter-item reveal">
+      <span class="num" data-target="18">0</span><span class="unit">:30</span>
+      <span class="label">OPEN TIME</span>
+    </div>
+    <div class="counter-item reveal">
+      <span class="num" data-target="20">0</span><span class="unit">+</span>
+      <span class="label">CAST MEMBERS</span>
+    </div>
+    <div class="counter-item reveal">
+      <span class="num" data-target="5">0</span><span class="unit">F</span>
+      <span class="label">PRIVATE ROOMS</span>
+    </div>
+    <div class="counter-item reveal">
+      <span class="num" data-target="10000">0</span><span class="unit">+</span>
+      <span class="label">SONGS AVAILABLE</span>
+    </div>
+  </div>
+</div>
+
+<!-- SYSTEM -->
 <section class="system" id="system">
-  <div class="s-label">System & Price</div>
-  <h2 class="s-title">ご利用案内</h2>
-  <div class="gold-line"></div>
+  <div class="s-label reveal">System & Price</div>
+  <h2 class="s-title reveal">ご利用案内</h2>
+  <div class="gold-line reveal"></div>
   <div class="system-grid">
-    <div class="sys-item">
-      <div class="icon">🥂</div>
+    <div class="sys-item reveal">
+      <span class="sys-icon">🥂</span>
       <h3>Table Charge</h3>
-      <p>テーブルチャージ・セット料金</p>
-      <div class="price-tag">要お問い合わせ</div>
+      <p>テーブルチャージ・セット料金。詳細はお問い合わせください。</p>
+      <div class="sys-price">要お問い合わせ</div>
     </div>
-    <div class="sys-item">
-      <div class="icon">🎤</div>
+    <div class="sys-item reveal">
+      <span class="sys-icon">🎤</span>
       <h3>Karaoke</h3>
-      <p>日本語・英語・タイ語<br>幅広い選曲でお楽しみいただけます</p>
-      <div class="price-tag">完備</div>
+      <p>日本語・英語・タイ語。10,000曲以上の豊富な選曲でお楽しみいただけます。</p>
+      <div class="sys-price">完備</div>
     </div>
-    <div class="sys-item">
-      <div class="icon">🍾</div>
+    <div class="sys-item reveal">
+      <span class="sys-icon">🍾</span>
       <h3>Bottle Keep</h3>
-      <p>ボトルキープシステム<br>ご来店のたびにご利用いただけます</p>
-      <div class="price-tag">対応可</div>
+      <p>ボトルキープシステム完備。ご来店のたびにご利用いただけます。</p>
+      <div class="sys-price">対応可</div>
     </div>
   </div>
 </section>
 
+<!-- ACCESS -->
 <section class="access" id="access">
-  <div class="s-label">Access</div>
-  <h2 class="s-title">アクセス</h2>
-  <div class="gold-line"></div>
+  <div class="s-label reveal">Access</div>
+  <h2 class="s-title reveal">アクセス</h2>
+  <div class="gold-line reveal"></div>
   <div class="access-grid">
-    <div class="access-info">
-      <p><strong>場所</strong>Soi Thaniya, Silom, Bangkok</p>
-      <p><strong>営業時間</strong>18:30 〜 Late</p>
-      <p><strong>定休日</strong>なし（禁酒日を除く）</p>
-      <p><strong>言語</strong>日本語・英語・タイ語</p>
-      <p><strong>Instagram</strong>@milea_executive_club</p>
+    <div class="access-info reveal-left">
+      <div class="access-row"><strong>場所</strong><span>Soi Thaniya, Silom, Bangkok 10500</span></div>
+      <div class="access-row"><strong>営業時間</strong><span>18:30 〜 Late（年中無休 ※禁酒日除く）</span></div>
+      <div class="access-row"><strong>言語</strong><span>日本語 / English / ภาษาไทย</span></div>
+      <div class="access-row"><strong>Instagram</strong><span>@milea_executive_club</span></div>
+      <div class="access-row"><strong>LINE</strong><span>@milea_bkk</span></div>
     </div>
-    <div class="map-placeholder"><span>GOOGLE MAP</span></div>
+    <div class="map-frame reveal-right"></div>
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <div class="footer-logo">MILEA</div>
-  <p style="font-size:12px;color:#3a3020;letter-spacing:3px;margin-bottom:20px;">EXECUTIVE CLUB — THANIYA, BANGKOK</p>
+  <span class="footer-logo">MILEA</span>
+  <span class="footer-sub">EXECUTIVE CLUB — THANIYA, BANGKOK</span>
   <div class="footer-sns">
     <a href="#">INSTAGRAM</a>
     <a href="#">LINE</a>
@@ -233,5 +352,87 @@
   <div class="footer-copy">© 2026 MILEA Executive Club. All rights reserved.</div>
 </footer>
 
+<script>
+// ── Cursor ──────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button,.cast-card,.atm-item,.concept-img').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(2)';ring.style.borderColor='rgba(201,168,76,0.8)';});
+  el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(201,168,76,0.4)';});
+});
+
+// ── Particles ───────────────────────────
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let W,H,particles=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+class Particle{
+  constructor(){this.reset();}
+  reset(){this.x=Math.random()*W;this.y=Math.random()*H;this.size=Math.random()*1.5+0.3;this.speedX=(Math.random()-0.5)*0.3;this.speedY=-Math.random()*0.4-0.1;this.opacity=Math.random()*0.4+0.1;this.life=0;this.maxLife=Math.random()*200+100;}
+  update(){this.x+=this.speedX;this.y+=this.speedY;this.life++;if(this.life>this.maxLife||this.y<0)this.reset();}
+  draw(){ctx.save();ctx.globalAlpha=this.opacity*(1-this.life/this.maxLife);ctx.fillStyle='#c9a84c';ctx.beginPath();ctx.arc(this.x,this.y,this.size,0,Math.PI*2);ctx.fill();ctx.restore();}
+}
+for(let i=0;i<80;i++)particles.push(new Particle());
+function animParticles(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animParticles);}
+animParticles();
+
+// ── Nav scroll ──────────────────────────
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>50);});
+
+// ── Hero entrance ───────────────────────
+window.addEventListener('load',()=>{
+  const heroBg=document.getElementById('heroBg');
+  heroBg.classList.add('loaded');
+  setTimeout(()=>document.getElementById('heroContent').classList.add('visible'),300);
+});
+
+// ── Scroll reveal ───────────────────────
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:0.15});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el));
+
+// ── Counter animation ───────────────────
+const counterObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const el=entry.target;
+    const target=+el.dataset.target;
+    let start=0;
+    const duration=1800;
+    const step=timestamp=>{
+      if(!start)start=timestamp;
+      const progress=Math.min((timestamp-start)/duration,1);
+      const ease=1-Math.pow(1-progress,3);
+      el.textContent=Math.floor(ease*target).toLocaleString();
+      if(progress<1)requestAnimationFrame(step);
+      else el.textContent=target.toLocaleString();
+    };
+    requestAnimationFrame(step);
+    counterObs.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.num[data-target]').forEach(el=>counterObs.observe(el));
+
+// ── Parallax hero ───────────────────────
+window.addEventListener('scroll',()=>{
+  const heroBg=document.getElementById('heroBg');
+  if(heroBg)heroBg.style.transform=`scale(1.05) translateY(${window.scrollY*0.25}px)`;
+});
+
+// ── Smooth scroll ───────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const target=document.querySelector(a.getAttribute('href'));
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+</script>
 </body>
 </html>
