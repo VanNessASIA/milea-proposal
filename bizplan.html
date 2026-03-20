@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夜系SNS運用代行 事業企画書</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#0a0a0a; color:#e8e0d0; font-family:'Noto Serif JP',serif; line-height:1.8; }
+
+  .cover { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:linear-gradient(135deg,#0a0a0a 0%,#0d1a12 50%,#0a0a0a 100%); border-bottom:1px solid #2a6914; padding:40px; position:relative; }
+  .cover::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,rgba(42,105,20,0.1) 0%,transparent 70%); }
+  .cover-label { font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:6px; color:#4a9a2c; text-transform:uppercase; margin-bottom:30px; }
+  .cover h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,5vw,60px); font-weight:300; color:#e8e0d0; letter-spacing:4px; line-height:1.3; margin-bottom:15px; position:relative; }
+  .cover h2 { font-size:clamp(13px,2vw,17px); font-weight:300; color:#6a9a5a; letter-spacing:3px; margin-bottom:60px; }
+  .divider { width:80px; height:1px; background:linear-gradient(90deg,transparent,#4a9a2c,transparent); margin:30px auto; }
+  .cover-date { font-size:13px; color:#3a5030; letter-spacing:3px; }
+
+  .slide { min-height:100vh; padding:80px 10%; display:flex; flex-direction:column; justify-content:center; border-bottom:1px solid #0e1a0a; position:relative; }
+  .slide:nth-child(even) { background:#0d0d0d; }
+  .slide-num { font-family:'Cormorant Garamond',serif; font-size:80px; color:#0d1a0a; position:absolute; right:8%; top:50px; line-height:1; font-weight:300; }
+  .s-label { font-size:12px; letter-spacing:5px; color:#4a9a2c; text-transform:uppercase; margin-bottom:20px; }
+  .s-title { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,4vw,48px); font-weight:300; color:#c8e0c0; margin-bottom:10px; line-height:1.3; }
+  .s-title .jp { font-family:'Noto Serif JP',serif; font-size:0.6em; color:#5a7050; display:block; letter-spacing:2px; margin-top:5px; }
+  .s-text { font-size:15px; color:#a0b890; max-width:700px; margin-bottom:20px; font-weight:300; }
+  .gold-line { width:60px; height:1px; background:#4a9a2c; margin:25px 0; }
+
+  /* Highlight box */
+  .highlight { border:1px solid #2a6914; padding:40px; max-width:800px; margin:40px 0; background:rgba(42,105,20,0.05); position:relative; }
+  .highlight::before { content:'★'; position:absolute; top:-15px; left:40px; background:#0a0a0a; padding:0 15px; color:#4a9a2c; font-size:18px; }
+  .highlight h3 { font-family:'Cormorant Garamond',serif; font-size:24px; color:#8aca6c; margin-bottom:15px; font-weight:400; }
+  .highlight p { font-size:14px; color:#7a9870; margin-bottom:10px; }
+
+  /* Opportunity */
+  .opp-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:25px; margin-top:40px; }
+  .opp-card { border:1px solid #1a2a14; padding:30px; background:rgba(42,105,20,0.03); transition:border-color 0.3s; }
+  .opp-card:hover { border-color:#2a6914; }
+  .opp-card .num { font-family:'Cormorant Garamond',serif; font-size:42px; color:#1a3a10; font-weight:300; }
+  .opp-card h3 { font-family:'Cormorant Garamond',serif; font-size:20px; color:#8aca6c; font-weight:400; margin:10px 0; }
+  .opp-card p { font-size:13px; color:#5a7850; line-height:1.8; }
+
+  /* Phase timeline */
+  .phase-list { margin-top:40px; max-width:800px; }
+  .phase { display:flex; gap:30px; margin-bottom:50px; position:relative; }
+  .phase::after { content:''; position:absolute; left:19px; top:45px; bottom:-50px; width:1px; background:#1a2a14; }
+  .phase:last-child::after { display:none; }
+  .phase-dot { width:40px; height:40px; border:1px solid #4a9a2c; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:16px; color:#8aca6c; flex-shrink:0; background:#0a0a0a; position:relative; z-index:1; }
+  .phase-body h3 { font-family:'Cormorant Garamond',serif; font-size:24px; color:#8aca6c; font-weight:400; margin-bottom:8px; }
+  .phase-body .period { font-size:12px; color:#3a6028; letter-spacing:3px; margin-bottom:12px; }
+  .phase-body p { font-size:14px; color:#6a8860; line-height:1.9; margin-bottom:5px; }
+  .phase-body .revenue { display:inline-block; border:1px solid #2a6914; padding:5px 15px; font-size:13px; color:#4a9a2c; margin-top:10px; }
+
+  /* Services */
+  .svc-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px; margin-top:40px; }
+  .svc { border:1px solid #1a2a14; padding:30px; }
+  .svc h3 { font-family:'Cormorant Garamond',serif; font-size:20px; color:#8aca6c; font-weight:400; margin-bottom:15px; }
+  .svc ul { list-style:none; }
+  .svc ul li { font-size:13px; color:#6a8860; padding:6px 0; border-bottom:1px solid #0e1a0a; display:flex; gap:10px; }
+  .svc ul li::before { content:'→'; color:#4a9a2c; flex-shrink:0; }
+  .svc .price { font-family:'Cormorant Garamond',serif; font-size:28px; color:#c8e0c0; margin-top:20px; }
+  .svc .price span { font-size:14px; color:#3a5030; }
+
+  /* Revenue table */
+  .rev-table { width:100%; max-width:800px; border-collapse:collapse; margin-top:40px; }
+  .rev-table th { font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:3px; color:#4a9a2c; text-align:left; padding:15px 20px; border-bottom:1px solid #2a6914; text-transform:uppercase; }
+  .rev-table td { font-size:14px; color:#8a9880; padding:15px 20px; border-bottom:1px solid #0e1a0a; }
+  .rev-table .highlight-row td { color:#c8e0c0; }
+  .rev-table tr:hover td { background:rgba(42,105,20,0.05); }
+
+  /* KPI */
+  .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:20px; margin-top:40px; max-width:900px; }
+  .kpi { border:1px solid #1a2a14; padding:25px 20px; text-align:center; }
+  .kpi .num { font-family:'Cormorant Garamond',serif; font-size:40px; color:#8aca6c; font-weight:300; display:block; }
+  .kpi .label { font-size:11px; color:#3a5030; letter-spacing:2px; display:block; margin-top:5px; }
+
+  /* Vision */
+  .vision { background:linear-gradient(135deg,#0a0a0a 0%,#0d1a12 50%,#0a0a0a 100%); text-align:center; padding:100px 10%; }
+  .vision h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(24px,4vw,48px); font-weight:300; color:#c8e0c0; margin-bottom:20px; }
+  .vision p { font-size:15px; color:#5a7850; max-width:500px; margin:0 auto 40px; }
+
+  .tag { display:inline-block; border:1px solid #2a6914; padding:2px 10px; font-size:11px; color:#4a9a2c; letter-spacing:2px; margin-right:8px; margin-bottom:8px; }
+
+  footer { background:#0a0a0a; border-top:1px solid #0e1a0a; padding:60px 10%; text-align:center; }
+  footer p { font-size:12px; color:#1a2a14; letter-spacing:3px; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-label">Business Plan — Confidential</div>
+  <h1>バンコク夜系<br>SNS・Web運用代行<br>事業企画書</h1>
+  <h2>Nightlife Digital Marketing Business Plan</h2>
+  <div class="divider"></div>
+  <div class="cover-date">March 2026 — Bangkok, Thailand</div>
+</div>
+
+<!-- SLIDE 1: OPPORTUNITY -->
+<div class="slide">
+  <div class="slide-num">01</div>
+  <div class="s-label">Market Opportunity</div>
+  <h2 class="s-title">市場機会<span class="jp">なぜ今このビジネスか</span></h2>
+  <div class="gold-line"></div>
+  <div class="highlight">
+    <h3>2026年3月 — タニヤ客引き禁止 という転換点</h3>
+    <p>バンコク・タニヤの夜系店舗が長年頼ってきた「路上客引き」が全面禁止。</p>
+    <p>タニヤだけで推定20〜30店舗、スクンビット・プロンポン・ナナエリアまで含めると100店舗以上が同じ課題を抱えている。</p>
+    <p style="color:#8aca6c; margin-top:15px; font-size:15px;">しかし、デジタルで集客できている店はほぼゼロ。今が参入の最大チャンス。</p>
+  </div>
+  <div class="opp-grid">
+    <div class="opp-card">
+      <div class="num">100+</div>
+      <h3>潜在顧客店舗数</h3>
+      <p>タニヤ・スクンビット・プロンポン・ナナエリアの日系夜系店舗</p>
+    </div>
+    <div class="opp-card">
+      <div class="num">0</div>
+      <h3>まともなSNS運用店舗</h3>
+      <p>Instagramいいね10以下、TikTok再生300回以下が大半。競合ほぼなし</p>
+    </div>
+    <div class="opp-card">
+      <div class="num">5万+</div>
+      <h3>バンコク在住日本人</h3>
+      <p>旅行者を含めると月間数万人がターゲット市場。需要は明確に存在</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: BUSINESS MODEL -->
+<div class="slide">
+  <div class="slide-num">02</div>
+  <div class="s-label">Business Model</div>
+  <h2 class="s-title">ビジネスモデル<span class="jp">3フェーズの段階的展開</span></h2>
+  <div class="gold-line"></div>
+  <div class="phase-list">
+    <div class="phase">
+      <div class="phase-dot">1</div>
+      <div class="phase-body">
+        <h3>Phase 1 — 実績構築（今）</h3>
+        <div class="period">MONTH 1〜3 | 1店舗 密着型</div>
+        <p>知人店舗（ミレア）を第1号クライアントとして受注。</p>
+        <p>現場で撮影・編集・投稿まで全て自社で実施。成功事例を作る。</p>
+        <p>Google Maps整備・Webサイト制作・Instagram/X運用を包括提供。</p>
+        <div class="revenue">売上：5,000〜10,000 THB/月 × 1店舗</div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-dot">2</div>
+      <div class="phase-body">
+        <h3>Phase 2 — 横展開（近隣店舗）</h3>
+        <div class="period">MONTH 3〜6 | 複数店舗 ディレクター型</div>
+        <p>ミレアの成功事例を見た近隣店舗へ営業。「どこに頼んだ？」が集客になる。</p>
+        <p>撮影指示を出し、店側が撮影 → こちらで編集・投稿。工数を削減しながら店舗数を増やす。</p>
+        <p>Webサイト制作を初期費用として受注。月額運用でストック収益化。</p>
+        <div class="revenue">売上：10,000 THB/月 × 5〜10店舗 = 50,000〜100,000 THB/月</div>
+      </div>
+    </div>
+    <div class="phase">
+      <div class="phase-dot">3</div>
+      <div class="phase-body">
+        <h3>Phase 3 — 自動化・スケール</h3>
+        <div class="period">MONTH 6〜12 | 自動化 プラットフォーム型</div>
+        <p>AIエージェント（Mike）がLINEで各店舗へ撮影指示を自動送信。</p>
+        <p>素材を受け取り、編集・投稿・レポーティングまで自動化。</p>
+        <p>人的コストを最小化しながら、契約店舗数を無制限に拡大できる体制へ。</p>
+        <div class="revenue">売上：5,000〜15,000 THB/月 × 30店舗以上 = 150,000+ THB/月</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: SERVICES -->
+<div class="slide">
+  <div class="slide-num">03</div>
+  <div class="s-label">Services</div>
+  <h2 class="s-title">提供サービス<span class="jp">3つのパッケージ</span></h2>
+  <div class="gold-line"></div>
+  <div class="svc-grid">
+    <div class="svc">
+      <h3>Starter</h3>
+      <ul>
+        <li>Googleマップ整備・写真登録</li>
+        <li>Instagram 週3投稿</li>
+        <li>X（Twitter）週5投稿</li>
+        <li>月次簡易レポート</li>
+      </ul>
+      <div class="price">5,000 <span>THB / 月</span></div>
+    </div>
+    <div class="svc">
+      <h3>Standard</h3>
+      <ul>
+        <li>Webサイト制作（初期）</li>
+        <li>Googleマップ最適化</li>
+        <li>Instagram リール週5投稿</li>
+        <li>X 毎日投稿</li>
+        <li>月次詳細レポート</li>
+        <li>コンテンツ企画・撮影指示</li>
+      </ul>
+      <div class="price">10,000 <span>THB / 月</span></div>
+    </div>
+    <div class="svc">
+      <h3>Full Support</h3>
+      <ul>
+        <li>Standard 全て含む</li>
+        <li>撮影サポート（現地）</li>
+        <li>競合分析・戦略立案</li>
+        <li>LINE公式アカウント運用</li>
+        <li>専任担当制</li>
+        <li>レビュー獲得施策</li>
+      </ul>
+      <div class="price">要相談</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: REVENUE PROJECTION -->
+<div class="slide">
+  <div class="slide-num">04</div>
+  <div class="s-label">Revenue Projection</div>
+  <h2 class="s-title">売上予測<span class="jp">12ヶ月のロードマップ</span></h2>
+  <div class="gold-line"></div>
+  <table class="rev-table">
+    <tr>
+      <th>フェーズ</th>
+      <th>期間</th>
+      <th>契約店舗数</th>
+      <th>月間売上</th>
+    </tr>
+    <tr>
+      <td>Phase 1（実績構築）</td>
+      <td>Month 1〜3</td>
+      <td>1〜2店舗</td>
+      <td>5,000〜20,000 THB</td>
+    </tr>
+    <tr>
+      <td>Phase 2（横展開）</td>
+      <td>Month 3〜6</td>
+      <td>5〜10店舗</td>
+      <td>50,000〜100,000 THB</td>
+    </tr>
+    <tr class="highlight-row">
+      <td>Phase 3（自動化）</td>
+      <td>Month 6〜12</td>
+      <td>20〜30店舗以上</td>
+      <td>150,000〜300,000 THB</td>
+    </tr>
+  </table>
+  <p style="margin-top:20px; font-size:13px; color:#3a5030;">※ Web制作の初期費用（1店舗あたり30,000〜50,000 THB）は別途</p>
+  <div class="kpi-grid" style="margin-top:40px;">
+    <div class="kpi">
+      <span class="num">30+</span>
+      <span class="label">12ヶ月後 契約店舗数</span>
+    </div>
+    <div class="kpi">
+      <span class="num">150K+</span>
+      <span class="label">月間売上 THB（目標）</span>
+    </div>
+    <div class="kpi">
+      <span class="num">90%</span>
+      <span class="label">Phase3 自動化率</span>
+    </div>
+    <div class="kpi">
+      <span class="num">1st</span>
+      <span class="label">バンコク夜系SNS代行 No.1</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: WHY US -->
+<div class="slide">
+  <div class="slide-num">05</div>
+  <div class="s-label">Competitive Advantage</div>
+  <h2 class="s-title">なぜ我々か<span class="jp">他社にできない理由</span></h2>
+  <div class="gold-line"></div>
+  <div class="opp-grid">
+    <div class="opp-card">
+      <h3>AIによる自動化</h3>
+      <p>撮影指示・投稿スケジュール・レポーティングをAIが自動化。人的コストを最小化しながらスケールできる。</p>
+    </div>
+    <div class="opp-card">
+      <h3>業界特化の知見</h3>
+      <p>バンコク夜系・日系店舗に特化。ターゲット（日本人男性）の行動パターンを深く理解した戦略立案。</p>
+    </div>
+    <div class="opp-card">
+      <h3>実データベース</h3>
+      <p>Instagramバズ投稿分析・TikTokトレンド調査を実データで実施。勘ではなくファクトで戦略を組む。</p>
+    </div>
+    <div class="opp-card">
+      <h3>圧倒的スピード</h3>
+      <p>Webサイト制作から投稿開始まで1週間以内。大手代理店では不可能なスピードで価値を提供。</p>
+    </div>
+  </div>
+  <div style="margin-top:30px;">
+    <span class="tag">AI POWERED</span>
+    <span class="tag">DATA DRIVEN</span>
+    <span class="tag">INDUSTRY SPECIFIC</span>
+    <span class="tag">FAST EXECUTION</span>
+  </div>
+</div>
+
+<!-- VISION -->
+<div class="vision">
+  <div class="divider"></div>
+  <h2>バンコク夜系のデジタル集客を、<br>我々がつくる。</h2>
+  <p>客引きがなくなった時代に、<br>最初に正解を示したプレイヤーが市場を制する。</p>
+  <div class="divider"></div>
+</div>
+
+<footer>
+  <p>Confidential Business Plan — March 2026 — Bangkok, Thailand</p>
+</footer>
+
+</body>
+</html>
