@@ -186,6 +186,7 @@
     <li><a href="#cast">Cast</a></li>
     <li><a href="#system">System</a></li>
     <li><a href="#access">Access</a></li>
+    <li><a href="#faq">FAQ</a></li>
   </ul>
 </nav>
 
@@ -350,6 +351,17 @@
   </div>
 </section>
 
+<!-- FAQ -->
+<section id="faq" style="background:var(--dark); padding:120px 8%;">
+  <div class="s-label reveal">FAQ</div>
+  <h2 class="s-title reveal">初めての方へ</h2>
+  <div style="width:60px;height:1px;background:var(--gold);margin:30px 0;" class="reveal"></div>
+  <p class="s-text reveal" style="margin-bottom:60px;">初めてMILEAにいらっしゃる方のよくあるご質問にお答えします。<br>ご不明な点はLINEやInstagramのDMでもお気軽にどうぞ。</p>
+
+  <div style="max-width:800px;" id="faqList">
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <span class="footer-logo">MILEA</span>
@@ -363,6 +375,69 @@
 </footer>
 
 <script>
+// ── FAQ Accordion ───────────────────────
+const faqs = [
+  {cat:'💰 料金・システム', items:[
+    {q:'チャージ料金はいくらですか？', a:'テーブルチャージ制です。詳細はご来店時またはLINEにてお問い合わせください。'},
+    {q:'ボトルキープはできますか？', a:'はい、ボトルキープ対応しています。次回以降のご来店でもお使いいただけます。詳しくは店舗へお問い合わせください。'},
+    {q:'支払い方法は？', a:'現金（バーツ）、QRコード決済に対応しています。クレジットカードについてはお問い合わせください。'},
+    {q:'1人でも入れますか？', a:'もちろんです！おひとり様のお客様も多くいらっしゃいます。お気軽にどうぞ。'},
+  ]},
+  {cat:'🗣️ 言語・スタッフ', items:[
+    {q:'日本語は通じますか？', a:'日本語を話せるスタッフが在籍しています。日本語でのコミュニケーションを大切にしていますのでご安心ください。'},
+    {q:'スタッフはどんな方がいますか？', a:'タイ出身の女性スタッフが中心です。歌が得意な子、会話が得意な子など個性豊かなメンバーが揃っています。'},
+    {q:'スタッフの指名はできますか？', a:'はい、指名システムをご用意しています。お気に入りのスタッフをリクエストいただけます。'},
+  ]},
+  {cat:'🎤 カラオケ', items:[
+    {q:'日本語の曲は歌えますか？', a:'はい！J-POP、演歌、最新ヒット曲まで幅広く揃えています。'},
+    {q:'タイ語・英語の曲もありますか？', a:'タイ語・英語の楽曲も豊富にご用意しています。タイ語の曲はスタッフと一緒に盛り上がれます！'},
+    {q:'カラオケはどんな設備ですか？', a:'最新のカラオケシステムを完備しています。採点機能もお楽しみいただけます。'},
+  ]},
+  {cat:'🌙 初めての方へ', items:[
+    {q:'スナックとキャバクラの違いは？', a:'スナックはカラオケを楽しみながら、スタッフとゆったり飲んで会話するスタイルです。堅苦しくなく、アットホームな雰囲気が特徴です。'},
+    {q:'どんな流れで楽しめますか？', a:'入店 → 席へご案内 → ドリンク注文 → スタッフと会話・カラオケ → お会計の流れです。ゆっくりご自分のペースで楽しんでいただけます。'},
+    {q:'何時に行くのがおすすめですか？', a:'20時〜23時頃が最も賑わっています。ゆっくり楽しみたい方は開店直後の18時半頃もおすすめです。'},
+    {q:'ドレスコードはありますか？', a:'特に決まりはありません。ビジネスカジュアルからカジュアルまで、お気軽な服装でどうぞ。'},
+    {q:'タニヤへの行き方は？', a:'BTSシーロム駅から徒歩約5分。シーロム通りからタニヤ通りに入るとすぐです。初めての方はGoogleマップで「Soi Thaniya」と検索するとわかりやすいです。'},
+  ]},
+];
+
+const faqList = document.getElementById('faqList');
+faqs.forEach(section => {
+  const catEl = document.createElement('div');
+  catEl.style.cssText = 'margin-bottom:40px;';
+  catEl.innerHTML = `<div style="font-size:13px;color:var(--gold2);letter-spacing:3px;margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid #1a1810;">${section.cat}</div>`;
+  section.items.forEach((item,i) => {
+    const el = document.createElement('div');
+    el.className = 'reveal';
+    el.style.cssText = 'border-bottom:1px solid #1a1810;overflow:hidden;';
+    el.innerHTML = `
+      <button onclick="toggleFaq(this)" style="width:100%;text-align:left;padding:20px 0;background:none;border:none;cursor:none;display:flex;justify-content:space-between;align-items:center;gap:20px;">
+        <span style="font-family:\'Noto Serif JP\',serif;font-size:15px;color:#d4c9b0;line-height:1.6;">${item.q}</span>
+        <span class="faq-icon" style="color:var(--gold);font-family:\'Cormorant Garamond\',serif;font-size:22px;flex-shrink:0;transition:transform 0.3s;">+</span>
+      </button>
+      <div class="faq-body" style="max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;">
+        <p style="font-size:14px;color:#9a9080;line-height:2;padding-bottom:20px;">${item.a}</p>
+      </div>`;
+    catEl.appendChild(el);
+  });
+  faqList.appendChild(catEl);
+});
+
+function toggleFaq(btn) {
+  const body = btn.nextElementSibling;
+  const icon = btn.querySelector('.faq-icon');
+  const isOpen = body.style.maxHeight !== '0px' && body.style.maxHeight !== '';
+  // Close all
+  document.querySelectorAll('.faq-body').forEach(b => { b.style.maxHeight = '0px'; });
+  document.querySelectorAll('.faq-icon').forEach(ic => { ic.textContent = '+'; ic.style.transform = 'rotate(0deg)'; });
+  if (!isOpen) {
+    body.style.maxHeight = body.scrollHeight + 40 + 'px';
+    icon.textContent = '×';
+    icon.style.transform = 'rotate(90deg)';
+  }
+}
+
 // ── Cursor ──────────────────────────────
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
