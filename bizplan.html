@@ -7,7 +7,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:#0a0a0a; color:#e8e0d0; font-family:'Noto Serif JP',serif; line-height:1.8; }
+  body { background:#0a0a0a; color:#e8e0d0; font-family:'Noto Serif JP',serif; line-height:1.9; font-size:15px; }
 
   .cover { height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; background:linear-gradient(135deg,#0a0a0a 0%,#0d1a12 50%,#0a0a0a 100%); border-bottom:1px solid #2a6914; padding:40px; position:relative; }
   .cover::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,rgba(42,105,20,0.1) 0%,transparent 70%); }
@@ -23,7 +23,7 @@
   .s-label { font-size:12px; letter-spacing:5px; color:#4a9a2c; text-transform:uppercase; margin-bottom:20px; }
   .s-title { font-family:'Cormorant Garamond',serif; font-size:clamp(28px,4vw,48px); font-weight:300; color:#c8e0c0; margin-bottom:10px; line-height:1.3; }
   .s-title .jp { font-family:'Noto Serif JP',serif; font-size:0.6em; color:#5a7050; display:block; letter-spacing:2px; margin-top:5px; }
-  .s-text { font-size:15px; color:#a0b890; max-width:700px; margin-bottom:20px; font-weight:300; }
+  .s-text { font-size:15px; color:#b0c8a0; max-width:700px; margin-bottom:20px; font-weight:300; line-height:2; }
   .gold-line { width:60px; height:1px; background:#4a9a2c; margin:25px 0; }
 
   /* Highlight box */
@@ -38,7 +38,7 @@
   .opp-card:hover { border-color:#2a6914; }
   .opp-card .num { font-family:'Cormorant Garamond',serif; font-size:42px; color:#1a3a10; font-weight:300; }
   .opp-card h3 { font-family:'Cormorant Garamond',serif; font-size:20px; color:#8aca6c; font-weight:400; margin:10px 0; }
-  .opp-card p { font-size:13px; color:#5a7850; line-height:1.8; }
+  .opp-card p { font-size:13px; color:#7a9870; line-height:1.9; }
 
   /* Phase timeline */
   .phase-list { margin-top:40px; max-width:800px; }
@@ -48,7 +48,7 @@
   .phase-dot { width:40px; height:40px; border:1px solid #4a9a2c; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'Cormorant Garamond',serif; font-size:16px; color:#8aca6c; flex-shrink:0; background:#0a0a0a; position:relative; z-index:1; }
   .phase-body h3 { font-family:'Cormorant Garamond',serif; font-size:24px; color:#8aca6c; font-weight:400; margin-bottom:8px; }
   .phase-body .period { font-size:12px; color:#3a6028; letter-spacing:3px; margin-bottom:12px; }
-  .phase-body p { font-size:14px; color:#6a8860; line-height:1.9; margin-bottom:5px; }
+  .phase-body p { font-size:14px; color:#8aaa80; line-height:2; margin-bottom:5px; }
   .phase-body .revenue { display:inline-block; border:1px solid #2a6914; padding:5px 15px; font-size:13px; color:#4a9a2c; margin-top:10px; }
 
   /* Services */
@@ -56,7 +56,7 @@
   .svc { border:1px solid #1a2a14; padding:30px; }
   .svc h3 { font-family:'Cormorant Garamond',serif; font-size:20px; color:#8aca6c; font-weight:400; margin-bottom:15px; }
   .svc ul { list-style:none; }
-  .svc ul li { font-size:13px; color:#6a8860; padding:6px 0; border-bottom:1px solid #0e1a0a; display:flex; gap:10px; }
+  .svc ul li { font-size:13px; color:#8aaa80; padding:7px 0; border-bottom:1px solid #0e1a0a; display:flex; gap:10px; }
   .svc ul li::before { content:'→'; color:#4a9a2c; flex-shrink:0; }
   .svc .price { font-family:'Cormorant Garamond',serif; font-size:28px; color:#c8e0c0; margin-top:20px; }
   .svc .price span { font-size:14px; color:#3a5030; }
@@ -64,7 +64,7 @@
   /* Revenue table */
   .rev-table { width:100%; max-width:800px; border-collapse:collapse; margin-top:40px; }
   .rev-table th { font-family:'Cormorant Garamond',serif; font-size:13px; letter-spacing:3px; color:#4a9a2c; text-align:left; padding:15px 20px; border-bottom:1px solid #2a6914; text-transform:uppercase; }
-  .rev-table td { font-size:14px; color:#8a9880; padding:15px 20px; border-bottom:1px solid #0e1a0a; }
+  .rev-table td { font-size:14px; color:#9aaa90; padding:15px 20px; border-bottom:1px solid #0e1a0a; }
   .rev-table .highlight-row td { color:#c8e0c0; }
   .rev-table tr:hover td { background:rgba(42,105,20,0.05); }
 
@@ -72,17 +72,38 @@
   .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:20px; margin-top:40px; max-width:900px; }
   .kpi { border:1px solid #1a2a14; padding:25px 20px; text-align:center; }
   .kpi .num { font-family:'Cormorant Garamond',serif; font-size:40px; color:#8aca6c; font-weight:300; display:block; }
-  .kpi .label { font-size:11px; color:#3a5030; letter-spacing:2px; display:block; margin-top:5px; }
+  .kpi .label { font-size:11px; color:#5a7850; letter-spacing:2px; display:block; margin-top:5px; }
 
   /* Vision */
   .vision { background:linear-gradient(135deg,#0a0a0a 0%,#0d1a12 50%,#0a0a0a 100%); text-align:center; padding:100px 10%; }
   .vision h2 { font-family:'Cormorant Garamond',serif; font-size:clamp(24px,4vw,48px); font-weight:300; color:#c8e0c0; margin-bottom:20px; }
-  .vision p { font-size:15px; color:#5a7850; max-width:500px; margin:0 auto 40px; }
+  .vision p { font-size:15px; color:#7a9870; max-width:500px; margin:0 auto 40px; }
 
   .tag { display:inline-block; border:1px solid #2a6914; padding:2px 10px; font-size:11px; color:#4a9a2c; letter-spacing:2px; margin-right:8px; margin-bottom:8px; }
 
   footer { background:#0a0a0a; border-top:1px solid #0e1a0a; padding:60px 10%; text-align:center; }
-  footer p { font-size:12px; color:#1a2a14; letter-spacing:3px; }
+  footer p { font-size:12px; color:#4a6040; letter-spacing:3px; }
+
+  /* Cover date contrast */
+  .cover-date { font-size:13px; color:#7a9870; letter-spacing:3px; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .slide { padding: 60px 6%; }
+    .cover { padding: 30px; }
+    .opp-grid { grid-template-columns: 1fr 1fr; }
+    .svc-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .rev-table { font-size: 13px; }
+    .rev-table th, .rev-table td { padding: 10px 12px; }
+  }
+  @media (max-width: 480px) {
+    .slide { padding: 50px 5%; }
+    .opp-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .phase { flex-direction: column; gap: 15px; }
+    .phase::after { display: none; }
+  }
 </style>
 </head>
 <body>
@@ -161,8 +182,8 @@
       <div class="phase-body">
         <h3>Phase 3 — 自動化・スケール</h3>
         <div class="period">MONTH 6〜12 | 自動化 プラットフォーム型</div>
-        <p>AIエージェント（Mike）がLINEで各店舗へ撮影指示を自動送信。</p>
-        <p>素材を受け取り、編集・投稿・レポーティングまで自動化。</p>
+        <p>専任ディレクターによる撮影指示システムをLINEで各店舗へ自動配信。</p>
+        <p>素材を受け取り、編集・投稿・レポーティングまで一貫対応。</p>
         <p>人的コストを最小化しながら、契約店舗数を無制限に拡大できる体制へ。</p>
         <div class="revenue">売上：5,000〜15,000 THB/月 × 30店舗以上 = 150,000+ THB/月</div>
       </div>
@@ -275,8 +296,8 @@
   <div class="gold-line"></div>
   <div class="opp-grid">
     <div class="opp-card">
-      <h3>AIによる自動化</h3>
-      <p>撮影指示・投稿スケジュール・レポーティングをAIが自動化。人的コストを最小化しながらスケールできる。</p>
+      <h3>システム化された運用体制</h3>
+      <p>撮影指示・投稿スケジュール・レポーティングを専任ディレクターが体系的に管理。人的コストを最小化しながらスケールできる。</p>
     </div>
     <div class="opp-card">
       <h3>業界特化の知見</h3>

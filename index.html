@@ -49,7 +49,7 @@
 
   /* Scroll indicator */
   .scroll-indicator{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fadeIn 1s 2s forwards;}
-  .scroll-indicator span{font-size:10px;letter-spacing:4px;color:#3a3020;}
+  .scroll-indicator span{font-size:10px;letter-spacing:4px;color:#7a7060;}
   .scroll-line{width:1px;height:40px;background:linear-gradient(180deg,var(--gold2),transparent);animation:scrollPulse 2s infinite;}
 
   /* Sections */
@@ -120,14 +120,14 @@
   .counter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;max-width:900px;margin:0 auto;}
   .counter-item .num{font-family:'Cormorant Garamond',serif;font-size:60px;color:var(--gold);font-weight:300;display:block;line-height:1;}
   .counter-item .unit{font-size:18px;color:var(--gold2);}
-  .counter-item .label{font-size:11px;color:#3a3020;letter-spacing:3px;margin-top:10px;display:block;}
+  .counter-item .label{font-size:11px;color:#7a7060;letter-spacing:3px;margin-top:10px;display:block;}
 
   /* ACCESS */
   .access{background:var(--mid);}
   .access-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:60px;align-items:start;}
   .access-info{display:flex;flex-direction:column;gap:20px;}
   .access-row{display:flex;gap:20px;align-items:flex-start;padding-bottom:20px;border-bottom:1px solid #1a1810;}
-  .access-row strong{font-size:11px;color:var(--gold);letter-spacing:3px;min-width:80px;padding-top:3px;}
+  .access-row strong{font-size:11px;color:var(--gold);letter-spacing:3px;min-width:90px;padding-top:3px;}
   .access-row span{font-size:14px;color:#8a8070;line-height:1.8;}
   .map-frame{height:380px;background:#12100f;border:1px solid #1a1810;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
   .map-frame::before{content:'THANIYA\A BANGKOK';white-space:pre;font-family:'Cormorant Garamond',serif;font-size:20px;color:#2a2418;letter-spacing:6px;text-align:center;line-height:2;}
@@ -137,9 +137,9 @@
   .footer-logo{font-family:'Cormorant Garamond',serif;font-size:32px;letter-spacing:10px;color:var(--gold);margin-bottom:5px;display:block;}
   .footer-sub{font-size:11px;color:#2a2418;letter-spacing:5px;margin-bottom:40px;display:block;}
   .footer-sns{display:flex;gap:35px;justify-content:center;margin-bottom:40px;}
-  .footer-sns a{font-size:11px;letter-spacing:3px;color:#3a3020;text-decoration:none;transition:color 0.3s;}
+  .footer-sns a{font-size:11px;letter-spacing:3px;color:#6a6050;text-decoration:none;transition:color 0.3s;}
   .footer-sns a:hover{color:var(--gold);}
-  .footer-copy{font-size:11px;color:#1a1810;letter-spacing:3px;}
+  .footer-copy{font-size:11px;color:#4a4438;letter-spacing:3px;}
 
   /* Animations */
   @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
@@ -155,6 +155,16 @@
     nav .nav-links{display:none;}
     body{cursor:auto;}
     #cursor,#cursor-ring{display:none;}
+    section{padding:80px 5%;}
+    .hero-content{padding:20px;}
+    .counter-section{padding:60px 5%;}
+  }
+  @media(max-width:480px){
+    .cast-grid{grid-template-columns:1fr;}
+    .atm-grid{grid-template-columns:1fr;}
+    .counter-grid{grid-template-columns:1fr 1fr;}
+    .counter-item .num{font-size:48px;}
+    section{padding:60px 5%;}
   }
 </style>
 </head>

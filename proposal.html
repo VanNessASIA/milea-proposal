@@ -74,7 +74,7 @@
 
   .cover-date {
     font-size: 13px;
-    color: #5a5040;
+    color: #8a8070;
     letter-spacing: 3px;
   }
 
@@ -135,9 +135,10 @@
   .slide p {
     font-size: 16px;
     color: #c8b898;
-    max-width: 700px;
+    max-width: 720px;
     margin-bottom: 20px;
     font-weight: 300;
+    line-height: 1.9;
   }
 
   /* Urgency box */
@@ -524,6 +525,17 @@
   @media (max-width: 768px) {
     .slide { padding: 60px 6%; }
     .cover { padding: 30px; }
+    .card-grid { grid-template-columns: 1fr; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .pages-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .slide { padding: 50px 5%; }
+    .kpi-grid { grid-template-columns: 1fr 1fr; }
+    .pages-grid { grid-template-columns: 1fr 1fr; }
+    .plans-grid { grid-template-columns: 1fr; }
+    .timeline-item { flex-direction: column; gap: 15px; }
   }
 </style>
 </head>
@@ -665,9 +677,9 @@
   </div>
 </div>
 
-<!-- SLIDE 3b: CURRENT STATUS -->
+<!-- SLIDE 4: CURRENT STATUS -->
 <div class="slide">
-  <div class="slide-number">03b</div>
+  <div class="slide-number">04</div>
   <div class="section-label">Current Status</div>
   <h2>現状分析<span class="jp">ミレアのデジタル存在感</span></h2>
   <p>お客様が来店を決める場所に、MILEAは<strong style="color:#c9a84c;">存在していない</strong>。</p>
@@ -747,9 +759,9 @@
   </div>
 </div>
 
-<!-- SLIDE 4: WEBSITE -->
+<!-- SLIDE 5: WEBSITE -->
 <div class="slide" style="background-image:linear-gradient(rgba(10,10,10,0.88),rgba(10,10,10,0.95)), url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1600&q=80'); background-size:cover; background-position:center;">
-  <div class="slide-number">04</div>
+  <div class="slide-number">05</div>
   <div class="section-label">Solution — Web</div>
   <h2>Webサイト制作<span class="jp">高級感あるブランドサイト</span></h2>
   <p>Leone BKK・JUNGLE東京・Le Club de Tokyo を参考にした、黒ベース・金アクセントの高級感あるサイトを制作。</p>
@@ -792,9 +804,9 @@
   </div>
 </div>
 
-<!-- SLIDE 5: ACTION PLAN -->
+<!-- SLIDE 6: ACTION PLAN -->
 <div class="slide" style="background-image:linear-gradient(rgba(10,10,10,0.88),rgba(10,10,10,0.96)), url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1600&q=80'); background-size:cover; background-position:center;">
-  <div class="slide-number">05</div>
+  <div class="slide-number">06</div>
   <div class="section-label">Action Plan</div>
   <h2>実施スケジュール<span class="jp">最速で動く</span></h2>
   <div class="timeline">
@@ -831,9 +843,9 @@
   </div>
 </div>
 
-<!-- SLIDE 5b: EXECUTION DETAIL -->
+<!-- SLIDE 7: EXECUTION DETAIL -->
 <div class="slide">
-  <div class="slide-number">05b</div>
+  <div class="slide-number">07</div>
   <div class="section-label">Execution Plan</div>
   <h2>具体的な施策と数値目標<span class="jp">何をやって、どの数字をどう上げるか</span></h2>
   <div class="gold-line"></div>
@@ -923,7 +935,7 @@
       </div>
       <div style="border:1px solid #1e1a12; padding:20px;">
         <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;">目標：在住者の新規来店を月10組</p>
-        <ul style="font-size:none;">
+        <ul style="list-style:none;">
           <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>「今夜21時〜空いてます」毎日リアルタイム投稿</li>
           <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>「本日のスタッフ」写真を夕方に投稿</li>
           <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>バンコク在住日本人の人気アカウントとの相互フォロー</li>
@@ -934,9 +946,9 @@
   </div>
 </div>
 
-<!-- SLIDE 5b-2: WHY IT WORKS -->
+<!-- SLIDE 8: WHY IT WORKS -->
 <div class="slide" style="background-image:linear-gradient(rgba(10,10,10,0.88),rgba(10,10,10,0.96)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&q=80'); background-size:cover; background-position:center;">
-  <div class="slide-number">★</div>
+  <div class="slide-number">08</div>
   <div class="section-label">The Core Value</div>
   <h2>なぜ続くのか。<span class="jp">仕組みが人を動かす</span></h2>
   <div class="gold-line"></div>
@@ -1000,9 +1012,9 @@
   </div>
 </div>
 
-<!-- SLIDE 5c: GLOBAL BEST PRACTICES -->
+<!-- SLIDE 9: GLOBAL BEST PRACTICES -->
 <div class="slide">
-  <div class="slide-number">05c</div>
+  <div class="slide-number">09</div>
   <div class="section-label">Global Best Practices</div>
   <h2>世界の成功事例から学ぶ<span class="jp">日本・米国・タイの最新手法</span></h2>
   <div class="gold-line"></div>
@@ -1020,7 +1032,7 @@
     </div>
 
     <div style="border:1px solid #2a2418; padding:30px; background:rgba(139,105,20,0.03);">
-      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;">🎬 AI動画生成 Remotion活用</div>
+      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;">🎬 Remotion 動画制作活用</div>
       <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;">ショート動画の自動生成</h3>
       <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;">Remotion（動画生成ツール）を使い、スタッフ紹介・イベント告知・定型動画を自動生成。撮影素材を受け取るだけで、テロップ・BGM・アニメーション入りの動画が即完成。</p>
       <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;"><strong style="color:#c9a84c;">作れる動画：</strong>スタッフ紹介30秒・イベント告知・「今夜空いてます」定型・ハイライトダイジェスト</p>
@@ -1065,9 +1077,9 @@
   </div>
 </div>
 
-<!-- SLIDE 6: PLANS -->
+<!-- SLIDE 10: PLANS -->
 <div class="slide">
-  <div class="slide-number">06</div>
+  <div class="slide-number">10</div>
   <div class="section-label">Pricing</div>
   <h2>料金プラン<span class="jp">シンプルな3プラン</span></h2>
   <div class="plans-grid">
@@ -1109,9 +1121,9 @@
   <p style="margin-top:30px; font-size:13px; color:#3a3020;">※ Webサイト制作は初期費用として別途お見積もり</p>
 </div>
 
-<!-- SLIDE 7: KPI -->
+<!-- SLIDE 11: KPI -->
 <div class="slide">
-  <div class="slide-number">07</div>
+  <div class="slide-number">11</div>
   <div class="section-label">Expected Results</div>
   <h2>3ヶ月後の目標<span class="jp">数字で見る成果</span></h2>
   <div class="kpi-grid">
