@@ -3,798 +3,235 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Milea Executive Club | Web・SNS運用代行 提案書</title>
+<title>MILEA Executive Club — Bangkok Thaniya</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    background: #0a0a0a;
-    color: #e8e0d0;
-    font-family: 'Noto Serif JP', serif;
-    line-height: 1.8;
-  }
-
-  /* Cover */
-  .cover {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%);
-    border-bottom: 1px solid #8b6914;
-    position: relative;
-    padding: 40px;
-  }
-
-  .cover::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(ellipse at center, rgba(139,105,20,0.15) 0%, transparent 70%);
-  }
-
-  .cover-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 6px;
-    color: #8b6914;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-  }
-
-  .cover h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(36px, 6vw, 72px);
-    font-weight: 300;
-    letter-spacing: 4px;
-    color: #c9a84c;
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-
-  .cover h2 {
-    font-size: clamp(14px, 2vw, 18px);
-    font-weight: 300;
-    color: #a0987a;
-    letter-spacing: 3px;
-    margin-bottom: 60px;
-  }
-
-  .divider-gold {
-    width: 80px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, #8b6914, transparent);
-    margin: 30px auto;
-  }
-
-  .cover-date {
-    font-size: 13px;
-    color: #5a5040;
-    letter-spacing: 3px;
-  }
-
-  /* Slides */
-  .slide {
-    min-height: 100vh;
-    padding: 80px 10%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-bottom: 1px solid #1e1a12;
-  }
-
-  .slide:nth-child(even) {
-    background: #0d0d0d;
-  }
-
-  .slide-number {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 80px;
-    color: #1a1508;
-    position: absolute;
-    right: 8%;
-    top: 50px;
-    line-height: 1;
-    font-weight: 300;
-  }
-
-  .slide { position: relative; }
-
-  .section-label {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 12px;
-    letter-spacing: 5px;
-    color: #8b6914;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-
-  .slide h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 300;
-    color: #c9a84c;
-    margin-bottom: 10px;
-    line-height: 1.3;
-  }
-
-  .slide h2 .jp {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 0.6em;
-    color: #7a7060;
-    display: block;
-    letter-spacing: 2px;
-    margin-top: 5px;
-  }
-
-  .slide p {
-    font-size: 15px;
-    color: #c0b090;
-    max-width: 700px;
-    margin-bottom: 20px;
-    font-weight: 300;
-  }
-
-  /* Urgency box */
-  .urgency-box {
-    border: 1px solid #8b6914;
-    padding: 40px;
-    max-width: 800px;
-    margin: 40px 0;
-    background: rgba(139,105,20,0.05);
-    position: relative;
-  }
-
-  .urgency-box::before {
-    content: '⚠';
-    position: absolute;
-    top: -15px;
-    left: 40px;
-    background: #0a0a0a;
-    padding: 0 15px;
-    color: #c9a84c;
-    font-size: 20px;
-  }
-
-  .urgency-box h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 24px;
-    color: #c9a84c;
-    margin-bottom: 15px;
-    font-weight: 400;
-  }
-
-  .urgency-box p {
-    font-size: 14px;
-    color: #a09070;
-    margin-bottom: 10px;
-  }
-
-  /* Target cards */
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-  }
-
-  .card {
-    border: 1px solid #2a2418;
-    padding: 35px;
-    background: rgba(139,105,20,0.03);
-    transition: border-color 0.3s;
-  }
-
-  .card:hover { border-color: #8b6914; }
-
-  .card-icon {
-    font-size: 28px;
-    margin-bottom: 15px;
-  }
-
-  .card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 20px;
-    color: #c9a84c;
-    margin-bottom: 15px;
-    font-weight: 400;
-  }
-
-  .card ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .card ul li {
-    font-size: 13px;
-    color: #8a8070;
-    padding: 5px 0;
-    border-bottom: 1px solid #1a1810;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-  }
-
-  .card ul li::before {
-    content: '—';
-    color: #8b6914;
-    flex-shrink: 0;
-  }
-
-  /* Status table */
-  .status-table {
-    width: 100%;
-    max-width: 800px;
-    border-collapse: collapse;
-    margin-top: 40px;
-  }
-
-  .status-table th {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 3px;
-    color: #8b6914;
-    text-align: left;
-    padding: 15px 20px;
-    border-bottom: 1px solid #8b6914;
-    text-transform: uppercase;
-  }
-
-  .status-table td {
-    font-size: 14px;
-    color: #a09070;
-    padding: 18px 20px;
-    border-bottom: 1px solid #1a1810;
-  }
-
-  .status-table tr:hover td { background: rgba(139,105,20,0.05); }
-
-  .status-bad { color: #c0392b; }
-  .status-good { color: #27ae60; }
-
-  /* Timeline */
-  .timeline {
-    margin-top: 40px;
-    max-width: 700px;
-  }
-
-  .timeline-item {
-    display: flex;
-    gap: 30px;
-    margin-bottom: 40px;
-    position: relative;
-  }
-
-  .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: 19px;
-    top: 40px;
-    bottom: -40px;
-    width: 1px;
-    background: #1a1810;
-  }
-
-  .timeline-item:last-child::before { display: none; }
-
-  .timeline-dot {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #8b6914;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 16px;
-    color: #c9a84c;
-    flex-shrink: 0;
-    background: #0a0a0a;
-    position: relative;
-    z-index: 1;
-  }
-
-  .timeline-content h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: #c9a84c;
-    font-weight: 400;
-    margin-bottom: 10px;
-  }
-
-  .timeline-content p {
-    font-size: 14px;
-    color: #7a7060;
-    margin-bottom: 5px;
-  }
-
-  .tag {
-    display: inline-block;
-    border: 1px solid #8b6914;
-    padding: 2px 10px;
-    font-size: 11px;
-    color: #8b6914;
-    letter-spacing: 2px;
-    margin-right: 8px;
-    margin-bottom: 8px;
-  }
-
-  /* Site pages */
-  .pages-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 40px;
-    max-width: 900px;
-  }
-
-  .page-item {
-    border: 1px solid #2a2418;
-    padding: 25px 20px;
-    text-align: center;
-  }
-
-  .page-item .num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px;
-    color: #2a2418;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .page-item h4 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 18px;
-    color: #c9a84c;
-    font-weight: 400;
-    margin-bottom: 8px;
-  }
-
-  .page-item p {
-    font-size: 12px;
-    color: #5a5040;
-    margin: 0;
-  }
-
-  /* Plans */
-  .plans-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 25px;
-    margin-top: 40px;
-    max-width: 900px;
-  }
-
-  .plan {
-    border: 1px solid #2a2418;
-    padding: 40px 30px;
-    position: relative;
-    transition: border-color 0.3s;
-  }
-
-  .plan.featured {
-    border-color: #8b6914;
-    background: rgba(139,105,20,0.05);
-  }
-
-  .plan.featured::before {
-    content: 'RECOMMENDED';
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #8b6914;
-    color: #0a0a0a;
-    font-size: 10px;
-    letter-spacing: 3px;
-    padding: 3px 15px;
-    white-space: nowrap;
-  }
-
-  .plan h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: #c9a84c;
-    font-weight: 400;
-    margin-bottom: 10px;
-  }
-
-  .plan .price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px;
-    color: #e8e0d0;
-    margin-bottom: 5px;
-  }
-
-  .plan .price span {
-    font-size: 16px;
-    color: #5a5040;
-  }
-
-  .plan ul {
-    list-style: none;
-    margin-top: 25px;
-  }
-
-  .plan ul li {
-    font-size: 13px;
-    color: #8a8070;
-    padding: 8px 0;
-    border-bottom: 1px solid #1a1810;
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-  }
-
-  .plan ul li::before {
-    content: '✓';
-    color: #8b6914;
-    flex-shrink: 0;
-  }
-
-  /* KPI */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 20px;
-    margin-top: 40px;
-    max-width: 900px;
-  }
-
-  .kpi-card {
-    border: 1px solid #2a2418;
-    padding: 30px 20px;
-    text-align: center;
-  }
-
-  .kpi-card .metric {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 42px;
-    color: #c9a84c;
-    font-weight: 300;
-    display: block;
-  }
-
-  .kpi-card .label {
-    font-size: 12px;
-    color: #5a5040;
-    letter-spacing: 2px;
-    display: block;
-    margin-top: 5px;
-  }
-
-  .kpi-card .current {
-    font-size: 11px;
-    color: #3a3020;
-    margin-top: 10px;
-  }
-
-  /* Final */
-  .final {
-    background: linear-gradient(135deg, #0a0a0a 0%, #1a1208 50%, #0a0a0a 100%);
-    text-align: center;
-    padding: 100px 10%;
-  }
-
-  .final h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(28px, 4vw, 52px);
-    font-weight: 300;
-    color: #c9a84c;
-    margin-bottom: 20px;
-  }
-
-  .final p {
-    font-size: 15px;
-    color: #7a7060;
-    max-width: 500px;
-    margin: 0 auto 50px;
-  }
-
-  .contact-box {
-    display: inline-block;
-    border: 1px solid #8b6914;
-    padding: 30px 60px;
-    margin-top: 20px;
-  }
-
-  .contact-box p {
-    font-size: 13px;
-    color: #8b6914;
-    letter-spacing: 3px;
-    margin: 0;
-  }
-
-  @media print {
-    .slide { page-break-after: always; }
-    body { background: white; color: #333; }
-  }
-
-  @media (max-width: 768px) {
-    .slide { padding: 60px 6%; }
-    .cover { padding: 30px; }
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+JP:wght@300;400&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  :root { --gold:#c9a84c; --dark:#08070a; --mid:#12100f; }
+  body { background:var(--dark); color:#d4c9b0; font-family:'Noto Serif JP',serif; }
+
+  nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:20px 8%; display:flex; justify-content:space-between; align-items:center; background:linear-gradient(180deg,rgba(8,7,10,0.95),transparent); }
+  .nav-logo { font-family:'Cormorant Garamond',serif; font-size:22px; letter-spacing:6px; color:var(--gold); }
+  .nav-links { display:flex; gap:40px; list-style:none; }
+  .nav-links a { font-size:11px; letter-spacing:4px; color:#7a7060; text-decoration:none; text-transform:uppercase; transition:color 0.3s; }
+  .nav-links a:hover { color:var(--gold); }
+
+  .hero { height:100vh; position:relative; display:flex; align-items:center; justify-content:center; }
+  .hero-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1600&q=80') center/cover; filter:brightness(0.3); }
+  .hero-overlay { position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,7,10,0.3) 0%,rgba(8,7,10,0.7) 100%); }
+  .hero-content { position:relative; text-align:center; padding:40px; }
+  .hero-label { font-size:11px; letter-spacing:8px; color:var(--gold); text-transform:uppercase; margin-bottom:30px; }
+  .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(50px,8vw,100px); font-weight:300; color:#fff; letter-spacing:8px; line-height:1; margin-bottom:10px; }
+  .hero-sub { font-family:'Cormorant Garamond',serif; font-size:clamp(14px,2vw,20px); color:var(--gold); letter-spacing:5px; font-style:italic; margin-bottom:40px; }
+  .hero-divider { width:60px; height:1px; background:var(--gold); margin:30px auto; }
+  .hero-desc { font-size:14px; color:#9a9080; letter-spacing:2px; }
+  .scroll-hint { position:absolute; bottom:40px; left:50%; transform:translateX(-50%); font-size:11px; letter-spacing:4px; color:#4a4030; }
+
+  section { padding:120px 8%; }
+  .s-label { font-size:11px; letter-spacing:6px; color:var(--gold); text-transform:uppercase; margin-bottom:20px; }
+  .s-title { font-family:'Cormorant Garamond',serif; font-size:clamp(32px,4vw,56px); font-weight:300; color:#e8dfc8; line-height:1.2; margin-bottom:20px; }
+  .s-text { font-size:14px; color:#9a9080; line-height:2; max-width:600px; }
+  .gold-line { width:60px; height:1px; background:var(--gold); margin:30px 0; }
+
+  .concept { background:var(--mid); }
+  .concept-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; margin-top:60px; }
+  .concept-img { position:relative; height:500px; overflow:hidden; }
+  .concept-img img { width:100%; height:100%; object-fit:cover; filter:brightness(0.8); }
+  .concept-img::after { content:''; position:absolute; inset:0; border:1px solid rgba(201,168,76,0.3); margin:20px; pointer-events:none; }
+  .concept-text h3 { font-family:'Cormorant Garamond',serif; font-size:28px; color:var(--gold); font-weight:300; margin-bottom:20px; }
+  .concept-text p { font-size:14px; color:#8a8070; line-height:2.2; margin-bottom:20px; }
+
+  .atmosphere { background:var(--dark); }
+  .atm-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-top:60px; }
+  .atm-item { position:relative; overflow:hidden; aspect-ratio:3/4; }
+  .atm-item img { width:100%; height:100%; object-fit:cover; filter:brightness(0.7); transition:transform 0.6s,filter 0.6s; }
+  .atm-item:hover img { transform:scale(1.05); filter:brightness(0.9); }
+  .atm-item .overlay { position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(transparent,rgba(8,7,10,0.9)); opacity:0; transition:opacity 0.3s; }
+  .atm-item:hover .overlay { opacity:1; }
+  .atm-item .overlay span { font-size:12px; letter-spacing:3px; color:var(--gold); }
+
+  .cast { background:var(--mid); }
+  .cast-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:60px; }
+  .cast-card img { width:100%; aspect-ratio:2/3; object-fit:cover; filter:brightness(0.75); transition:filter 0.4s; }
+  .cast-card:hover img { filter:brightness(0.9); }
+  .cast-info { padding:15px 0; }
+  .cast-info .name { font-family:'Cormorant Garamond',serif; font-size:18px; color:var(--gold); font-weight:300; }
+  .cast-info .detail { font-size:11px; color:#5a5040; letter-spacing:2px; margin-top:5px; }
+
+  .system { background:var(--dark); }
+  .system-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; margin-top:60px; }
+  .sys-item { border:1px solid #1e1a12; padding:40px 30px; text-align:center; transition:border-color 0.3s; }
+  .sys-item:hover { border-color:rgba(201,168,76,0.4); }
+  .sys-item .icon { font-size:32px; margin-bottom:20px; }
+  .sys-item h3 { font-family:'Cormorant Garamond',serif; font-size:22px; color:var(--gold); font-weight:400; margin-bottom:15px; }
+  .sys-item p { font-size:13px; color:#7a7060; line-height:1.9; }
+  .price-tag { display:inline-block; border:1px solid var(--gold); padding:8px 20px; font-family:'Cormorant Garamond',serif; font-size:20px; color:var(--gold); margin-top:15px; }
+
+  .access { background:var(--mid); }
+  .access-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:60px; align-items:start; }
+  .access-info p { font-size:14px; color:#8a8070; line-height:2.5; display:flex; gap:20px; }
+  .access-info p strong { color:var(--gold); font-weight:400; min-width:80px; }
+  .map-placeholder { height:350px; background:#1a1810; display:flex; align-items:center; justify-content:center; border:1px solid #2a2418; }
+  .map-placeholder span { color:#3a3020; letter-spacing:3px; font-size:12px; }
+
+  footer { background:var(--dark); border-top:1px solid #1a1810; padding:80px 8%; text-align:center; }
+  .footer-logo { font-family:'Cormorant Garamond',serif; font-size:28px; letter-spacing:8px; color:var(--gold); margin-bottom:20px; }
+  .footer-sns { display:flex; gap:30px; justify-content:center; margin:30px 0; }
+  .footer-sns a { font-size:11px; letter-spacing:3px; color:#4a4030; text-decoration:none; transition:color 0.3s; }
+  .footer-sns a:hover { color:var(--gold); }
+  .footer-copy { font-size:11px; color:#2a2018; letter-spacing:3px; }
+
+  @media(max-width:768px) {
+    .concept-grid,.access-grid { grid-template-columns:1fr; gap:40px; }
+    .atm-grid { grid-template-columns:repeat(2,1fr); }
+    .cast-grid { grid-template-columns:repeat(2,1fr); }
+    .system-grid { grid-template-columns:1fr; }
+    nav .nav-links { display:none; }
   }
 </style>
 </head>
 <body>
 
-<!-- COVER -->
-<div class="cover">
-  <div class="cover-label">Confidential Proposal</div>
-  <h1>MILEA<br>Executive Club</h1>
-  <h2>Web & SNS 運用代行 提案書</h2>
-  <div class="divider-gold"></div>
-  <div class="cover-date">March 2026 — Bangkok, Thailand</div>
+<nav>
+  <div class="nav-logo">MILEA</div>
+  <ul class="nav-links">
+    <li><a href="#concept">Concept</a></li>
+    <li><a href="#cast">Cast</a></li>
+    <li><a href="#system">System</a></li>
+    <li><a href="#access">Access</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-label">Thaniya — Bangkok</div>
+    <div class="hero-title">MILEA</div>
+    <div class="hero-sub">Executive Club</div>
+    <div class="hero-divider"></div>
+    <div class="hero-desc">バンコク・タニヤが誇る、特別な夜の空間</div>
+  </div>
+  <div class="scroll-hint">SCROLL ↓</div>
 </div>
 
-<!-- SLIDE 1: WHY NOW -->
-<div class="slide">
-  <div class="slide-number">01</div>
-  <div class="section-label">Background</div>
-  <h2>Why Now?<span class="jp">なぜ今なのか</span></h2>
-  <div class="urgency-box">
-    <h3>2026年3月 ── タニヤ、客引き全面禁止</h3>
-    <p>これまでタニヤの集客を支えてきた「路上での客引き」が突然禁止された。<br>タニヤ全店舗が同じ問題に直面している。しかし、まだほとんどの店は動いていない。</p>
-    <p style="color:#c9a84c; margin-top:20px; font-size:15px;">今この瞬間に動いた店が、圧倒的に有利になる。</p>
-  </div>
-  <p>ミレアが1週間以内にWebサイト・SNS・Googleマップを全整備すれば、タニヤ中が注目する。<br>近隣店舗から「どこに頼んだ？」という問い合わせが自然に集まる。</p>
-  <div style="margin-top:20px;">
-    <span class="tag">FIRST MOVER ADVANTAGE</span>
-    <span class="tag">LIMITED TIME OPPORTUNITY</span>
-  </div>
-</div>
-
-<!-- SLIDE 2: TARGET -->
-<div class="slide">
-  <div class="slide-number">02</div>
-  <div class="section-label">Target Analysis</div>
-  <h2>Who Are They?<span class="jp">ターゲット顧客の行動</span></h2>
-  <div class="card-grid">
-    <div class="card">
-      <div class="card-icon">🏙️</div>
-      <h3>在住日本人</h3>
-      <ul>
-        <li>知人の口コミ → Google検索</li>
-        <li>「タニヤ スナック」「バンコク カラオケ」で検索</li>
-        <li>Googleレビュー・写真で最終判断</li>
-        <li>Instagram で雰囲気を確認</li>
-        <li>X（Twitter）でリアルタイム評判チェック</li>
-      </ul>
+<section class="concept" id="concept">
+  <div class="s-label">Concept</div>
+  <h2 class="s-title">特別な夜を、<br>あなたと。</h2>
+  <div class="gold-line"></div>
+  <div class="concept-grid">
+    <div class="concept-img">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=800&q=80" alt="Interior">
     </div>
-    <div class="card">
-      <div class="card-icon">✈️</div>
-      <h3>旅行者</h3>
-      <ul>
-        <li>旅行ブログ・YouTube → Google</li>
-        <li>「バンコク 夜遊び おすすめ」で検索</li>
-        <li>Googleマップの写真で即断</li>
-        <li>料金が明記されているか重要</li>
-        <li>Instagram の雰囲気で最終決定</li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="card-icon">🌏</div>
-      <h3>中国人・韓国人</h3>
-      <ul>
-        <li>中国人：小紅書（RED）・WeChat</li>
-        <li>韓国人：Naver・Instagram</li>
-        <li>Google Maps も参照</li>
-        <li>※ Phase 2 以降で対応予定</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<!-- SLIDE 3: CURRENT STATUS -->
-<div class="slide">
-  <div class="slide-number">03</div>
-  <div class="section-label">Current Status</div>
-  <h2>現状分析<span class="jp">ミレアのデジタル存在感</span></h2>
-  <p>客引き禁止の今、ネット上に存在しないことは、<strong style="color:#c9a84c;">存在しないことと同じ</strong>。</p>
-  <table class="status-table">
-    <tr>
-      <th>項目</th>
-      <th>現状</th>
-      <th>問題</th>
-    </tr>
-    <tr>
-      <td>Webサイト</td>
-      <td class="status-bad">❌ なし</td>
-      <td>検索でヒットしない</td>
-    </tr>
-    <tr>
-      <td>Googleマップ（タニヤ）</td>
-      <td class="status-bad">❌ 未登録</td>
-      <td>存在しないのと同じ</td>
-    </tr>
-    <tr>
-      <td>Googleマップ（Thonglor）</td>
-      <td class="status-bad">⚠️ レビュー0・写真なし</td>
-      <td>信頼性ゼロ</td>
-    </tr>
-    <tr>
-      <td>Instagram</td>
-      <td class="status-bad">⚠️ フォロワー119・いいね2〜8</td>
-      <td>雰囲気が伝わらない</td>
-    </tr>
-    <tr>
-      <td>X（Twitter）</td>
-      <td class="status-bad">❌ なし</td>
-      <td>在住者コミュニティへのリーチゼロ</td>
-    </tr>
-  </table>
-</div>
-
-<!-- SLIDE 4: WEBSITE -->
-<div class="slide">
-  <div class="slide-number">04</div>
-  <div class="section-label">Solution — Web</div>
-  <h2>Webサイト制作<span class="jp">高級感あるブランドサイト</span></h2>
-  <p>Leone BKK・JUNGLE東京・Le Club de Tokyo を参考にした、黒ベース・金アクセントの高級感あるサイトを制作。</p>
-  <div class="pages-grid">
-    <div class="page-item">
-      <span class="num">01</span>
-      <h4>TOP</h4>
-      <p>全面写真 ＋<br>キャッチコピー</p>
-    </div>
-    <div class="page-item">
-      <span class="num">02</span>
-      <h4>CONCEPT</h4>
-      <p>ミレアの世界観・<br>こだわり</p>
-    </div>
-    <div class="page-item">
-      <span class="num">03</span>
-      <h4>CAST</h4>
-      <p>スタッフ個別<br>プロフィール</p>
-    </div>
-    <div class="page-item">
-      <span class="num">04</span>
-      <h4>SYSTEM</h4>
-      <p>料金・チャージ・<br>ボトル価格</p>
-    </div>
-    <div class="page-item">
-      <span class="num">05</span>
-      <h4>ACCESS</h4>
-      <p>GoogleMap・<br>営業時間</p>
-    </div>
-    <div class="page-item">
-      <span class="num">06</span>
-      <h4>INSTAGRAM</h4>
-      <p>最新投稿<br>自動表示</p>
-    </div>
-  </div>
-  <div style="margin-top:30px;">
-    <span class="tag">日本語 / English</span>
-    <span class="tag">スマホ対応</span>
-    <span class="tag">最短3日で公開</span>
-  </div>
-</div>
-
-<!-- SLIDE 5: ACTION PLAN -->
-<div class="slide">
-  <div class="slide-number">05</div>
-  <div class="section-label">Action Plan</div>
-  <h2>実施スケジュール<span class="jp">最速で動く</span></h2>
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-dot">1</div>
-      <div class="timeline-content">
-        <h3>Week 1 — デジタル基盤整備</h3>
-        <p>Webサイト制作・公開</p>
-        <p>Googleマップ タニヤ店舗 新規登録</p>
-        <p>写真15枚以上アップ・基本情報整備</p>
-        <span class="tag">URGENT</span>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot">2</div>
-      <div class="timeline-content">
-        <h3>Week 2 — SNS強化</h3>
-        <p>Instagram リール動画3本制作・投稿</p>
-        <p>X（Twitter）アカウント開設</p>
-        <p>ハッシュタグ・プロフィール最適化</p>
-        <span class="tag">HIGH PRIORITY</span>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot">3</div>
-      <div class="timeline-content">
-        <h3>Month 2〜3 — 継続運用</h3>
-        <p>Instagram 週3投稿体制</p>
-        <p>Googleレビュー獲得の仕組み化</p>
-        <p>月次レポート（フォロワー・来店数）</p>
-        <span class="tag">ONGOING</span>
+    <div class="concept-text">
+      <h3>ミレアという名の夜</h3>
+      <p>バンコク・タニヤの中心に位置するMILEA Executive Clubは、日本人男性のための上質な社交空間です。</p>
+      <p>日本語でのおもてなしを心がけた美しいスタッフたちと、上質な空間でカラオケ、ドリンク、そして特別な夜の時間をお過ごしください。</p>
+      <p>ビジネスの接待から、大切な仲間との一夜まで。MILEAは、あなたの夜をより豊かにします。</p>
+      <div style="margin-top:30px;">
+        <span style="display:inline-block;border:1px solid var(--gold);padding:8px 20px;font-size:11px;letter-spacing:3px;color:var(--gold);">JAPANESE HOSPITALITY</span>
       </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- SLIDE 6: PLANS -->
-<div class="slide">
-  <div class="slide-number">06</div>
-  <div class="section-label">Pricing</div>
-  <h2>料金プラン<span class="jp">シンプルな3プラン</span></h2>
-  <div class="plans-grid">
-    <div class="plan">
-      <h3>スタータープラン</h3>
-      <div class="price">5,000 <span>THB / 月</span></div>
-      <ul>
-        <li>Instagram 週3投稿</li>
-        <li>X（Twitter）週5投稿</li>
-        <li>Googleマップ管理</li>
-        <li>月次簡易レポート</li>
-      </ul>
+<section class="atmosphere">
+  <div class="s-label">Atmosphere</div>
+  <h2 class="s-title">空間</h2>
+  <div class="gold-line"></div>
+  <div class="atm-grid">
+    <div class="atm-item">
+      <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="">
+      <div class="overlay"><span>LOUNGE</span></div>
     </div>
-    <div class="plan featured">
-      <h3>スタンダード</h3>
-      <div class="price">10,000 <span>THB / 月</span></div>
-      <ul>
-        <li>Instagram 週5投稿（リール含む）</li>
-        <li>X（Twitter）毎日投稿</li>
-        <li>Googleマップ最適化</li>
-        <li>月次詳細レポート</li>
-        <li>コンテンツ企画・撮影指示</li>
-      </ul>
+    <div class="atm-item">
+      <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" alt="">
+      <div class="overlay"><span>DRINKS</span></div>
     </div>
-    <div class="plan">
-      <h3>フルサポート</h3>
-      <div class="price">要相談</div>
-      <ul>
-        <li>全媒体フル運用</li>
-        <li>Webサイト制作含む</li>
-        <li>撮影サポート</li>
-        <li>競合分析・戦略立案</li>
-        <li>専任担当制</li>
-      </ul>
+    <div class="atm-item">
+      <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&q=80" alt="">
+      <div class="overlay"><span>KARAOKE</span></div>
     </div>
   </div>
-  <p style="margin-top:30px; font-size:13px; color:#3a3020;">※ Webサイト制作は初期費用として別途お見積もり</p>
-</div>
+</section>
 
-<!-- SLIDE 7: KPI -->
-<div class="slide">
-  <div class="slide-number">07</div>
-  <div class="section-label">Expected Results</div>
-  <h2>3ヶ月後の目標<span class="jp">数字で見る成果</span></h2>
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <span class="metric">30+</span>
-      <span class="label">GOOGLE REVIEWS</span>
-      <p class="current">現状：0件</p>
+<section class="cast" id="cast">
+  <div class="s-label">Cast</div>
+  <h2 class="s-title">スタッフ紹介</h2>
+  <div class="gold-line"></div>
+  <p class="s-text">厳選されたスタッフが、心のこもったおもてなしでお迎えします。日本語でのコミュニケーションも安心してお任せください。</p>
+  <div class="cast-grid">
+    <div class="cast-card">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80" alt="">
+      <div class="cast-info"><div class="name">Nana</div><div class="detail">日本語 / English OK</div></div>
     </div>
-    <div class="kpi-card">
-      <span class="metric">2,000</span>
-      <span class="label">IG FOLLOWERS</span>
-      <p class="current">現状：119人</p>
+    <div class="cast-card">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80" alt="">
+      <div class="cast-info"><div class="name">Mia</div><div class="detail">日本語 / カラオケ得意</div></div>
     </div>
-    <div class="kpi-card">
-      <span class="metric">30</span>
-      <span class="label">SNS経由来店 / 月</span>
-      <p class="current">現状：不明（ほぼゼロ）</p>
+    <div class="cast-card">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80" alt="">
+      <div class="cast-info"><div class="name">Fah</div><div class="detail">English / ダンス得意</div></div>
     </div>
-    <div class="kpi-card">
-      <span class="metric">TOP3</span>
-      <span class="label">タニヤ Google 検索順位</span>
-      <p class="current">現状：圏外</p>
+    <div class="cast-card">
+      <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&q=80" alt="">
+      <div class="cast-info"><div class="name">Anya</div><div class="detail">日本語 / 北部出身</div></div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- FINAL -->
-<div class="final">
-  <div class="divider-gold"></div>
-  <h2>タニヤで最初に動いた店が、<br>勝つ。</h2>
-  <p>客引き禁止から1週間。<br>今この瞬間が、最大のチャンスです。</p>
-  <div class="contact-box">
-    <p>お問い合わせ・ご相談</p>
+<section class="system" id="system">
+  <div class="s-label">System & Price</div>
+  <h2 class="s-title">ご利用案内</h2>
+  <div class="gold-line"></div>
+  <div class="system-grid">
+    <div class="sys-item">
+      <div class="icon">🥂</div>
+      <h3>Table Charge</h3>
+      <p>テーブルチャージ・セット料金</p>
+      <div class="price-tag">要お問い合わせ</div>
+    </div>
+    <div class="sys-item">
+      <div class="icon">🎤</div>
+      <h3>Karaoke</h3>
+      <p>日本語・英語・タイ語<br>幅広い選曲でお楽しみいただけます</p>
+      <div class="price-tag">完備</div>
+    </div>
+    <div class="sys-item">
+      <div class="icon">🍾</div>
+      <h3>Bottle Keep</h3>
+      <p>ボトルキープシステム<br>ご来店のたびにご利用いただけます</p>
+      <div class="price-tag">対応可</div>
+    </div>
   </div>
-  <div class="divider-gold" style="margin-top:50px;"></div>
-  <p style="font-size:12px; color:#2a2418; margin-top:20px;">Confidential — March 2026</p>
-</div>
+</section>
+
+<section class="access" id="access">
+  <div class="s-label">Access</div>
+  <h2 class="s-title">アクセス</h2>
+  <div class="gold-line"></div>
+  <div class="access-grid">
+    <div class="access-info">
+      <p><strong>場所</strong>Soi Thaniya, Silom, Bangkok</p>
+      <p><strong>営業時間</strong>18:30 〜 Late</p>
+      <p><strong>定休日</strong>なし（禁酒日を除く）</p>
+      <p><strong>言語</strong>日本語・英語・タイ語</p>
+      <p><strong>Instagram</strong>@milea_executive_club</p>
+    </div>
+    <div class="map-placeholder"><span>GOOGLE MAP</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">MILEA</div>
+  <p style="font-size:12px;color:#3a3020;letter-spacing:3px;margin-bottom:20px;">EXECUTIVE CLUB — THANIYA, BANGKOK</p>
+  <div class="footer-sns">
+    <a href="#">INSTAGRAM</a>
+    <a href="#">LINE</a>
+    <a href="#">X / TWITTER</a>
+  </div>
+  <div class="footer-copy">© 2026 MILEA Executive Club. All rights reserved.</div>
+</footer>
 
 </body>
 </html>
