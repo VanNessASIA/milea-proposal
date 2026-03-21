@@ -6,7 +6,7 @@
 <title>MILEA Executive Club — Thaniya, Bangkok</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+KR:wght@300;400&family=Noto+Sans+SC:wght@300;400&family=Noto+Sans+Thai:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & BASE ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -111,7 +111,19 @@ section { padding: 80px 0; }
 }
 @media (max-width: 767px) {
   .nav-links a:not(.nav-tel) { display: none; }
+  .lang-switch { margin-right: 8px; }
 }
+
+/* ===== LANGUAGE SWITCHER ===== */
+.lang-switch { display: flex; gap: 0; border: 1px solid rgba(201,168,76,0.3); border-radius: 4px; overflow: hidden; }
+.lang-switch button {
+  border: none; background: transparent; color: #5a5040; font-size: 11px;
+  padding: 5px 10px; cursor: pointer; font-family: inherit;
+  border-right: 1px solid rgba(201,168,76,0.2); transition: background 0.15s, color 0.15s;
+}
+.lang-switch button:last-child { border-right: none; }
+.lang-switch button:hover { background: rgba(201,168,76,0.1); }
+.lang-switch button.active { background: #c9a84c; color: #0a0a0a; }
 
 /* ===== CTA BUTTON ===== */
 .btn-line {
@@ -403,6 +415,11 @@ section { padding: 80px 0; }
   margin: 0 auto 32px;
   opacity: .5;
 }
+
+/* ===== FONT OVERRIDE PER LANG ===== */
+html[lang="th"] body { font-family: 'Noto Sans Thai', 'Noto Serif JP', sans-serif; }
+html[lang="zh"] body { font-family: 'Noto Sans SC', 'Noto Serif JP', sans-serif; }
+html[lang="ko"] body { font-family: 'Noto Sans KR', 'Noto Serif JP', sans-serif; }
 </style>
 </head>
 <body>
@@ -412,10 +429,17 @@ section { padding: 80px 0; }
   <div class="nav-inner">
     <a href="#" class="nav-logo">MILEA</a>
     <div class="nav-links">
-      <a href="#cast">CAST</a>
-      <a href="#pricing">SYSTEM</a>
-      <a href="#gallery">GALLERY</a>
-      <a href="#access">ACCESS</a>
+      <a href="#cast" data-i18n="nav_cast">CAST</a>
+      <a href="#pricing" data-i18n="nav_system">SYSTEM</a>
+      <a href="#gallery" data-i18n="nav_gallery">GALLERY</a>
+      <a href="#access" data-i18n="nav_access">ACCESS</a>
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="ja" class="active">JP</button>
+        <button data-lang="en">EN</button>
+        <button data-lang="th">TH</button>
+        <button data-lang="zh">CN</button>
+        <button data-lang="ko">KR</button>
+      </div>
       <a href="tel:+6620001234" class="nav-tel">02-000-1234</a>
     </div>
   </div>
@@ -426,18 +450,18 @@ section { padding: 80px 0; }
   <div class="hero-content">
     <h1 class="hero-logo">MILEA</h1>
     <p class="hero-sub">Executive Club — Thaniya, Bangkok</p>
-    <p class="hero-catch">大人の紳士に、最上の夜を。</p>
+    <p class="hero-catch" data-i18n="hero_catch">大人の紳士に、最上の夜を。</p>
     <div class="hero-cta">
       <a href="https://line.me/R/" class="btn-line" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.95 2 10.7c0 4.29 3.8 7.88 8.94 8.56.35.08.82.23.94.54.11.27.07.7.03.98l-.15.92c-.05.28-.22 1.1.96.6s6.39-3.76 8.71-6.44C23.08 13.96 22 12.44 22 10.7 22 5.95 17.52 2 12 2zm-3.39 11.28h-2.1a.48.48 0 01-.48-.48V8.56c0-.27.22-.48.48-.48s.48.22.48.48v3.76h1.62c.27 0 .48.22.48.48s-.22.48-.48.48zm1.68-.48a.48.48 0 01-.96 0V8.56a.48.48 0 01.96 0v4.24zm4.32 0c0 .2-.12.37-.3.44a.47.47 0 01-.52-.1l-2.16-2.94v2.6a.48.48 0 01-.96 0V8.56c0-.2.12-.37.3-.44a.47.47 0 01.52.1l2.16 2.94V8.56a.48.48 0 01.96 0v4.24zm3.12-3.28a.48.48 0 010 .96h-1.62v.88h1.62a.48.48 0 010 .96h-2.1a.48.48 0 01-.48-.48V8.56c0-.27.22-.48.48-.48h2.1a.48.48 0 010 .96h-1.62v.88h1.62z"/></svg>
-        LINE予約
+        <span data-i18n="btn_line_reserve">LINE予約</span>
       </a>
       <div>
-        <span class="hero-tel-label">RESERVATION</span>
+        <span class="hero-tel-label" data-i18n="reservation_label">RESERVATION</span>
         <a href="tel:+6620001234" class="hero-tel">02-000-1234</a>
       </div>
     </div>
-    <p class="hero-info">OPEN 19:00 – 01:00 ｜ 年中無休</p>
+    <p class="hero-info" data-i18n="hero_info">OPEN 19:00 – 01:00 ｜ 年中無休</p>
   </div>
 </section>
 
@@ -446,10 +470,10 @@ section { padding: 80px 0; }
   <div class="container fade-in">
     <div class="section-title">
       <span class="en">Concept</span>
-      <span class="jp">コンセプト</span>
+      <span class="jp" data-i18n="section_concept">コンセプト</span>
     </div>
     <div class="divider"></div>
-    <p class="concept-text">
+    <p class="concept-text" data-i18n="concept_text">
       バンコク・タニヤの喧騒の中に、静かに灯る大人のための空間。<br>
       厳選されたキャストと洗練された空間が、<br>
       日常を離れた特別な夜をお約束します。<br>
@@ -464,53 +488,53 @@ section { padding: 80px 0; }
   <div class="container fade-in">
     <div class="section-title">
       <span class="en">Cast</span>
-      <span class="jp">在籍キャスト</span>
+      <span class="jp" data-i18n="section_cast">在籍キャスト</span>
     </div>
     <div class="divider"></div>
     <div class="cast-grid">
       <div class="cast-card">
         <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80" alt="Mina">
         <p class="cast-name">Mina</p>
-        <p class="cast-comment">笑顔でお出迎えします♪</p>
+        <p class="cast-comment" data-i18n="cast_mina">笑顔でお出迎えします♪</p>
       </div>
       <div class="cast-card">
         <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80" alt="Aoi">
         <p class="cast-name">Aoi</p>
-        <p class="cast-comment">楽しい時間を一緒に</p>
+        <p class="cast-comment" data-i18n="cast_aoi">楽しい時間を一緒に</p>
       </div>
       <div class="cast-card">
         <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" alt="Rina">
         <p class="cast-name">Rina</p>
-        <p class="cast-comment">癒しの時間をお届けします</p>
+        <p class="cast-comment" data-i18n="cast_rina">癒しの時間をお届けします</p>
       </div>
       <div class="cast-card">
         <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80" alt="Yuki">
         <p class="cast-name">Yuki</p>
-        <p class="cast-comment">お話しましょう♪</p>
+        <p class="cast-comment" data-i18n="cast_yuki">お話しましょう♪</p>
       </div>
       <div class="cast-card">
         <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&q=80" alt="Hana">
         <p class="cast-name">Hana</p>
-        <p class="cast-comment">カラオケ大好き！</p>
+        <p class="cast-comment" data-i18n="cast_hana">カラオケ大好き！</p>
       </div>
       <div class="cast-card">
         <img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400&q=80" alt="Saki">
         <p class="cast-name">Saki</p>
-        <p class="cast-comment">最高の夜にしましょう</p>
+        <p class="cast-comment" data-i18n="cast_saki">最高の夜にしましょう</p>
       </div>
       <div class="cast-card">
         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="Nana">
         <p class="cast-name">Nana</p>
-        <p class="cast-comment">会えるのを楽しみに♡</p>
+        <p class="cast-comment" data-i18n="cast_nana">会えるのを楽しみに♡</p>
       </div>
       <div class="cast-card">
         <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80" alt="Mei">
         <p class="cast-name">Mei</p>
-        <p class="cast-comment">お酒の席、お任せください</p>
+        <p class="cast-comment" data-i18n="cast_mei">お酒の席、お任せください</p>
       </div>
     </div>
     <div class="cast-more">
-      <a href="#" class="btn-outline">キャスト一覧をもっと見る →</a>
+      <a href="#" class="btn-outline" data-i18n="cast_more">キャスト一覧をもっと見る →</a>
     </div>
   </div>
 </section>
@@ -520,20 +544,20 @@ section { padding: 80px 0; }
   <div class="container fade-in">
     <div class="section-title">
       <span class="en">System</span>
-      <span class="jp">料金システム</span>
+      <span class="jp" data-i18n="section_system">料金システム</span>
     </div>
     <div class="divider"></div>
     <div class="pricing-wrap">
-      <div class="pricing-badge"><span>明 朗 会 計</span></div>
+      <div class="pricing-badge"><span data-i18n="pricing_badge">明 朗 会 計</span></div>
       <table class="pricing-table">
-        <tr><th>セット料金（1時間・飲み放題）</th><td>700 B</td></tr>
-        <tr><th>延長（30分）</th><td>350 B</td></tr>
-        <tr><th>指名料</th><td>300 B</td></tr>
-        <tr><th>レディースドリンク</th><td>200 B / 杯</td></tr>
-        <tr><th>ボトルキープ（ウイスキー各種）</th><td>2,500 B 〜</td></tr>
-        <tr><th>カラオケ</th><td>セット料金に含む</td></tr>
+        <tr><th data-i18n="price_set">セット料金（1時間・飲み放題）</th><td>700 B</td></tr>
+        <tr><th data-i18n="price_ext">延長（30分）</th><td>350 B</td></tr>
+        <tr><th data-i18n="price_nom">指名料</th><td>300 B</td></tr>
+        <tr><th data-i18n="price_drink">レディースドリンク</th><td>200 B / <span data-i18n="price_cup">杯</span></td></tr>
+        <tr><th data-i18n="price_bottle">ボトルキープ（ウイスキー各種）</th><td>2,500 B 〜</td></tr>
+        <tr><th data-i18n="price_karaoke">カラオケ</th><td data-i18n="price_karaoke_val">セット料金に含む</td></tr>
       </table>
-      <p class="pricing-note">※ 上記は税・サービス料込みの料金です。追加料金は一切ございません。</p>
+      <p class="pricing-note" data-i18n="pricing_note">※ 上記は税・サービス料込みの料金です。追加料金は一切ございません。</p>
     </div>
   </div>
 </section>
@@ -543,7 +567,7 @@ section { padding: 80px 0; }
   <div class="container fade-in">
     <div class="section-title">
       <span class="en">Today</span>
-      <span class="jp">本日の出勤</span>
+      <span class="jp" data-i18n="section_today">本日の出勤</span>
     </div>
     <div class="divider"></div>
     <div class="schedule-grid">
@@ -568,7 +592,7 @@ section { padding: 80px 0; }
         <p class="time">19:00 – 01:00</p>
       </div>
     </div>
-    <p class="schedule-note">最新の出勤情報は<a href="https://line.me/R/" target="_blank" rel="noopener">LINE</a>でお問い合わせください</p>
+    <p class="schedule-note" data-i18n="schedule_note">最新の出勤情報は<a href="https://line.me/R/" target="_blank" rel="noopener">LINE</a>でお問い合わせください</p>
   </div>
 </section>
 
@@ -577,7 +601,7 @@ section { padding: 80px 0; }
   <div class="container fade-in">
     <div class="section-title">
       <span class="en">Gallery</span>
-      <span class="jp">店内ギャラリー</span>
+      <span class="jp" data-i18n="section_gallery">店内ギャラリー</span>
     </div>
     <div class="divider"></div>
     <div class="gallery-grid">
@@ -596,20 +620,20 @@ section { padding: 80px 0; }
   <div class="container fade-in">
     <div class="section-title">
       <span class="en">Access</span>
-      <span class="jp">アクセス</span>
+      <span class="jp" data-i18n="section_access">アクセス</span>
     </div>
     <div class="divider"></div>
     <div class="access-wrap">
       <dl class="access-info">
-        <dt>店名</dt>
+        <dt data-i18n="access_name">店名</dt>
         <dd>MILEA Executive Club</dd>
-        <dt>住所</dt>
+        <dt data-i18n="access_address">住所</dt>
         <dd>Thaniya Plaza 2F, Silom Rd,<br>Bang Rak, Bangkok 10500</dd>
-        <dt>最寄り駅</dt>
-        <dd>BTS サラデーン駅 徒歩2分<br>MRT シーロム駅 徒歩5分</dd>
-        <dt>営業時間</dt>
-        <dd>19:00 – 01:00（年中無休）</dd>
-        <dt>電話番号</dt>
+        <dt data-i18n="access_station">最寄り駅</dt>
+        <dd data-i18n="access_station_val">BTS サラデーン駅 徒歩2分<br>MRT シーロム駅 徒歩5分</dd>
+        <dt data-i18n="access_hours">営業時間</dt>
+        <dd data-i18n="access_hours_val">19:00 – 01:00（年中無休）</dd>
+        <dt data-i18n="access_phone">電話番号</dt>
         <dd><a href="tel:+6620001234" style="color:#c9a84c;">02-000-1234</a></dd>
         <dt>LINE</dt>
         <dd><a href="https://line.me/R/" target="_blank" rel="noopener" style="color:#c9a84c;">@milea-bkk</a></dd>
@@ -625,10 +649,10 @@ section { padding: 80px 0; }
 <footer class="footer">
   <div class="container">
     <div class="footer-cta fade-in">
-      <p style="font-size:14px; color:#998a6e; margin-bottom:16px; letter-spacing:.15em;">ご予約・お問い合わせ</p>
+      <p style="font-size:14px; color:#998a6e; margin-bottom:16px; letter-spacing:.15em;" data-i18n="footer_cta_label">ご予約・お問い合わせ</p>
       <a href="https://line.me/R/" class="btn-line" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.95 2 10.7c0 4.29 3.8 7.88 8.94 8.56.35.08.82.23.94.54.11.27.07.7.03.98l-.15.92c-.05.28-.22 1.1.96.6s6.39-3.76 8.71-6.44C23.08 13.96 22 12.44 22 10.7 22 5.95 17.52 2 12 2zm-3.39 11.28h-2.1a.48.48 0 01-.48-.48V8.56c0-.27.22-.48.48-.48s.48.22.48.48v3.76h1.62c.27 0 .48.22.48.48s-.22.48-.48.48zm1.68-.48a.48.48 0 01-.96 0V8.56a.48.48 0 01.96 0v4.24zm4.32 0c0 .2-.12.37-.3.44a.47.47 0 01-.52-.1l-2.16-2.94v2.6a.48.48 0 01-.96 0V8.56c0-.2.12-.37.3-.44a.47.47 0 01.52.1l2.16 2.94V8.56a.48.48 0 01.96 0v4.24zm3.12-3.28a.48.48 0 010 .96h-1.62v.88h1.62a.48.48 0 010 .96h-2.1a.48.48 0 01-.48-.48V8.56c0-.27.22-.48.48-.48h2.1a.48.48 0 010 .96h-1.62v.88h1.62z"/></svg>
-        LINEで予約する
+        <span data-i18n="btn_line_book">LINEで予約する</span>
       </a>
     </div>
     <div class="footer-social">
@@ -641,6 +665,275 @@ section { padding: 80px 0; }
 </footer>
 
 <script>
+// ===== i18n TRANSLATIONS =====
+const i18n = {
+  ja: {
+    nav_cast: 'CAST',
+    nav_system: 'SYSTEM',
+    nav_gallery: 'GALLERY',
+    nav_access: 'ACCESS',
+    hero_catch: '大人の紳士に、最上の夜を。',
+    btn_line_reserve: 'LINE予約',
+    reservation_label: 'RESERVATION',
+    hero_info: 'OPEN 19:00 – 01:00 ｜ 年中無休',
+    section_concept: 'コンセプト',
+    concept_text: 'バンコク・タニヤの喧騒の中に、静かに灯る大人のための空間。<br>厳選されたキャストと洗練された空間が、<br>日常を離れた特別な夜をお約束します。<br>MILEAは、品格ある紳士のための社交場です。',
+    section_cast: '在籍キャスト',
+    cast_mina: '笑顔でお出迎えします♪',
+    cast_aoi: '楽しい時間を一緒に',
+    cast_rina: '癒しの時間をお届けします',
+    cast_yuki: 'お話しましょう♪',
+    cast_hana: 'カラオケ大好き！',
+    cast_saki: '最高の夜にしましょう',
+    cast_nana: '会えるのを楽しみに♡',
+    cast_mei: 'お酒の席、お任せください',
+    cast_more: 'キャスト一覧をもっと見る →',
+    section_system: '料金システム',
+    pricing_badge: '明 朗 会 計',
+    price_set: 'セット料金（1時間・飲み放題）',
+    price_ext: '延長（30分）',
+    price_nom: '指名料',
+    price_drink: 'レディースドリンク',
+    price_cup: '杯',
+    price_bottle: 'ボトルキープ（ウイスキー各種）',
+    price_karaoke: 'カラオケ',
+    price_karaoke_val: 'セット料金に含む',
+    pricing_note: '※ 上記は税・サービス料込みの料金です。追加料金は一切ございません。',
+    section_today: '本日の出勤',
+    schedule_note: '最新の出勤情報は<a href="https://line.me/R/" target="_blank" rel="noopener">LINE</a>でお問い合わせください',
+    section_gallery: '店内ギャラリー',
+    section_access: 'アクセス',
+    access_name: '店名',
+    access_address: '住所',
+    access_station: '最寄り駅',
+    access_station_val: 'BTS サラデーン駅 徒歩2分<br>MRT シーロム駅 徒歩5分',
+    access_hours: '営業時間',
+    access_hours_val: '19:00 – 01:00（年中無休）',
+    access_phone: '電話番号',
+    footer_cta_label: 'ご予約・お問い合わせ',
+    btn_line_book: 'LINEで予約する'
+  },
+  en: {
+    nav_cast: 'CAST',
+    nav_system: 'SYSTEM',
+    nav_gallery: 'GALLERY',
+    nav_access: 'ACCESS',
+    hero_catch: 'The finest night for the distinguished gentleman.',
+    btn_line_reserve: 'LINE Booking',
+    reservation_label: 'RESERVATION',
+    hero_info: 'OPEN 19:00 – 01:00 ｜ Open Every Day',
+    section_concept: 'Concept',
+    concept_text: 'A refined sanctuary quietly glowing amidst the bustle of Thaniya, Bangkok.<br>Carefully selected hostesses and an elegant space<br>promise you an extraordinary evening away from the everyday.<br>MILEA is a social club for gentlemen of distinction.',
+    section_cast: 'Our Cast',
+    cast_mina: 'Welcome with a smile ♪',
+    cast_aoi: "Let's have a great time together",
+    cast_rina: 'I\'ll bring you a relaxing time',
+    cast_yuki: "Let's chat ♪",
+    cast_hana: 'I love karaoke!',
+    cast_saki: "Let's make it an amazing night",
+    cast_nana: 'Looking forward to meeting you ♡',
+    cast_mei: 'Leave the drinks to me',
+    cast_more: 'View All Cast →',
+    section_system: 'Pricing',
+    pricing_badge: 'TRANSPARENT PRICING',
+    price_set: 'Set (1 hour, all-you-can-drink)',
+    price_ext: 'Extension (30 min)',
+    price_nom: 'Nomination Fee',
+    price_drink: 'Lady\'s Drink',
+    price_cup: 'glass',
+    price_bottle: 'Bottle Keep (Whisky)',
+    price_karaoke: 'Karaoke',
+    price_karaoke_val: 'Included in set',
+    pricing_note: '※ All prices include tax and service charge. No hidden fees.',
+    section_today: "Today's Schedule",
+    schedule_note: 'For the latest schedule, please contact us via <a href="https://line.me/R/" target="_blank" rel="noopener">LINE</a>',
+    section_gallery: 'Gallery',
+    section_access: 'Access',
+    access_name: 'Name',
+    access_address: 'Address',
+    access_station: 'Nearest Station',
+    access_station_val: 'BTS Sala Daeng — 2 min walk<br>MRT Si Lom — 5 min walk',
+    access_hours: 'Hours',
+    access_hours_val: '19:00 – 01:00 (Open Every Day)',
+    access_phone: 'Phone',
+    footer_cta_label: 'Reservations & Inquiries',
+    btn_line_book: 'Book via LINE'
+  },
+  th: {
+    nav_cast: 'CAST',
+    nav_system: 'SYSTEM',
+    nav_gallery: 'GALLERY',
+    nav_access: 'ACCESS',
+    hero_catch: 'ค่ำคืนที่ดีที่สุดสำหรับสุภาพบุรุษ',
+    btn_line_reserve: 'จอง LINE',
+    reservation_label: 'สำรองที่นั่ง',
+    hero_info: 'เปิด 19:00 – 01:00 ｜ เปิดทุกวัน',
+    section_concept: 'แนวคิด',
+    concept_text: 'พื้นที่สงบเงียบที่ส่องแสงอยู่ท่ามกลางความคึกคักของธนิยะ กรุงเทพฯ<br>พนักงานต้อนรับที่คัดสรรมาอย่างดีและบรรยากาศหรูหรา<br>มอบค่ำคืนพิเศษที่แตกต่างจากชีวิตประจำวัน<br>MILEA คือสังคมสำหรับสุภาพบุรุษผู้มีรสนิยม',
+    section_cast: 'พนักงานต้อนรับ',
+    cast_mina: 'ยินดีต้อนรับด้วยรอยยิ้ม ♪',
+    cast_aoi: 'มาสนุกด้วยกันนะคะ',
+    cast_rina: 'มอบเวลาผ่อนคลายให้คุณ',
+    cast_yuki: 'มาคุยกันนะคะ ♪',
+    cast_hana: 'ชอบคาราโอเกะมาก!',
+    cast_saki: 'มาทำให้เป็นคืนที่ดีที่สุด',
+    cast_nana: 'รอพบคุณอยู่นะคะ ♡',
+    cast_mei: 'เรื่องเครื่องดื่ม ปล่อยให้ฉันเลย',
+    cast_more: 'ดูพนักงานทั้งหมด →',
+    section_system: 'ระบบราคา',
+    pricing_badge: 'ราคาโปร่งใส',
+    price_set: 'เซ็ต (1 ชม. เครื่องดื่มไม่อั้น)',
+    price_ext: 'ต่อเวลา (30 นาที)',
+    price_nom: 'ค่าเลือกพนักงาน',
+    price_drink: 'เครื่องดื่มสุภาพสตรี',
+    price_cup: 'แก้ว',
+    price_bottle: 'เก็บขวด (วิสกี้)',
+    price_karaoke: 'คาราโอเกะ',
+    price_karaoke_val: 'รวมในเซ็ต',
+    pricing_note: '※ ราคาข้างต้นรวมภาษีและค่าบริการแล้ว ไม่มีค่าใช้จ่ายเพิ่มเติม',
+    section_today: 'ตารางวันนี้',
+    schedule_note: 'สอบถามตารางล่าสุดได้ทาง <a href="https://line.me/R/" target="_blank" rel="noopener">LINE</a>',
+    section_gallery: 'แกลเลอรี',
+    section_access: 'การเดินทาง',
+    access_name: 'ชื่อร้าน',
+    access_address: 'ที่อยู่',
+    access_station: 'สถานีใกล้สุด',
+    access_station_val: 'BTS ศาลาแดง เดิน 2 นาที<br>MRT สีลม เดิน 5 นาที',
+    access_hours: 'เวลาเปิด',
+    access_hours_val: '19:00 – 01:00 (เปิดทุกวัน)',
+    access_phone: 'โทรศัพท์',
+    footer_cta_label: 'สำรองที่นั่ง・สอบถาม',
+    btn_line_book: 'จองผ่าน LINE'
+  },
+  zh: {
+    nav_cast: 'CAST',
+    nav_system: 'SYSTEM',
+    nav_gallery: 'GALLERY',
+    nav_access: 'ACCESS',
+    hero_catch: '为尊贵绅士，呈献至臻之夜。',
+    btn_line_reserve: 'LINE预约',
+    reservation_label: '预约',
+    hero_info: '营业 19:00 – 01:00 ｜ 全年无休',
+    section_concept: '理念',
+    concept_text: '在曼谷Thaniya的喧嚣中，静静闪耀的大人空间。<br>精心挑选的接待员与洗练的空间，<br>为您许诺远离日常的特别之夜。<br>MILEA，是专为品位绅士打造的社交场所。',
+    section_cast: '在籍接待',
+    cast_mina: '以微笑迎接您 ♪',
+    cast_aoi: '一起度过快乐时光',
+    cast_rina: '为您带来治愈时光',
+    cast_yuki: '一起聊天吧 ♪',
+    cast_hana: '超喜欢卡拉OK！',
+    cast_saki: '一起度过最棒的夜晚',
+    cast_nana: '期待与您相见 ♡',
+    cast_mei: '酒席之事，请交给我',
+    cast_more: '查看全部接待 →',
+    section_system: '价格体系',
+    pricing_badge: '明码标价',
+    price_set: '套餐（1小时・畅饮）',
+    price_ext: '延时（30分钟）',
+    price_nom: '指名费',
+    price_drink: '女士饮品',
+    price_cup: '杯',
+    price_bottle: '存酒（威士忌各种）',
+    price_karaoke: '卡拉OK',
+    price_karaoke_val: '含在套餐内',
+    pricing_note: '※ 以上价格含税及服务费，绝无额外收费。',
+    section_today: '今日出勤',
+    schedule_note: '最新出勤信息请通过<a href="https://line.me/R/" target="_blank" rel="noopener">LINE</a>咨询',
+    section_gallery: '店内相册',
+    section_access: '交通',
+    access_name: '店名',
+    access_address: '地址',
+    access_station: '最近车站',
+    access_station_val: 'BTS Sala Daeng站 步行2分钟<br>MRT Si Lom站 步行5分钟',
+    access_hours: '营业时间',
+    access_hours_val: '19:00 – 01:00（全年无休）',
+    access_phone: '电话',
+    footer_cta_label: '预约・咨询',
+    btn_line_book: '通过LINE预约'
+  },
+  ko: {
+    nav_cast: 'CAST',
+    nav_system: 'SYSTEM',
+    nav_gallery: 'GALLERY',
+    nav_access: 'ACCESS',
+    hero_catch: '품격 있는 신사에게, 최고의 밤을.',
+    btn_line_reserve: 'LINE 예약',
+    reservation_label: '예약',
+    hero_info: 'OPEN 19:00 – 01:00 ｜ 연중무휴',
+    section_concept: '컨셉',
+    concept_text: '방콕 타니야의 번화함 속에 조용히 빛나는 어른을 위한 공간.<br>엄선된 캐스트와 세련된 공간이<br>일상을 벗어난 특별한 밤을 약속합니다.<br>MILEA는 품격 있는 신사를 위한 사교 클럽입니다.',
+    section_cast: '소속 캐스트',
+    cast_mina: '미소로 맞이해 드릴게요 ♪',
+    cast_aoi: '즐거운 시간을 함께해요',
+    cast_rina: '힐링 타임을 선물할게요',
+    cast_yuki: '이야기해요 ♪',
+    cast_hana: '노래방 너무 좋아요!',
+    cast_saki: '최고의 밤을 만들어요',
+    cast_nana: '만나뵐 수 있길 기대해요 ♡',
+    cast_mei: '술자리는 저에게 맡겨주세요',
+    cast_more: '캐스트 전체 보기 →',
+    section_system: '요금 시스템',
+    pricing_badge: '명확한 요금제',
+    price_set: '세트 요금 (1시간・무제한 음료)',
+    price_ext: '연장 (30분)',
+    price_nom: '지명료',
+    price_drink: '레이디스 드링크',
+    price_cup: '잔',
+    price_bottle: '보틀 킵 (위스키 각종)',
+    price_karaoke: '노래방',
+    price_karaoke_val: '세트 요금에 포함',
+    pricing_note: '※ 상기 요금은 세금 및 서비스료 포함입니다. 추가 요금은 없습니다.',
+    section_today: '오늘 출근',
+    schedule_note: '최신 출근 정보는 <a href="https://line.me/R/" target="_blank" rel="noopener">LINE</a>으로 문의해 주세요',
+    section_gallery: '매장 갤러리',
+    section_access: '오시는 길',
+    access_name: '매장명',
+    access_address: '주소',
+    access_station: '가까운 역',
+    access_station_val: 'BTS 살라댕역 도보 2분<br>MRT 시롬역 도보 5분',
+    access_hours: '영업시간',
+    access_hours_val: '19:00 – 01:00 (연중무휴)',
+    access_phone: '전화번호',
+    footer_cta_label: '예약・문의',
+    btn_line_book: 'LINE으로 예약하기'
+  }
+};
+
+// ===== i18n ENGINE =====
+function setLang(lang) {
+  const dict = i18n[lang];
+  if (!dict) return;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) {
+      el.innerHTML = dict[key];
+    }
+  });
+  // Update active button
+  document.querySelectorAll('#langSwitch button').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  // Save preference
+  try { localStorage.setItem('milea-lang', lang); } catch(e) {}
+}
+
+// Language switcher click handler
+document.getElementById('langSwitch').addEventListener('click', e => {
+  const btn = e.target.closest('button[data-lang]');
+  if (btn) setLang(btn.getAttribute('data-lang'));
+});
+
+// Restore saved language on load
+(function() {
+  try {
+    const saved = localStorage.getItem('milea-lang');
+    if (saved && i18n[saved]) setLang(saved);
+  } catch(e) {}
+})();
+
+// ===== EXISTING EFFECTS (PRESERVED) =====
+
 // Scroll: Nav shrink
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
