@@ -6,7 +6,7 @@
 <title>Karaoke Snack SAMPLE — Bangkok Thaniya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@400;500;700&family=Noto+Sans+KR:wght@300;400&family=Noto+Sans+SC:wght@300;400&family=Noto+Sans+Thai:wght@300;400&display=swap" rel="stylesheet">
 <style>
 /* ===== Reset & Base ===== */
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -66,6 +66,17 @@ section:nth-child(even) { background: #130e1a; }
 .nav-links a { color: #e8e0f0; font-size: .85rem; transition: color .2s; }
 .nav-links a:hover { color: #f5c542; }
 .nav-toggle { display: none; background: none; border: none; color: #e8e0f0; font-size: 1.5rem; cursor: pointer; }
+
+/* ===== Lang Switch ===== */
+.lang-switch { display: flex; gap: 0; border: 1px solid rgba(224,160,255,0.3); border-radius: 4px; overflow: hidden; }
+.lang-switch button {
+  border: none; background: transparent; color: rgba(224,160,255,0.6); font-size: 11px;
+  padding: 5px 10px; cursor: pointer; font-family: inherit;
+  border-right: 1px solid rgba(224,160,255,0.2); transition: background 0.15s, color 0.15s;
+}
+.lang-switch button:last-child { border-right: none; }
+.lang-switch button:hover { background: rgba(224,160,255,0.1); }
+.lang-switch button.active { background: #e0a0ff; color: #0f0a14; }
 
 /* ===== Hero ===== */
 .hero {
@@ -298,6 +309,8 @@ section:nth-child(even) { background: #130e1a; }
   .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,10,20,.97); flex-direction: column; padding: 1.5rem; gap: 1rem; }
   .nav-links.open { display: flex; }
   .nav-toggle { display: block; }
+  .nav-inner { flex-wrap: wrap; }
+  .lang-switch { order: 3; margin-top: .5rem; width: 100%; justify-content: center; }
   .mama-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
   .mama-photo { width: 200px; height: 260px; }
   .features-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
@@ -321,14 +334,21 @@ section:nth-child(even) { background: #130e1a; }
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">Snack SAMPLE</a>
     <button class="nav-toggle" id="navToggle" aria-label="メニュー">☰</button>
+    <div class="lang-switch" id="langSwitch">
+      <button class="active" data-lang="ja">JP</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="th">TH</button>
+      <button data-lang="zh">CN</button>
+      <button data-lang="ko">KR</button>
+    </div>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#mama">ご挨拶</a></li>
-      <li><a href="#features">当店の特徴</a></li>
-      <li><a href="#karaoke">カラオケ</a></li>
-      <li><a href="#staff">スタッフ</a></li>
-      <li><a href="#pricing">料金</a></li>
-      <li><a href="#reviews">お客様の声</a></li>
-      <li><a href="#access">アクセス</a></li>
+      <li><a href="#mama" data-i18n="nav_greeting">ご挨拶</a></li>
+      <li><a href="#features" data-i18n="nav_features">当店の特徴</a></li>
+      <li><a href="#karaoke" data-i18n="nav_karaoke">カラオケ</a></li>
+      <li><a href="#staff" data-i18n="nav_staff">スタッフ</a></li>
+      <li><a href="#pricing" data-i18n="nav_pricing">料金</a></li>
+      <li><a href="#reviews" data-i18n="nav_reviews">お客様の声</a></li>
+      <li><a href="#access" data-i18n="nav_access">アクセス</a></li>
     </ul>
   </div>
 </nav>
@@ -337,15 +357,15 @@ section:nth-child(even) { background: #130e1a; }
 <section class="hero" id="hero">
   <div class="hero-content">
     <h1>Snack SAMPLE</h1>
-    <p class="hero-tagline">あなたの"帰る場所"が、バンコクにある</p>
-    <p class="hero-hours">営業時間｜月〜土 19:00 – 01:00（日曜定休）</p>
+    <p class="hero-tagline" data-i18n="hero_tagline">あなたの"帰る場所"が、バンコクにある</p>
+    <p class="hero-hours" data-i18n="hero_hours">営業時間｜月〜土 19:00 – 01:00（日曜定休）</p>
     <div class="hero-cta">
       <a href="https://line.me/R/" class="btn-line">
         <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.508.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
-        LINE予約
+        <span data-i18n="btn_line_reserve">LINE予約</span>
       </a>
       <div class="hero-tel">
-        TEL: <span>02-234-XXXX</span>
+        <span data-i18n="tel_label">TEL:</span> <span>02-234-XXXX</span>
       </div>
     </div>
   </div>
@@ -354,17 +374,14 @@ section:nth-child(even) { background: #130e1a; }
 <!-- ===== MAMA ===== -->
 <section id="mama">
   <div class="container">
-    <h2 class="section-title fade-in">ご挨拶</h2>
-    <p class="section-subtitle fade-in">Welcome Message</p>
+    <h2 class="section-title fade-in" data-i18n="section_greeting">ご挨拶</h2>
+    <p class="section-subtitle fade-in" data-i18n="section_greeting_sub">Welcome Message</p>
     <div class="mama-grid fade-in">
       <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" alt="ママの写真" class="mama-photo" loading="lazy">
       <div class="mama-message">
-        <h3>はじめまして。ママの美咲です。</h3>
-        <p>バンコク・タニヤで当店を開いて15年になります。<br>
-        お仕事帰りのひととき、懐かしい日本の歌、気心の知れたスタッフとの会話。<br>
-        ここは「もう一つの自分の居場所」——そんなお店でありたいと思っています。</p>
-        <p>おひとりでも、ご接待でも、どうぞお気軽にお越しください。<br>
-        スタッフ一同、心よりお待ちしております。</p>
+        <h3 data-i18n="mama_title">はじめまして。ママの美咲です。</h3>
+        <p data-i18n="mama_p1">バンコク・タニヤで当店を開いて15年になります。<br>お仕事帰りのひととき、懐かしい日本の歌、気心の知れたスタッフとの会話。<br>ここは「もう一つの自分の居場所」——そんなお店でありたいと思っています。</p>
+        <p data-i18n="mama_p2">おひとりでも、ご接待でも、どうぞお気軽にお越しください。<br>スタッフ一同、心よりお待ちしております。</p>
         <p class="mama-name">— ママ 美咲</p>
       </div>
     </div>
@@ -374,23 +391,23 @@ section:nth-child(even) { background: #130e1a; }
 <!-- ===== FEATURES ===== -->
 <section id="features">
   <div class="container">
-    <h2 class="section-title fade-in">当店の特徴</h2>
-    <p class="section-subtitle fade-in">Why Choose Us</p>
+    <h2 class="section-title fade-in" data-i18n="section_features">当店の特徴</h2>
+    <p class="section-subtitle fade-in" data-i18n="section_features_sub">Why Choose Us</p>
     <div class="features-grid">
       <div class="feature-card fade-in">
         <div class="feature-icon">🏠</div>
-        <h3>アットホーム</h3>
-        <p>初めてでも安心。ママとスタッフが<br>温かくお迎えします。</p>
+        <h3 data-i18n="feat_home_title">アットホーム</h3>
+        <p data-i18n="feat_home_desc">初めてでも安心。ママとスタッフが<br>温かくお迎えします。</p>
       </div>
       <div class="feature-card fade-in">
         <div class="feature-icon">🎤</div>
-        <h3>カラオケ充実</h3>
-        <p>最新DAM導入。日本語・タイ語・英語<br>10,000曲以上をご用意。</p>
+        <h3 data-i18n="feat_karaoke_title">カラオケ充実</h3>
+        <p data-i18n="feat_karaoke_desc">最新DAM導入。日本語・タイ語・英語<br>10,000曲以上をご用意。</p>
       </div>
       <div class="feature-card fade-in">
         <div class="feature-icon">🥃</div>
-        <h3>ボトルキープ</h3>
-        <p>お好みの一本をキープ。<br>次回来店がもっと楽しみに。</p>
+        <h3 data-i18n="feat_bottle_title">ボトルキープ</h3>
+        <p data-i18n="feat_bottle_desc">お好みの一本をキープ。<br>次回来店がもっと楽しみに。</p>
       </div>
     </div>
   </div>
@@ -399,14 +416,14 @@ section:nth-child(even) { background: #130e1a; }
 <!-- ===== KARAOKE ===== -->
 <section id="karaoke">
   <div class="container">
-    <h2 class="section-title fade-in">カラオケ</h2>
-    <p class="section-subtitle fade-in">Karaoke</p>
+    <h2 class="section-title fade-in" data-i18n="section_karaoke">カラオケ</h2>
+    <p class="section-subtitle fade-in" data-i18n="section_karaoke_sub">Karaoke</p>
     <div class="karaoke-grid fade-in">
       <div class="karaoke-info">
-        <h3>日本語・タイ語・英語 10,000曲以上</h3>
-        <p>最新のDAMシステム完備。毎月新曲追加で、最新ヒットから懐メロまで幅広く楽しめます。</p>
-        <span class="karaoke-badge">✨ 採点機能あり — 仲間と盛り上がろう！</span>
-        <h3 style="margin-top: 1rem;">人気曲ランキング TOP5</h3>
+        <h3 data-i18n="karaoke_songs_title">日本語・タイ語・英語 10,000曲以上</h3>
+        <p data-i18n="karaoke_songs_desc">最新のDAMシステム完備。毎月新曲追加で、最新ヒットから懐メロまで幅広く楽しめます。</p>
+        <span class="karaoke-badge" data-i18n="karaoke_badge">✨ 採点機能あり — 仲間と盛り上がろう！</span>
+        <h3 style="margin-top: 1rem;" data-i18n="karaoke_ranking_title">人気曲ランキング TOP5</h3>
         <ol class="ranking">
           <li>糸 — 中島みゆき</li>
           <li>残酷な天使のテーゼ — 高橋洋子</li>
@@ -423,43 +440,43 @@ section:nth-child(even) { background: #130e1a; }
 <!-- ===== STAFF ===== -->
 <section id="staff">
   <div class="container">
-    <h2 class="section-title fade-in">スタッフ紹介</h2>
-    <p class="section-subtitle fade-in">Our Staff</p>
+    <h2 class="section-title fade-in" data-i18n="section_staff">スタッフ紹介</h2>
+    <p class="section-subtitle fade-in" data-i18n="section_staff_sub">Our Staff</p>
     <div class="staff-grid">
       <div class="staff-card fade-in">
         <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&q=80" alt="ナナ" class="staff-photo" loading="lazy">
         <h4>ナナ</h4>
-        <p class="staff-origin">チェンマイ出身</p>
+        <p class="staff-origin" data-i18n="staff_nana_origin">チェンマイ出身</p>
         <p class="staff-song">♪ First Love — 宇多田ヒカル</p>
       </div>
       <div class="staff-card fade-in">
         <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&q=80" alt="モモ" class="staff-photo" loading="lazy">
         <h4>モモ</h4>
-        <p class="staff-origin">バンコク出身</p>
+        <p class="staff-origin" data-i18n="staff_momo_origin">バンコク出身</p>
         <p class="staff-song">♪ 恋するフォーチュンクッキー — AKB48</p>
       </div>
       <div class="staff-card fade-in">
         <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" alt="リナ" class="staff-photo" loading="lazy">
         <h4>リナ</h4>
-        <p class="staff-origin">コンケン出身</p>
+        <p class="staff-origin" data-i18n="staff_rina_origin">コンケン出身</p>
         <p class="staff-song">♪ 涙そうそう — 夏川りみ</p>
       </div>
       <div class="staff-card fade-in">
         <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&q=80" alt="ユキ" class="staff-photo" loading="lazy">
         <h4>ユキ</h4>
-        <p class="staff-origin">ウドンタニ出身</p>
+        <p class="staff-origin" data-i18n="staff_yuki_origin">ウドンタニ出身</p>
         <p class="staff-song">♪ 三日月 — 絢香</p>
       </div>
       <div class="staff-card fade-in">
         <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=300&q=80" alt="サクラ" class="staff-photo" loading="lazy">
         <h4>サクラ</h4>
-        <p class="staff-origin">チェンライ出身</p>
+        <p class="staff-origin" data-i18n="staff_sakura_origin">チェンライ出身</p>
         <p class="staff-song">♪ 未来予想図II — DREAMS COME TRUE</p>
       </div>
       <div class="staff-card fade-in">
         <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="マイ" class="staff-photo" loading="lazy">
         <h4>マイ</h4>
-        <p class="staff-origin">ナコンラチャシマ出身</p>
+        <p class="staff-origin" data-i18n="staff_mai_origin">ナコンラチャシマ出身</p>
         <p class="staff-song">♪ LOVE LOVE LOVE — DREAMS COME TRUE</p>
       </div>
     </div>
@@ -469,66 +486,65 @@ section:nth-child(even) { background: #130e1a; }
 <!-- ===== PRICING ===== -->
 <section id="pricing">
   <div class="container">
-    <h2 class="section-title fade-in">料金システム</h2>
-    <p class="section-subtitle fade-in">Price System</p>
+    <h2 class="section-title fade-in" data-i18n="section_pricing">料金システム</h2>
+    <p class="section-subtitle fade-in" data-i18n="section_pricing_sub">Price System</p>
     <div class="fade-in">
       <table class="pricing-table">
         <thead>
           <tr>
-            <th>メニュー</th>
-            <th>料金</th>
-            <th>内容</th>
+            <th data-i18n="price_th_menu">メニュー</th>
+            <th data-i18n="price_th_price">料金</th>
+            <th data-i18n="price_th_detail">内容</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>テーブルチャージ</td>
-            <td class="price">700B / 1時間</td>
-            <td>飲み放題（ウイスキー水割り・ビール・ソフトドリンク）</td>
+            <td data-i18n="price_table_charge">テーブルチャージ</td>
+            <td class="price">700B / <span data-i18n="price_per_hour">1時間</span></td>
+            <td data-i18n="price_charge_detail">飲み放題（ウイスキー水割り・ビール・ソフトドリンク）</td>
           </tr>
           <tr>
-            <td>延長</td>
-            <td class="price">700B / 1時間</td>
-            <td>引き続き飲み放題</td>
+            <td data-i18n="price_extension">延長</td>
+            <td class="price">700B / <span data-i18n="price_per_hour2">1時間</span></td>
+            <td data-i18n="price_ext_detail">引き続き飲み放題</td>
           </tr>
           <tr>
-            <td>レディースドリンク</td>
-            <td class="price">200B / 1杯</td>
-            <td>スタッフへのお飲み物</td>
+            <td data-i18n="price_ladies_drink">レディースドリンク</td>
+            <td class="price">200B / <span data-i18n="price_per_glass">1杯</span></td>
+            <td data-i18n="price_ladies_detail">スタッフへのお飲み物</td>
           </tr>
           <tr>
-            <td>カラオケ</td>
-            <td class="price">無料</td>
-            <td>チャージ料金に含まれます</td>
+            <td data-i18n="price_karaoke">カラオケ</td>
+            <td class="price" data-i18n="price_free">無料</td>
+            <td data-i18n="price_karaoke_detail">チャージ料金に含まれます</td>
           </tr>
         </tbody>
       </table>
 
-      <h3 style="color:#f5c542; font-size:1.1rem; margin-bottom:.8rem; font-family:'Lora',serif;">ボトルキープ</h3>
+      <h3 style="color:#f5c542; font-size:1.1rem; margin-bottom:.8rem; font-family:'Lora',serif;" data-i18n="price_bottle_title">ボトルキープ</h3>
       <table class="pricing-table" style="margin-bottom:2rem;">
         <tbody>
           <tr>
-            <td>ウイスキー各種</td>
+            <td data-i18n="price_whisky">ウイスキー各種</td>
             <td class="price">2,500B 〜</td>
-            <td>角・ジムビーム・ジョニーウォーカー 他</td>
+            <td data-i18n="price_whisky_detail">角・ジムビーム・ジョニーウォーカー 他</td>
           </tr>
           <tr>
-            <td>焼酎各種</td>
+            <td data-i18n="price_shochu">焼酎各種</td>
             <td class="price">2,000B 〜</td>
-            <td>芋・麦・黒糖 各種</td>
+            <td data-i18n="price_shochu_detail">芋・麦・黒糖 各種</td>
           </tr>
           <tr>
-            <td>ワイン</td>
+            <td data-i18n="price_wine">ワイン</td>
             <td class="price">3,000B 〜</td>
-            <td>赤・白 各種</td>
+            <td data-i18n="price_wine_detail">赤・白 各種</td>
           </tr>
         </tbody>
       </table>
 
       <div class="pricing-note">
-        <strong>💎 明朗会計</strong><br>
-        お会計はすべてテーブルで明細をご確認いただけます。<br>
-        追加料金やサービスチャージはございません。安心してお楽しみください。
+        <strong data-i18n="price_note_title">💎 明朗会計</strong><br>
+        <span data-i18n="price_note_desc">お会計はすべてテーブルで明細をご確認いただけます。<br>追加料金やサービスチャージはございません。安心してお楽しみください。</span>
       </div>
     </div>
   </div>
@@ -537,23 +553,23 @@ section:nth-child(even) { background: #130e1a; }
 <!-- ===== REVIEWS ===== -->
 <section id="reviews">
   <div class="container">
-    <h2 class="section-title fade-in">お客様の声</h2>
-    <p class="section-subtitle fade-in">Voice of Our Guests</p>
+    <h2 class="section-title fade-in" data-i18n="section_reviews">お客様の声</h2>
+    <p class="section-subtitle fade-in" data-i18n="section_reviews_sub">Voice of Our Guests</p>
     <div class="reviews-grid">
       <div class="review-card fade-in">
         <div class="review-stars">★★★★★</div>
-        <p>バンコク出張のたびに必ず寄ります。ママの人柄と、スタッフの笑顔に癒されます。料金も明朗で安心。</p>
-        <p class="review-author">— T.S 様（50代・商社勤務）</p>
+        <p data-i18n="review1_text">バンコク出張のたびに必ず寄ります。ママの人柄と、スタッフの笑顔に癒されます。料金も明朗で安心。</p>
+        <p class="review-author" data-i18n="review1_author">— T.S 様（50代・商社勤務）</p>
       </div>
       <div class="review-card fade-in">
         <div class="review-stars">★★★★★</div>
-        <p>カラオケの曲数がすごい！最新の曲もちゃんと入ってて、採点で盛り上がります。接待にもぴったり。</p>
-        <p class="review-author">— K.M 様（40代・メーカー勤務）</p>
+        <p data-i18n="review2_text">カラオケの曲数がすごい！最新の曲もちゃんと入ってて、採点で盛り上がります。接待にもぴったり。</p>
+        <p class="review-author" data-i18n="review2_author">— K.M 様（40代・メーカー勤務）</p>
       </div>
       <div class="review-card fade-in">
         <div class="review-stars">★★★★☆</div>
-        <p>初めて一人で来ましたが、ママが気さくに話しかけてくれて全然寂しくなかった。ボトルキープしちゃいました。</p>
-        <p class="review-author">— Y.H 様（30代・IT企業）</p>
+        <p data-i18n="review3_text">初めて一人で来ましたが、ママが気さくに話しかけてくれて全然寂しくなかった。ボトルキープしちゃいました。</p>
+        <p class="review-author" data-i18n="review3_author">— Y.H 様（30代・IT企業）</p>
       </div>
     </div>
   </div>
@@ -562,8 +578,8 @@ section:nth-child(even) { background: #130e1a; }
 <!-- ===== GALLERY ===== -->
 <section id="gallery">
   <div class="container">
-    <h2 class="section-title fade-in">店内ギャラリー</h2>
-    <p class="section-subtitle fade-in">Gallery</p>
+    <h2 class="section-title fade-in" data-i18n="section_gallery">店内ギャラリー</h2>
+    <p class="section-subtitle fade-in" data-i18n="section_gallery_sub">Gallery</p>
     <div class="gallery-grid fade-in">
       <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=500&q=80" alt="店内1" loading="lazy">
       <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=500&q=80" alt="店内2" loading="lazy">
@@ -578,20 +594,20 @@ section:nth-child(even) { background: #130e1a; }
 <!-- ===== ACCESS ===== -->
 <section id="access">
   <div class="container">
-    <h2 class="section-title fade-in">アクセス</h2>
-    <p class="section-subtitle fade-in">Access</p>
+    <h2 class="section-title fade-in" data-i18n="section_access">アクセス</h2>
+    <p class="section-subtitle fade-in" data-i18n="section_access_sub">Access</p>
     <div class="access-grid fade-in">
       <div class="access-info">
-        <h3>店舗情報</h3>
+        <h3 data-i18n="access_shop_info">店舗情報</h3>
         <dl>
-          <dt>店名</dt>
+          <dt data-i18n="access_name">店名</dt>
           <dd>Karaoke Snack SAMPLE</dd>
-          <dt>住所</dt>
+          <dt data-i18n="access_address">住所</dt>
           <dd>Thaniya Plaza 2F, Silom, Bang Rak, Bangkok 10500</dd>
-          <dt>営業時間</dt>
-          <dd>月〜土 19:00 – 01:00</dd>
-          <dt>定休日</dt>
-          <dd>日曜日</dd>
+          <dt data-i18n="access_hours">営業時間</dt>
+          <dd data-i18n="access_hours_val">月〜土 19:00 – 01:00</dd>
+          <dt data-i18n="access_closed">定休日</dt>
+          <dd data-i18n="access_closed_val">日曜日</dd>
           <dt>TEL</dt>
           <dd><a href="tel:+6622340000" style="color:#f5c542;">02-234-XXXX</a></dd>
           <dt>LINE</dt>
@@ -609,10 +625,10 @@ section:nth-child(even) { background: #130e1a; }
 <footer class="footer">
   <div class="container">
     <div class="footer-cta">
-      <p>ご予約・お問い合わせはお気軽に</p>
+      <p data-i18n="footer_cta">ご予約・お問い合わせはお気軽に</p>
       <a href="https://line.me/R/" class="btn-line">
         <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.508.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
-        LINE予約はこちら
+        <span data-i18n="btn_line_reserve_footer">LINE予約はこちら</span>
       </a>
     </div>
     <div class="footer-sns">
@@ -625,6 +641,478 @@ section:nth-child(even) { background: #130e1a; }
 </footer>
 
 <script>
+// ===== i18n translations =====
+const i18n = {
+  ja: {
+    nav_greeting: 'ご挨拶',
+    nav_features: '当店の特徴',
+    nav_karaoke: 'カラオケ',
+    nav_staff: 'スタッフ',
+    nav_pricing: '料金',
+    nav_reviews: 'お客様の声',
+    nav_access: 'アクセス',
+    hero_tagline: 'あなたの"帰る場所"が、バンコクにある',
+    hero_hours: '営業時間｜月〜土 19:00 – 01:00（日曜定休）',
+    btn_line_reserve: 'LINE予約',
+    tel_label: 'TEL:',
+    section_greeting: 'ご挨拶',
+    section_greeting_sub: 'Welcome Message',
+    mama_title: 'はじめまして。ママの美咲です。',
+    mama_p1: 'バンコク・タニヤで当店を開いて15年になります。<br>お仕事帰りのひととき、懐かしい日本の歌、気心の知れたスタッフとの会話。<br>ここは「もう一つの自分の居場所」——そんなお店でありたいと思っています。',
+    mama_p2: 'おひとりでも、ご接待でも、どうぞお気軽にお越しください。<br>スタッフ一同、心よりお待ちしております。',
+    section_features: '当店の特徴',
+    section_features_sub: 'Why Choose Us',
+    feat_home_title: 'アットホーム',
+    feat_home_desc: '初めてでも安心。ママとスタッフが<br>温かくお迎えします。',
+    feat_karaoke_title: 'カラオケ充実',
+    feat_karaoke_desc: '最新DAM導入。日本語・タイ語・英語<br>10,000曲以上をご用意。',
+    feat_bottle_title: 'ボトルキープ',
+    feat_bottle_desc: 'お好みの一本をキープ。<br>次回来店がもっと楽しみに。',
+    section_karaoke: 'カラオケ',
+    section_karaoke_sub: 'Karaoke',
+    karaoke_songs_title: '日本語・タイ語・英語 10,000曲以上',
+    karaoke_songs_desc: '最新のDAMシステム完備。毎月新曲追加で、最新ヒットから懐メロまで幅広く楽しめます。',
+    karaoke_badge: '✨ 採点機能あり — 仲間と盛り上がろう！',
+    karaoke_ranking_title: '人気曲ランキング TOP5',
+    section_staff: 'スタッフ紹介',
+    section_staff_sub: 'Our Staff',
+    staff_nana_origin: 'チェンマイ出身',
+    staff_momo_origin: 'バンコク出身',
+    staff_rina_origin: 'コンケン出身',
+    staff_yuki_origin: 'ウドンタニ出身',
+    staff_sakura_origin: 'チェンライ出身',
+    staff_mai_origin: 'ナコンラチャシマ出身',
+    section_pricing: '料金システム',
+    section_pricing_sub: 'Price System',
+    price_th_menu: 'メニュー',
+    price_th_price: '料金',
+    price_th_detail: '内容',
+    price_table_charge: 'テーブルチャージ',
+    price_per_hour: '1時間',
+    price_per_hour2: '1時間',
+    price_extension: '延長',
+    price_charge_detail: '飲み放題（ウイスキー水割り・ビール・ソフトドリンク）',
+    price_ext_detail: '引き続き飲み放題',
+    price_ladies_drink: 'レディースドリンク',
+    price_per_glass: '1杯',
+    price_ladies_detail: 'スタッフへのお飲み物',
+    price_karaoke: 'カラオケ',
+    price_free: '無料',
+    price_karaoke_detail: 'チャージ料金に含まれます',
+    price_bottle_title: 'ボトルキープ',
+    price_whisky: 'ウイスキー各種',
+    price_whisky_detail: '角・ジムビーム・ジョニーウォーカー 他',
+    price_shochu: '焼酎各種',
+    price_shochu_detail: '芋・麦・黒糖 各種',
+    price_wine: 'ワイン',
+    price_wine_detail: '赤・白 各種',
+    price_note_title: '💎 明朗会計',
+    price_note_desc: 'お会計はすべてテーブルで明細をご確認いただけます。<br>追加料金やサービスチャージはございません。安心してお楽しみください。',
+    section_reviews: 'お客様の声',
+    section_reviews_sub: 'Voice of Our Guests',
+    review1_text: 'バンコク出張のたびに必ず寄ります。ママの人柄と、スタッフの笑顔に癒されます。料金も明朗で安心。',
+    review1_author: '— T.S 様（50代・商社勤務）',
+    review2_text: 'カラオケの曲数がすごい！最新の曲もちゃんと入ってて、採点で盛り上がります。接待にもぴったり。',
+    review2_author: '— K.M 様（40代・メーカー勤務）',
+    review3_text: '初めて一人で来ましたが、ママが気さくに話しかけてくれて全然寂しくなかった。ボトルキープしちゃいました。',
+    review3_author: '— Y.H 様（30代・IT企業）',
+    section_gallery: '店内ギャラリー',
+    section_gallery_sub: 'Gallery',
+    section_access: 'アクセス',
+    section_access_sub: 'Access',
+    access_shop_info: '店舗情報',
+    access_name: '店名',
+    access_address: '住所',
+    access_hours: '営業時間',
+    access_hours_val: '月〜土 19:00 – 01:00',
+    access_closed: '定休日',
+    access_closed_val: '日曜日',
+    footer_cta: 'ご予約・お問い合わせはお気軽に',
+    btn_line_reserve_footer: 'LINE予約はこちら'
+  },
+  en: {
+    nav_greeting: 'Welcome',
+    nav_features: 'Features',
+    nav_karaoke: 'Karaoke',
+    nav_staff: 'Staff',
+    nav_pricing: 'Pricing',
+    nav_reviews: 'Reviews',
+    nav_access: 'Access',
+    hero_tagline: 'Your "home away from home" in Bangkok',
+    hero_hours: 'Hours | Mon–Sat 19:00 – 01:00 (Closed Sundays)',
+    btn_line_reserve: 'LINE Booking',
+    tel_label: 'TEL:',
+    section_greeting: 'Welcome',
+    section_greeting_sub: 'Welcome Message',
+    mama_title: 'Hello, I\'m Mama Misaki.',
+    mama_p1: 'It\'s been 15 years since I opened this bar in Thaniya, Bangkok.<br>A relaxing moment after work, nostalgic Japanese songs, warm conversations with familiar staff.<br>I want this place to feel like "your second home."',
+    mama_p2: 'Whether you come alone or for business entertaining, please feel free to visit.<br>Our entire staff looks forward to welcoming you.',
+    section_features: 'Our Features',
+    section_features_sub: 'Why Choose Us',
+    feat_home_title: 'Warm & Friendly',
+    feat_home_desc: 'Feel at ease from your first visit.<br>Mama and staff welcome you warmly.',
+    feat_karaoke_title: 'Great Karaoke',
+    feat_karaoke_desc: 'Latest DAM system installed.<br>Over 10,000 songs in Japanese, Thai & English.',
+    feat_bottle_title: 'Bottle Keep',
+    feat_bottle_desc: 'Keep your favorite bottle.<br>Something to look forward to next time.',
+    section_karaoke: 'Karaoke',
+    section_karaoke_sub: 'Karaoke',
+    karaoke_songs_title: 'Over 10,000 Songs in Japanese, Thai & English',
+    karaoke_songs_desc: 'Equipped with the latest DAM system. New songs added monthly — enjoy everything from the latest hits to classic favorites.',
+    karaoke_badge: '✨ Scoring available — Have fun competing with friends!',
+    karaoke_ranking_title: 'Top 5 Popular Songs',
+    section_staff: 'Our Staff',
+    section_staff_sub: 'Our Staff',
+    staff_nana_origin: 'From Chiang Mai',
+    staff_momo_origin: 'From Bangkok',
+    staff_rina_origin: 'From Khon Kaen',
+    staff_yuki_origin: 'From Udon Thani',
+    staff_sakura_origin: 'From Chiang Rai',
+    staff_mai_origin: 'From Nakhon Ratchasima',
+    section_pricing: 'Price System',
+    section_pricing_sub: 'Price System',
+    price_th_menu: 'Menu',
+    price_th_price: 'Price',
+    price_th_detail: 'Details',
+    price_table_charge: 'Table Charge',
+    price_per_hour: '1 hour',
+    price_per_hour2: '1 hour',
+    price_extension: 'Extension',
+    price_charge_detail: 'All-you-can-drink (Whisky highball, Beer, Soft drinks)',
+    price_ext_detail: 'Continued all-you-can-drink',
+    price_ladies_drink: 'Ladies\' Drink',
+    price_per_glass: '1 glass',
+    price_ladies_detail: 'A drink for the staff',
+    price_karaoke: 'Karaoke',
+    price_free: 'Free',
+    price_karaoke_detail: 'Included in table charge',
+    price_bottle_title: 'Bottle Keep',
+    price_whisky: 'Whisky (various)',
+    price_whisky_detail: 'Kaku, Jim Beam, Johnnie Walker, etc.',
+    price_shochu: 'Shochu (various)',
+    price_shochu_detail: 'Sweet potato, Barley, Brown sugar, etc.',
+    price_wine: 'Wine',
+    price_wine_detail: 'Red & White (various)',
+    price_note_title: '💎 Transparent Pricing',
+    price_note_desc: 'All bills are itemized at your table.<br>No hidden charges or service fees. Enjoy with peace of mind.',
+    section_reviews: 'Guest Reviews',
+    section_reviews_sub: 'Voice of Our Guests',
+    review1_text: 'I visit every time I\'m in Bangkok on business. Mama\'s warmth and the staff\'s smiles are so comforting. Fair and transparent pricing too.',
+    review1_author: '— Mr. T.S (50s, Trading company)',
+    review2_text: 'Amazing karaoke selection! They have all the latest songs, and the scoring feature makes it so fun. Perfect for business entertaining.',
+    review2_author: '— Mr. K.M (40s, Manufacturer)',
+    review3_text: 'Came alone for the first time, but Mama was so friendly I didn\'t feel lonely at all. Ended up getting a bottle keep!',
+    review3_author: '— Mr. Y.H (30s, IT company)',
+    section_gallery: 'Gallery',
+    section_gallery_sub: 'Gallery',
+    section_access: 'Access',
+    section_access_sub: 'Access',
+    access_shop_info: 'Shop Information',
+    access_name: 'Name',
+    access_address: 'Address',
+    access_hours: 'Hours',
+    access_hours_val: 'Mon–Sat 19:00 – 01:00',
+    access_closed: 'Closed',
+    access_closed_val: 'Sundays',
+    footer_cta: 'Reservations & inquiries welcome',
+    btn_line_reserve_footer: 'Book via LINE'
+  },
+  th: {
+    nav_greeting: 'ทักทาย',
+    nav_features: 'จุดเด่น',
+    nav_karaoke: 'คาราโอเกะ',
+    nav_staff: 'พนักงาน',
+    nav_pricing: 'ราคา',
+    nav_reviews: 'รีวิว',
+    nav_access: 'การเดินทาง',
+    hero_tagline: '"บ้านหลังที่สอง" ของคุณในกรุงเทพฯ',
+    hero_hours: 'เวลาเปิด | จันทร์–เสาร์ 19:00 – 01:00 (หยุดวันอาทิตย์)',
+    btn_line_reserve: 'จอง LINE',
+    tel_label: 'โทร:',
+    section_greeting: 'ทักทาย',
+    section_greeting_sub: 'Welcome Message',
+    mama_title: 'สวัสดีค่ะ ดิฉันมาม่ามิซากิค่ะ',
+    mama_p1: 'เปิดร้านที่ธนิยา กรุงเทพฯ มา 15 ปีแล้วค่ะ<br>ช่วงเวลาพักผ่อนหลังเลิกงาน เพลงญี่ปุ่นที่คุ้นเคย บทสนทนากับพนักงานที่สนิทใจ<br>ที่นี่คือ "บ้านอีกหลัง" ของคุณ — นั่นคือสิ่งที่เราตั้งใจค่ะ',
+    mama_p2: 'ไม่ว่าจะมาคนเดียวหรือมาเลี้ยงรับรอง ยินดีต้อนรับค่ะ<br>พนักงานทุกคนรอต้อนรับคุณอยู่นะคะ',
+    section_features: 'จุดเด่นของร้าน',
+    section_features_sub: 'Why Choose Us',
+    feat_home_title: 'อบอุ่นเป็นกันเอง',
+    feat_home_desc: 'มาครั้งแรกก็สบายใจ<br>มาม่าและพนักงานต้อนรับอย่างอบอุ่น',
+    feat_karaoke_title: 'คาราโอเกะครบครัน',
+    feat_karaoke_desc: 'ติดตั้งระบบ DAM ล่าสุด<br>เพลงญี่ปุ่น ไทย อังกฤษ กว่า 10,000 เพลง',
+    feat_bottle_title: 'ฝากขวด',
+    feat_bottle_desc: 'เก็บขวดโปรดของคุณไว้<br>มีความสุขที่จะกลับมาอีกครั้ง',
+    section_karaoke: 'คาราโอเกะ',
+    section_karaoke_sub: 'Karaoke',
+    karaoke_songs_title: 'เพลงญี่ปุ่น ไทย อังกฤษ กว่า 10,000 เพลง',
+    karaoke_songs_desc: 'ติดตั้งระบบ DAM ล่าสุด เพิ่มเพลงใหม่ทุกเดือน ตั้งแต่เพลงฮิตล่าสุดไปจนถึงเพลงคลาสสิก',
+    karaoke_badge: '✨ มีระบบให้คะแนน — มาสนุกกับเพื่อนๆ!',
+    karaoke_ranking_title: 'เพลงยอดนิยม TOP5',
+    section_staff: 'แนะนำพนักงาน',
+    section_staff_sub: 'Our Staff',
+    staff_nana_origin: 'จากเชียงใหม่',
+    staff_momo_origin: 'จากกรุงเทพฯ',
+    staff_rina_origin: 'จากขอนแก่น',
+    staff_yuki_origin: 'จากอุดรธานี',
+    staff_sakura_origin: 'จากเชียงราย',
+    staff_mai_origin: 'จากนครราชสีมา',
+    section_pricing: 'ระบบราคา',
+    section_pricing_sub: 'Price System',
+    price_th_menu: 'เมนู',
+    price_th_price: 'ราคา',
+    price_th_detail: 'รายละเอียด',
+    price_table_charge: 'ค่าโต๊ะ',
+    price_per_hour: '1 ชั่วโมง',
+    price_per_hour2: '1 ชั่วโมง',
+    price_extension: 'ต่อเวลา',
+    price_charge_detail: 'ดื่มไม่อั้น (วิสกี้ไฮบอล เบียร์ เครื่องดื่มไม่มีแอลกอฮอล์)',
+    price_ext_detail: 'ดื่มไม่อั้นต่อเนื่อง',
+    price_ladies_drink: 'เลดี้ดริ้งค์',
+    price_per_glass: '1 แก้ว',
+    price_ladies_detail: 'เครื่องดื่มสำหรับพนักงาน',
+    price_karaoke: 'คาราโอเกะ',
+    price_free: 'ฟรี',
+    price_karaoke_detail: 'รวมในค่าโต๊ะแล้ว',
+    price_bottle_title: 'ฝากขวด',
+    price_whisky: 'วิสกี้ (หลากหลาย)',
+    price_whisky_detail: 'Kaku, Jim Beam, Johnnie Walker ฯลฯ',
+    price_shochu: 'โชจู (หลากหลาย)',
+    price_shochu_detail: 'มันเทศ ข้าวบาร์เลย์ น้ำตาลทรายแดง ฯลฯ',
+    price_wine: 'ไวน์',
+    price_wine_detail: 'แดง & ขาว (หลากหลาย)',
+    price_note_title: '💎 ราคาโปร่งใส',
+    price_note_desc: 'บิลทุกรายการแสดงรายละเอียดที่โต๊ะของคุณ<br>ไม่มีค่าใช้จ่ายแอบแฝงหรือค่าบริการเพิ่มเติม สนุกอย่างสบายใจ',
+    section_reviews: 'เสียงจากลูกค้า',
+    section_reviews_sub: 'Voice of Our Guests',
+    review1_text: 'มาทุกครั้งที่มากรุงเทพฯ ทำงาน มาม่าน่ารักและพนักงานยิ้มแย้มมาก ราคาก็ชัดเจนสบายใจ',
+    review1_author: '— คุณ T.S (50s, บริษัทการค้า)',
+    review2_text: 'เพลงคาราโอเกะเยอะมาก! มีเพลงใหม่ล่าสุดด้วย ระบบให้คะแนนสนุกมาก เหมาะกับเลี้ยงรับรอง',
+    review2_author: '— คุณ K.M (40s, ผู้ผลิต)',
+    review3_text: 'มาคนเดียวครั้งแรก แต่มาม่าคุยสนุกเลยไม่เหงาเลย สุดท้ายฝากขวดไว้เลย',
+    review3_author: '— คุณ Y.H (30s, IT)',
+    section_gallery: 'แกลเลอรี',
+    section_gallery_sub: 'Gallery',
+    section_access: 'การเดินทาง',
+    section_access_sub: 'Access',
+    access_shop_info: 'ข้อมูลร้าน',
+    access_name: 'ชื่อร้าน',
+    access_address: 'ที่อยู่',
+    access_hours: 'เวลาเปิด',
+    access_hours_val: 'จันทร์–เสาร์ 19:00 – 01:00',
+    access_closed: 'วันหยุด',
+    access_closed_val: 'วันอาทิตย์',
+    footer_cta: 'จองและสอบถามได้เลยค่ะ',
+    btn_line_reserve_footer: 'จองผ่าน LINE'
+  },
+  zh: {
+    nav_greeting: '致辞',
+    nav_features: '特色',
+    nav_karaoke: '卡拉OK',
+    nav_staff: '员工',
+    nav_pricing: '价格',
+    nav_reviews: '客户评价',
+    nav_access: '交通',
+    hero_tagline: '在曼谷，有一个属于你的"归处"',
+    hero_hours: '营业时间｜周一至周六 19:00 – 01:00（周日休息）',
+    btn_line_reserve: 'LINE预约',
+    tel_label: '电话:',
+    section_greeting: '致辞',
+    section_greeting_sub: 'Welcome Message',
+    mama_title: '你好，我是妈妈桑美咲。',
+    mama_p1: '在曼谷他尼亚开店已经15年了。<br>下班后的休闲时光、怀旧的日本歌曲、与熟悉员工的闲聊。<br>这里是"另一个属于自己的地方"——这是我对这家店的期望。',
+    mama_p2: '无论是一个人还是商务接待，请随时光临。<br>全体员工衷心期待您的到来。',
+    section_features: '本店特色',
+    section_features_sub: 'Why Choose Us',
+    feat_home_title: '温馨如家',
+    feat_home_desc: '即使第一次来也很安心。<br>妈妈桑和员工热情迎接您。',
+    feat_karaoke_title: '卡拉OK丰富',
+    feat_karaoke_desc: '引进最新DAM系统。<br>日语、泰语、英语超过10,000首歌曲。',
+    feat_bottle_title: '瓶子寄存',
+    feat_bottle_desc: '寄存您喜欢的一瓶酒。<br>下次来更加期待。',
+    section_karaoke: '卡拉OK',
+    section_karaoke_sub: 'Karaoke',
+    karaoke_songs_title: '日语·泰语·英语 超过10,000首',
+    karaoke_songs_desc: '配备最新DAM系统。每月新增歌曲，从最新热门到经典老歌应有尽有。',
+    karaoke_badge: '✨ 配有评分功能 — 和朋友一起嗨起来！',
+    karaoke_ranking_title: '人气歌曲排行 TOP5',
+    section_staff: '员工介绍',
+    section_staff_sub: 'Our Staff',
+    staff_nana_origin: '来自清迈',
+    staff_momo_origin: '来自曼谷',
+    staff_rina_origin: '来自孔敬',
+    staff_yuki_origin: '来自乌隆他尼',
+    staff_sakura_origin: '来自清莱',
+    staff_mai_origin: '来自呵叻',
+    section_pricing: '价格系统',
+    section_pricing_sub: 'Price System',
+    price_th_menu: '菜单',
+    price_th_price: '价格',
+    price_th_detail: '内容',
+    price_table_charge: '桌台费',
+    price_per_hour: '1小时',
+    price_per_hour2: '1小时',
+    price_extension: '延长',
+    price_charge_detail: '畅饮（威士忌兑水·啤酒·软饮料）',
+    price_ext_detail: '继续畅饮',
+    price_ladies_drink: '女士饮品',
+    price_per_glass: '1杯',
+    price_ladies_detail: '请员工喝的饮品',
+    price_karaoke: '卡拉OK',
+    price_free: '免费',
+    price_karaoke_detail: '包含在桌台费中',
+    price_bottle_title: '瓶子寄存',
+    price_whisky: '各种威士忌',
+    price_whisky_detail: '角瓶·金宾·尊尼获加 等',
+    price_shochu: '各种烧酒',
+    price_shochu_detail: '红薯·大麦·黑糖 等',
+    price_wine: '葡萄酒',
+    price_wine_detail: '红·白 各种',
+    price_note_title: '💎 透明计费',
+    price_note_desc: '所有账单都在您的桌上确认明细。<br>没有额外费用或服务费。请放心享用。',
+    section_reviews: '客户评价',
+    section_reviews_sub: 'Voice of Our Guests',
+    review1_text: '每次到曼谷出差都会来。妈妈桑的人品和员工的笑容让人治愈。价格也很透明安心。',
+    review1_author: '— T.S 先生（50多岁·贸易公司）',
+    review2_text: '卡拉OK歌曲超多！最新的歌也有，评分功能很热闹。商务宴请也很合适。',
+    review2_author: '— K.M 先生（40多岁·制造商）',
+    review3_text: '第一次一个人来，但妈妈桑很健谈，完全不觉得寂寞。最后还寄存了一瓶酒。',
+    review3_author: '— Y.H 先生（30多岁·IT企业）',
+    section_gallery: '店内相册',
+    section_gallery_sub: 'Gallery',
+    section_access: '交通',
+    section_access_sub: 'Access',
+    access_shop_info: '店铺信息',
+    access_name: '店名',
+    access_address: '地址',
+    access_hours: '营业时间',
+    access_hours_val: '周一至周六 19:00 – 01:00',
+    access_closed: '休息日',
+    access_closed_val: '周日',
+    footer_cta: '预约·咨询请随时联系',
+    btn_line_reserve_footer: '通过LINE预约'
+  },
+  ko: {
+    nav_greeting: '인사',
+    nav_features: '특징',
+    nav_karaoke: '노래방',
+    nav_staff: '스태프',
+    nav_pricing: '요금',
+    nav_reviews: '고객 후기',
+    nav_access: '오시는 길',
+    hero_tagline: '방콕에 있는 당신의 "돌아갈 곳"',
+    hero_hours: '영업시간｜월~토 19:00 – 01:00（일요일 휴무）',
+    btn_line_reserve: 'LINE 예약',
+    tel_label: '전화:',
+    section_greeting: '인사',
+    section_greeting_sub: 'Welcome Message',
+    mama_title: '안녕하세요. 마마 미사키입니다.',
+    mama_p1: '방콕 타니야에서 이 가게를 연 지 15년이 되었습니다.<br>퇴근 후의 여유로운 시간, 그리운 일본 노래, 친숙한 스태프와의 대화.<br>"또 하나의 내 자리" — 그런 가게이고 싶습니다.',
+    mama_p2: '혼자 오셔도, 접대로 오셔도 편하게 방문해 주세요.<br>스태프 일동 진심으로 기다리고 있겠습니다.',
+    section_features: '가게 특징',
+    section_features_sub: 'Why Choose Us',
+    feat_home_title: '아늑한 분위기',
+    feat_home_desc: '처음이어도 안심. 마마와 스태프가<br>따뜻하게 맞이합니다.',
+    feat_karaoke_title: '풍부한 노래방',
+    feat_karaoke_desc: '최신 DAM 시스템 도입.<br>일본어·태국어·영어 10,000곡 이상.',
+    feat_bottle_title: '보틀 킵',
+    feat_bottle_desc: '좋아하는 한 병을 킵.<br>다음 방문이 더 기대됩니다.',
+    section_karaoke: '노래방',
+    section_karaoke_sub: 'Karaoke',
+    karaoke_songs_title: '일본어·태국어·영어 10,000곡 이상',
+    karaoke_songs_desc: '최신 DAM 시스템 완비. 매월 신곡 추가로 최신 히트곡부터 추억의 명곡까지 폭넓게 즐길 수 있습니다.',
+    karaoke_badge: '✨ 채점 기능 있음 — 친구들과 함께 즐기세요!',
+    karaoke_ranking_title: '인기곡 랭킹 TOP5',
+    section_staff: '스태프 소개',
+    section_staff_sub: 'Our Staff',
+    staff_nana_origin: '치앙마이 출신',
+    staff_momo_origin: '방콕 출신',
+    staff_rina_origin: '콘깬 출신',
+    staff_yuki_origin: '우돈타니 출신',
+    staff_sakura_origin: '치앙라이 출신',
+    staff_mai_origin: '나콘라차시마 출신',
+    section_pricing: '요금 시스템',
+    section_pricing_sub: 'Price System',
+    price_th_menu: '메뉴',
+    price_th_price: '요금',
+    price_th_detail: '내용',
+    price_table_charge: '테이블 차지',
+    price_per_hour: '1시간',
+    price_per_hour2: '1시간',
+    price_extension: '연장',
+    price_charge_detail: '무제한 음료 (위스키 하이볼·맥주·소프트 드링크)',
+    price_ext_detail: '계속 무제한 음료',
+    price_ladies_drink: '레이디스 드링크',
+    price_per_glass: '1잔',
+    price_ladies_detail: '스태프에게 드리는 음료',
+    price_karaoke: '노래방',
+    price_free: '무료',
+    price_karaoke_detail: '테이블 차지에 포함',
+    price_bottle_title: '보틀 킵',
+    price_whisky: '위스키 각종',
+    price_whisky_detail: '카쿠·짐빔·조니워커 등',
+    price_shochu: '소주 각종',
+    price_shochu_detail: '고구마·보리·흑설탕 각종',
+    price_wine: '와인',
+    price_wine_detail: '레드·화이트 각종',
+    price_note_title: '💎 명확한 계산',
+    price_note_desc: '모든 계산서는 테이블에서 명세를 확인하실 수 있습니다.<br>추가 요금이나 서비스 차지는 없습니다. 안심하고 즐겨주세요.',
+    section_reviews: '고객 후기',
+    section_reviews_sub: 'Voice of Our Guests',
+    review1_text: '방콕 출장 때마다 꼭 들릅니다. 마마의 인품과 스태프의 미소에 힐링됩니다. 요금도 투명해서 안심.',
+    review1_author: '— T.S 님 (50대·무역회사)',
+    review2_text: '노래방 곡 수가 대단해! 최신곡도 있고 채점 기능도 재미있어요. 접대에도 딱!',
+    review2_author: '— K.M 님 (40대·제조업)',
+    review3_text: '처음 혼자 왔는데 마마가 다정하게 말 걸어줘서 전혀 외롭지 않았어요. 보틀 킵까지 해버렸어요.',
+    review3_author: '— Y.H 님 (30대·IT기업)',
+    section_gallery: '매장 갤러리',
+    section_gallery_sub: 'Gallery',
+    section_access: '오시는 길',
+    section_access_sub: 'Access',
+    access_shop_info: '매장 정보',
+    access_name: '가게명',
+    access_address: '주소',
+    access_hours: '영업시간',
+    access_hours_val: '월~토 19:00 – 01:00',
+    access_closed: '휴무일',
+    access_closed_val: '일요일',
+    footer_cta: '예약·문의는 편하게 연락주세요',
+    btn_line_reserve_footer: 'LINE으로 예약'
+  }
+};
+
+// ===== i18n switcher =====
+function setLang(lang) {
+  const dict = i18n[lang];
+  if (!dict) return;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) {
+      el.innerHTML = dict[key];
+    }
+  });
+  document.documentElement.lang = lang;
+  // Update active button
+  document.querySelectorAll('.lang-switch button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  // Store preference
+  try { localStorage.setItem('snack-lang', lang); } catch(e) {}
+}
+
+document.getElementById('langSwitch').addEventListener('click', e => {
+  if (e.target.tagName === 'BUTTON' && e.target.dataset.lang) {
+    setLang(e.target.dataset.lang);
+  }
+});
+
+// Restore saved language
+try {
+  const saved = localStorage.getItem('snack-lang');
+  if (saved && i18n[saved]) setLang(saved);
+} catch(e) {}
+
+// ===== Existing JS (unchanged) =====
+
 // Nav shrink
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
