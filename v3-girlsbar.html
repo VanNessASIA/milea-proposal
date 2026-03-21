@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girls Bar SAMPLE — Bangkok, Thaniya</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Noto Sans JP', sans-serif; color: #222; background: #fff; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+img { display: block; width: 100%; height: auto; }
+
+/* Nav */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 28px;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.nav-logo { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+.nav-links { display: flex; gap: 24px; }
+.nav-links a { font-size: 12px; font-weight: 400; color: #666; letter-spacing: 0.5px; }
+.nav-links a:hover { color: #222; }
+
+/* Hero */
+.hero {
+  position: relative; width: 100%; height: 100vh; min-height: 560px;
+  overflow: hidden; margin-top: 0;
+}
+.hero-img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.hero-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: linear-gradient(transparent 0%, rgba(0,0,0,0.65) 100%);
+  padding: 80px 32px 36px;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  flex-wrap: wrap; gap: 20px;
+}
+.hero-text { color: #fff; }
+.hero-text h1 { font-size: 32px; font-weight: 700; letter-spacing: 1px; margin-bottom: 6px; }
+.hero-text p { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.85); line-height: 1.7; }
+.hero-right { text-align: right; }
+.hero-right .line-btn {
+  display: inline-block; background: #06C755; color: #fff;
+  padding: 12px 28px; border-radius: 6px; font-size: 14px; font-weight: 500;
+  margin-bottom: 8px;
+}
+.hero-right .tel { font-size: 13px; color: rgba(255,255,255,0.8); }
+
+/* Section common */
+.section-label {
+  font-size: 11px; font-weight: 400; color: #999; letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+/* Cast */
+.cast-section { padding: 100px 28px 60px; max-width: 960px; margin: 0 auto; }
+.cast-section .section-label { margin-bottom: 32px; }
+.cast-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+}
+.cast-item { cursor: default; }
+.cast-item img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover;
+  transition: opacity 0.2s;
+}
+.cast-item:hover img { opacity: 0.85; }
+.cast-name {
+  padding: 8px 2px 0;
+}
+.cast-name-en { font-size: 13px; font-weight: 500; letter-spacing: 0.5px; }
+.cast-name-jp { font-size: 11px; color: #999; margin-top: 1px; }
+
+/* Price */
+.price-section {
+  padding: 120px 28px 80px;
+  max-width: 640px; margin: 0 auto;
+}
+.price-headline {
+  font-size: 28px; font-weight: 700; line-height: 1.6; margin-bottom: 28px;
+}
+.price-detail {
+  font-size: 14px; color: #666; line-height: 2.2;
+}
+.price-detail span {
+  display: inline-block; margin-right: 24px;
+}
+
+/* Gallery */
+.gallery-section { padding: 40px 0 0; }
+.gallery-grid {
+  column-count: 3; column-gap: 4px;
+  padding: 0 4px;
+}
+.gallery-grid img {
+  width: 100%; margin-bottom: 4px;
+  display: block;
+}
+
+/* Access */
+.access-section {
+  padding: 100px 28px 70px;
+  max-width: 960px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  align-items: start;
+}
+.access-info .section-label { margin-bottom: 24px; }
+.access-info h3 { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+.access-info dl { font-size: 14px; line-height: 2.4; }
+.access-info dt { color: #999; font-weight: 400; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+.access-info dd { margin-bottom: 12px; }
+.access-info .line-btn-sm {
+  display: inline-block; background: #06C755; color: #fff;
+  padding: 8px 20px; border-radius: 4px; font-size: 13px; font-weight: 500;
+  margin-top: 8px;
+}
+.access-map { border-radius: 4px; overflow: hidden; }
+.access-map iframe { width: 100%; height: 340px; border: 0; }
+
+/* Footer */
+.footer {
+  padding: 80px 28px 40px;
+  text-align: center;
+}
+.footer .line-btn-lg {
+  display: inline-block; background: #06C755; color: #fff;
+  padding: 16px 48px; border-radius: 6px; font-size: 16px; font-weight: 500;
+  margin-bottom: 32px;
+}
+.footer-links {
+  font-size: 12px; color: #999; margin-bottom: 24px;
+}
+.footer-links a { margin: 0 12px; color: #999; }
+.footer-links a:hover { color: #222; }
+.footer-copy { font-size: 11px; color: #ccc; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero { height: 85vh; min-height: 480px; }
+  .hero-overlay { padding: 60px 20px 24px; flex-direction: column; align-items: flex-start; }
+  .hero-text h1 { font-size: 24px; }
+  .hero-right { text-align: left; }
+  .cast-section { padding: 70px 16px 40px; }
+  .cast-grid { gap: 4px; }
+  .cast-name-en { font-size: 11px; }
+  .cast-name-jp { font-size: 10px; }
+  .price-section { padding: 80px 20px 50px; }
+  .price-headline { font-size: 22px; }
+  .gallery-grid { column-count: 2; }
+  .access-section {
+    grid-template-columns: 1fr; padding: 70px 20px 50px;
+  }
+  .access-map iframe { height: 260px; }
+}
+
+@media (max-width: 480px) {
+  .hero-text h1 { font-size: 20px; }
+  .hero-text p { font-size: 12px; }
+  .price-headline { font-size: 19px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-logo">SAMPLE</div>
+  <div class="nav-links">
+    <a href="#cast">CAST</a>
+    <a href="#price">PRICE</a>
+    <a href="#gallery">GALLERY</a>
+    <a href="#access">ACCESS</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1600&q=80" alt="Bar interior">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>Girls Bar SAMPLE</h1>
+      <p>Bangkok Thaniya — Girls Bar<br>Open 19:00 - 01:00</p>
+    </div>
+    <div class="hero-right">
+      <a href="#" class="line-btn">LINE予約</a>
+      <p class="tel">TEL 02-234-XXXX</p>
+    </div>
+  </div>
+</section>
+
+<!-- Cast -->
+<section class="cast-section" id="cast">
+  <div class="section-label">Cast</div>
+  <div class="cast-grid">
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80" alt="">
+      <div class="cast-name">
+        <div class="cast-name-en">MINA</div>
+        <div class="cast-name-jp">みな</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="">
+      <div class="cast-name">
+        <div class="cast-name-en">RIKO</div>
+        <div class="cast-name-jp">りこ</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80" alt="">
+      <div class="cast-name">
+        <div class="cast-name-en">YUKI</div>
+        <div class="cast-name-jp">ゆき</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80" alt="">
+      <div class="cast-name">
+        <div class="cast-name-en">HANA</div>
+        <div class="cast-name-jp">はな</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" alt="">
+      <div class="cast-name">
+        <div class="cast-name-en">SAKI</div>
+        <div class="cast-name-jp">さき</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&q=80" alt="">
+      <div class="cast-name">
+        <div class="cast-name-en">AMI</div>
+        <div class="cast-name-jp">あみ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Price -->
+<section class="price-section" id="price">
+  <div class="section-label">Price</div>
+  <div class="price-headline">チャージなし。<br>ドリンク代だけ。</div>
+  <div class="price-detail">
+    <span>ビール 150B〜</span>
+    <span>カクテル 200B〜</span>
+    <span>レディースドリンク 200B</span>
+  </div>
+  <p style="font-size: 13px; color: #999; margin-top: 20px; line-height: 1.8;">
+    お席についたらまずは一杯。難しいシステムはありません。<br>
+    お気軽にお立ち寄りください。
+  </p>
+</section>
+
+<!-- Gallery -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-grid">
+    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=600&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=80" alt="">
+    <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=600&q=80" alt="">
+  </div>
+</section>
+
+<!-- Access -->
+<section class="access-section" id="access">
+  <div class="access-info">
+    <div class="section-label">Access</div>
+    <h3>Girls Bar SAMPLE</h3>
+    <dl>
+      <dt>Address</dt>
+      <dd>Thaniya Plaza 2F, Silom Rd,<br>Bang Rak, Bangkok 10500</dd>
+      <dt>Hours</dt>
+      <dd>19:00 - 01:00 (Mon-Sat)</dd>
+      <dt>Tel</dt>
+      <dd>02-234-XXXX</dd>
+    </dl>
+    <a href="#" class="line-btn-sm">LINEで予約</a>
+  </div>
+  <div class="access-map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.8!2d100.5213!3d13.7277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDQzJzQwLjAiTiAxMDDCsDMxJzE3LjAiRQ!5e0!3m2!1sja!2sth!4v1" allowfullscreen loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <a href="#" class="line-btn-lg">LINEで予約する</a>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">X (Twitter)</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Girls Bar SAMPLE. All rights reserved.</div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
