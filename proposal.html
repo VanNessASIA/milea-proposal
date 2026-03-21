@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Milea Executive Club | Web・SNS運用代行 提案書</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+Thai:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -16,6 +16,25 @@
     line-height: 2;
     font-size: 16px;
   }
+
+  body[data-lang="th"] {
+    font-family: 'Noto Sans Thai', 'Noto Serif JP', sans-serif;
+  }
+
+  /* Language Switcher */
+  .lang-switch-fixed {
+    position: fixed; top: 20px; right: 20px; z-index: 9999;
+    display: flex; gap: 0; border: 1px solid rgba(201,168,76,0.4); border-radius: 4px; overflow: hidden;
+    backdrop-filter: blur(8px); background: rgba(10,10,10,0.8);
+  }
+  .lang-switch-fixed button {
+    border: none; background: transparent; color: #5a5040; font-size: 12px; font-weight: 500;
+    padding: 8px 14px; cursor: pointer; font-family: inherit;
+    border-right: 1px solid rgba(201,168,76,0.2); transition: background 0.15s, color 0.15s;
+  }
+  .lang-switch-fixed button:last-child { border-right: none; }
+  .lang-switch-fixed button:hover { background: rgba(201,168,76,0.15); }
+  .lang-switch-fixed button.active { background: #c9a84c; color: #0a0a0a; }
 
   /* Cover */
   .cover {
@@ -130,6 +149,10 @@
     display: block;
     letter-spacing: 2px;
     margin-top: 5px;
+  }
+
+  body[data-lang="th"] .slide h2 .jp {
+    font-family: 'Noto Sans Thai', sans-serif;
   }
 
   .slide p {
@@ -389,7 +412,7 @@
   }
 
   .plan.featured::before {
-    content: 'RECOMMENDED';
+    content: attr(data-recommended);
     position: absolute;
     top: -12px;
     left: 50%;
@@ -520,6 +543,7 @@
   @media print {
     .slide { page-break-after: always; }
     body { background: white; color: #333; }
+    .lang-switch-fixed { display: none; }
   }
 
   @media (max-width: 768px) {
@@ -539,13 +563,20 @@
   }
 </style>
 </head>
-<body>
+<body data-lang="ja">
+
+<!-- Language Switcher -->
+<div class="lang-switch-fixed">
+  <button onclick="switchLang('ja')" class="active" id="lang-ja">JP</button>
+  <button onclick="switchLang('en')" id="lang-en">EN</button>
+  <button onclick="switchLang('th')" id="lang-th">TH</button>
+</div>
 
 <!-- COVER -->
 <div class="cover">
-  <div class="cover-label">Confidential Proposal</div>
+  <div class="cover-label" data-i18n="cover_label">Confidential Proposal</div>
   <h1>MILEA<br>Executive Club</h1>
-  <h2>Web & SNS 運用代行 提案書</h2>
+  <h2 data-i18n="cover_subtitle">Web & SNS 運用代行 提案書</h2>
   <div class="divider-gold"></div>
   <div class="cover-date">March 2026 — Bangkok, Thailand</div>
 </div>
@@ -554,13 +585,13 @@
 <div class="slide" style="background-image:linear-gradient(rgba(10,10,10,0.85),rgba(10,10,10,0.95)), url('https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=1600&q=80'); background-size:cover; background-position:center;">
   <div class="slide-number">01</div>
   <div class="section-label">Background</div>
-  <h2>Why Now?<span class="jp">なぜ今なのか</span></h2>
+  <h2 data-i18n="s1_title">Why Now?<span class="jp" data-i18n="s1_title_jp">なぜ今なのか</span></h2>
   <div class="urgency-box">
-    <h3>2026年3月 ── タニヤ、客引き全面禁止</h3>
-    <p>これまでタニヤの集客を支えてきた「路上での客引き」が突然禁止された。<br>これまでの集客手段が一夜にして消えた今、新しい集客の仕組みが必要です。</p>
-    <p style="color:#c9a84c; margin-top:20px; font-size:15px;">ウェブ上に存在しない店は、存在しないのと同じ。</p>
+    <h3 data-i18n="s1_urgency_title">2026年3月 ── タニヤ、客引き全面禁止</h3>
+    <p data-i18n="s1_urgency_p1">これまでタニヤの集客を支えてきた「路上での客引き」が突然禁止された。<br>これまでの集客手段が一夜にして消えた今、新しい集客の仕組みが必要です。</p>
+    <p style="color:#c9a84c; margin-top:20px; font-size:15px;" data-i18n="s1_urgency_p2">ウェブ上に存在しない店は、存在しないのと同じ。</p>
   </div>
-  <p>客引きがなくなった今、お客様はGoogle・Instagram・SNSでお店を探します。<br>MILEAが最初に見つかる店になるために、今すぐデジタル基盤を整える必要があります。</p>
+  <p data-i18n="s1_body">客引きがなくなった今、お客様はGoogle・Instagram・SNSでお店を探します。<br>MILEAが最初に見つかる店になるために、今すぐデジタル基盤を整える必要があります。</p>
   <div style="margin-top:20px;">
     <span class="tag">NEW CUSTOMER ACQUISITION</span>
     <span class="tag">DIGITAL FIRST STRATEGY</span>
@@ -571,31 +602,26 @@
 <div class="slide">
   <div class="slide-number">02</div>
   <div class="section-label">Target Analysis</div>
-  <h2>Who Are They?<span class="jp">ターゲット顧客の行動</span></h2>
+  <h2 data-i18n="s2_title">Who Are They?<span class="jp" data-i18n="s2_title_jp">ターゲット顧客の行動</span></h2>
 
   <!-- SNS Platform Icons -->
   <div style="display:flex; gap:20px; flex-wrap:wrap; margin:25px 0; align-items:center;">
-    <!-- Google -->
     <div style="display:flex;align-items:center;gap:8px;border:1px solid #2a2418;padding:8px 16px;">
       <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
       <span style="font-size:12px;color:#7a7060;letter-spacing:2px;">Google Maps</span>
     </div>
-    <!-- Instagram -->
     <div style="display:flex;align-items:center;gap:8px;border:1px solid #2a2418;padding:8px 16px;">
       <svg width="20" height="20" viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
       <span style="font-size:12px;color:#7a7060;letter-spacing:2px;">Instagram</span>
     </div>
-    <!-- X/Twitter -->
     <div style="display:flex;align-items:center;gap:8px;border:1px solid #2a2418;padding:8px 16px;">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="#e8e0d0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       <span style="font-size:12px;color:#7a7060;letter-spacing:2px;">X / Twitter</span>
     </div>
-    <!-- TikTok -->
     <div style="display:flex;align-items:center;gap:8px;border:1px solid #2a2418;padding:8px 16px;">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="#e8e0d0"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.16 8.16 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg>
       <span style="font-size:12px;color:#7a7060;letter-spacing:2px;">TikTok</span>
     </div>
-    <!-- LINE -->
     <div style="display:flex;align-items:center;gap:8px;border:1px solid #2a2418;padding:8px 16px;">
       <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#06C755" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
       <span style="font-size:12px;color:#7a7060;letter-spacing:2px;">LINE</span>
@@ -605,34 +631,34 @@
   <div class="card-grid">
     <div class="card">
       <div class="card-icon">🏙️</div>
-      <h3>在住日本人</h3>
+      <h3 data-i18n="s2_card1_title">在住日本人</h3>
       <ul>
-        <li>知人の口コミ → Google検索</li>
-        <li>「タニヤ スナック」「バンコク カラオケ」で検索</li>
-        <li>Googleレビュー・写真で最終判断</li>
-        <li>Instagram で雰囲気を確認</li>
-        <li>X（Twitter）でリアルタイム評判チェック</li>
+        <li data-i18n="s2_card1_li1">知人の口コミ → Google検索</li>
+        <li data-i18n="s2_card1_li2">「タニヤ スナック」「バンコク カラオケ」で検索</li>
+        <li data-i18n="s2_card1_li3">Googleレビュー・写真で最終判断</li>
+        <li data-i18n="s2_card1_li4">Instagram で雰囲気を確認</li>
+        <li data-i18n="s2_card1_li5">X（Twitter）でリアルタイム評判チェック</li>
       </ul>
     </div>
     <div class="card">
       <div class="card-icon">✈️</div>
-      <h3>旅行者</h3>
+      <h3 data-i18n="s2_card2_title">旅行者</h3>
       <ul>
-        <li>旅行ブログ・YouTube → Google</li>
-        <li>「バンコク 夜遊び おすすめ」で検索</li>
-        <li>Googleマップの写真で即断</li>
-        <li>料金が明記されているか重要</li>
-        <li>Instagram の雰囲気で最終決定</li>
+        <li data-i18n="s2_card2_li1">旅行ブログ・YouTube → Google</li>
+        <li data-i18n="s2_card2_li2">「バンコク 夜遊び おすすめ」で検索</li>
+        <li data-i18n="s2_card2_li3">Googleマップの写真で即断</li>
+        <li data-i18n="s2_card2_li4">料金が明記されているか重要</li>
+        <li data-i18n="s2_card2_li5">Instagram の雰囲気で最終決定</li>
       </ul>
     </div>
     <div class="card">
       <div class="card-icon">🌏</div>
-      <h3>中国人・韓国人</h3>
+      <h3 data-i18n="s2_card3_title">中国人・韓国人</h3>
       <ul>
-        <li>中国人：小紅書（RED）・WeChat</li>
-        <li>韓国人：Naver・Instagram</li>
-        <li>Google Maps も参照</li>
-        <li>※ Phase 2 以降で対応予定</li>
+        <li data-i18n="s2_card3_li1">中国人：小紅書（RED）・WeChat</li>
+        <li data-i18n="s2_card3_li2">韓国人：Naver・Instagram</li>
+        <li data-i18n="s2_card3_li3">Google Maps も参照</li>
+        <li data-i18n="s2_card3_li4">※ Phase 2 以降で対応予定</li>
       </ul>
     </div>
   </div>
@@ -642,38 +668,37 @@
 <div class="slide">
   <div class="slide-number">03</div>
   <div class="section-label">Customer Journey</div>
-  <h2>お客様はどう動くか<span class="jp">来店までの行動プロセス</span></h2>
-  <p>客引きがなくなった今、お客様の来店判断は<strong style="color:#c9a84c;">すべてスマホの中で完結</strong>します。</p>
-  <div class="gold-line"></div>
+  <h2 data-i18n="s3_title">お客様はどう動くか<span class="jp" data-i18n="s3_title_jp">来店までの行動プロセス</span></h2>
+  <p data-i18n="s3_intro">客引きがなくなった今、お客様の来店判断は<strong style="color:#c9a84c;">すべてスマホの中で完結</strong>します。</p>
 
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:30px; max-width:900px;">
     <div>
-      <p style="color:#8b6914; font-size:12px; letter-spacing:3px; margin-bottom:20px;">🏙️ 在住日本人の場合</p>
+      <p style="color:#8b6914; font-size:12px; letter-spacing:3px; margin-bottom:20px;" data-i18n="s3_resident_label">🏙️ 在住日本人の場合</p>
       <div style="border-left:1px solid #2a2418; padding-left:20px;">
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">① 木曜・金曜の夜、仕事終わりに「今夜どこ行く？」</p>
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">② LINEで仲間に相談 → 「タニヤ行こう」</p>
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">③ Googleで「タニヤ カラオケ」検索</p>
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">④ Googleマップで★・写真・レビューを確認</p>
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">⑤ Instagramで雰囲気・スタッフを確認</p>
-        <p style="color:#c9a84c; font-size:14px; padding:12px 0;">⑥ 来店決定</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_r_step1">① 木曜・金曜の夜、仕事終わりに「今夜どこ行く？」</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_r_step2">② LINEで仲間に相談 → 「タニヤ行こう」</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_r_step3">③ Googleで「タニヤ カラオケ」検索</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_r_step4">④ Googleマップで★・写真・レビューを確認</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_r_step5">⑤ Instagramで雰囲気・スタッフを確認</p>
+        <p style="color:#c9a84c; font-size:14px; padding:12px 0;" data-i18n="s3_r_step6">⑥ 来店決定</p>
       </div>
     </div>
     <div>
-      <p style="color:#8b6914; font-size:12px; letter-spacing:3px; margin-bottom:20px;">✈️ 旅行者の場合</p>
+      <p style="color:#8b6914; font-size:12px; letter-spacing:3px; margin-bottom:20px;" data-i18n="s3_tourist_label">✈️ 旅行者の場合</p>
       <div style="border-left:1px solid #2a2418; padding-left:20px;">
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">① 出発前に「バンコク 夜遊び」をYouTube・ブログで検索</p>
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">② 「タニヤ」というキーワードを認知</p>
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">③ 現地到着後、Googleマップで「タニヤ スナック」検索</p>
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">④ 写真が多く・レビューが高い店を選ぶ</p>
-        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;">⑤ 料金が明記されているか最終確認</p>
-        <p style="color:#c9a84c; font-size:14px; padding:12px 0;">⑥ 来店決定</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_t_step1">① 出発前に「バンコク 夜遊び」をYouTube・ブログで検索</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_t_step2">② 「タニヤ」というキーワードを認知</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_t_step3">③ 現地到着後、Googleマップで「タニヤ スナック」検索</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_t_step4">④ 写真が多く・レビューが高い店を選ぶ</p>
+        <p style="color:#a09070; font-size:14px; padding:12px 0; border-bottom:1px solid #1a1810;" data-i18n="s3_t_step5">⑤ 料金が明記されているか最終確認</p>
+        <p style="color:#c9a84c; font-size:14px; padding:12px 0;" data-i18n="s3_t_step6">⑥ 来店決定</p>
       </div>
     </div>
   </div>
 
   <div style="margin-top:40px; border:1px solid #8b6914; padding:25px; max-width:900px; background:rgba(139,105,20,0.05);">
-    <p style="color:#c9a84c; font-size:15px;">💡 重要な気づき</p>
-    <p style="color:#9a9080; font-size:14px; margin-top:10px;">どちらのケースも、<strong style="color:#e8e0d0;">GoogleマップとSNSが来店の最終決め手</strong>になっています。<br>MILEAのX（Twitter）はフォロワー1,895人と既に強力な資産。この強みを活かしつつ、GoogleマップとInstagramを強化することで、全方位からの集客が可能になります。</p>
+    <p style="color:#c9a84c; font-size:15px;" data-i18n="s3_insight_title">💡 重要な気づき</p>
+    <p style="color:#9a9080; font-size:14px; margin-top:10px;" data-i18n="s3_insight_body">どちらのケースも、<strong style="color:#e8e0d0;">GoogleマップとSNSが来店の最終決め手</strong>になっています。<br>MILEAのX（Twitter）はフォロワー1,895人と既に強力な資産。この強みを活かしつつ、GoogleマップとInstagramを強化することで、全方位からの集客が可能になります。</p>
   </div>
 </div>
 
@@ -681,79 +706,79 @@
 <div class="slide">
   <div class="slide-number">04</div>
   <div class="section-label">Current Status</div>
-  <h2>現状分析<span class="jp">ミレアのデジタル存在感</span></h2>
-  <p>お客様が来店を決める場所に、MILEAは<strong style="color:#c9a84c;">存在していない</strong>。</p>
+  <h2 data-i18n="s4_title">現状分析<span class="jp" data-i18n="s4_title_jp">ミレアのデジタル存在感</span></h2>
+  <p data-i18n="s4_intro">お客様が来店を決める場所に、MILEAは<strong style="color:#c9a84c;">存在していない</strong>。</p>
   <div class="gold-line"></div>
   <table class="status-table">
     <tr>
-      <th>項目</th>
-      <th>現状</th>
-      <th>お客様への影響</th>
+      <th data-i18n="s4_th_item">項目</th>
+      <th data-i18n="s4_th_status">現状</th>
+      <th data-i18n="s4_th_impact">お客様への影響</th>
     </tr>
     <tr>
-      <td>Webサイト</td>
-      <td class="status-bad">❌ なし</td>
-      <td>Google検索でヒットしない。存在を知られない</td>
+      <td data-i18n="s4_r1c1">Webサイト</td>
+      <td class="status-bad" data-i18n="s4_r1c2">❌ なし</td>
+      <td data-i18n="s4_r1c3">Google検索でヒットしない。存在を知られない</td>
     </tr>
     <tr>
-      <td>Googleマップ（タニヤ）</td>
-      <td class="status-bad">❌ 未登録</td>
-      <td>「タニヤ スナック」で検索しても出てこない</td>
+      <td data-i18n="s4_r2c1">Googleマップ（タニヤ）</td>
+      <td class="status-bad" data-i18n="s4_r2c2">❌ 未登録</td>
+      <td data-i18n="s4_r2c3">「タニヤ スナック」で検索しても出てこない</td>
     </tr>
     <tr>
-      <td>Googleマップ（Thonglor）</td>
-      <td class="status-bad">⚠️ レビュー0・写真なし</td>
-      <td>写真なし＝不安。レビュー0＝信頼できない</td>
+      <td data-i18n="s4_r3c1">Googleマップ（Thonglor）</td>
+      <td class="status-bad" data-i18n="s4_r3c2">⚠️ レビュー0・写真なし</td>
+      <td data-i18n="s4_r3c3">写真なし＝不安。レビュー0＝信頼できない</td>
     </tr>
     <tr>
       <td>Instagram</td>
-      <td class="status-bad">⚠️ フォロワー119・いいね2〜8</td>
-      <td>雰囲気・スタッフが伝わらず来店動機にならない</td>
+      <td class="status-bad" data-i18n="s4_r4c2">⚠️ フォロワー119・いいね2〜8</td>
+      <td data-i18n="s4_r4c3">雰囲気・スタッフが伝わらず来店動機にならない</td>
     </tr>
     <tr>
       <td>TikTok</td>
-      <td class="status-bad">⚠️ 再生回数300回以下</td>
-      <td>ターゲット層（30〜50代）に届いていない</td>
+      <td class="status-bad" data-i18n="s4_r5c2">⚠️ 再生回数300回以下</td>
+      <td data-i18n="s4_r5c3">ターゲット層（30〜50代）に届いていない</td>
     </tr>
     <tr>
       <td>X（Twitter）</td>
-      <td class="status-good">✅ フォロワー1,895（最大チャネル）</td>
-      <td>Instagramの16倍。中国語タグも活用中。ここが最強の資産</td>
+      <td class="status-good" data-i18n="s4_r6c2">✅ フォロワー1,895（最大チャネル）</td>
+      <td data-i18n="s4_r6c3">Instagramの16倍。中国語タグも活用中。ここが最強の資産</td>
     </tr>
   </table>
 
   <div style="margin-top:40px; max-width:800px;">
-    <p style="color:#8b6914; font-size:12px; letter-spacing:3px; margin-bottom:20px;">📊 競合との比較（実データ）</p>
+    <p style="color:#8b6914; font-size:12px; letter-spacing:3px; margin-bottom:20px;" data-i18n="s4_comp_label">📊 競合との比較（実データ）</p>
     <table class="status-table">
       <tr>
-        <th>アカウント</th>
-        <th>フォロワー</th>
-        <th>投稿いいね（最高）</th>
-        <th>特徴</th>
+        <th data-i18n="s4_comp_th1">アカウント</th>
+        <th data-i18n="s4_comp_th2">フォロワー</th>
+        <th data-i18n="s4_comp_th3">投稿いいね（最高）</th>
+        <th data-i18n="s4_comp_th4">特徴</th>
       </tr>
       <tr>
-        <td>MILEA（現状）</td>
-        <td class="status-bad">119人</td>
+        <td data-i18n="s4_comp_r1c1">MILEA（現状）</td>
+        <td class="status-bad" data-i18n="s4_comp_r1c2">119人</td>
         <td class="status-bad">8</td>
-        <td>テキスト系投稿のみ・動画なし</td>
+        <td data-i18n="s4_comp_r1c4">テキスト系投稿のみ・動画なし</td>
       </tr>
       <tr>
         <td>Club Bell Bangkok</td>
-        <td>数百人</td>
+        <td data-i18n="s4_comp_r2c2">数百人</td>
         <td class="status-good">42</td>
-        <td>コスプレイベント・定期イベント告知</td>
+        <td data-i18n="s4_comp_r2c4">コスプレイベント・定期イベント告知</td>
       </tr>
       <tr>
-        <td>タニヤ周辺 平均</td>
-        <td>〜200人</td>
+        <td data-i18n="s4_comp_r3c1">タニヤ周辺 平均</td>
+        <td data-i18n="s4_comp_r3c2">〜200人</td>
         <td>10〜30</td>
-        <td>スタッフ紹介中心・動画少ない</td>
+        <td data-i18n="s4_comp_r3c4">スタッフ紹介中心・動画少ない</td>
       </tr>
       <tr style="background:rgba(139,105,20,0.05);">
-        <td style="color:#c9a84c;">MILEA（目標）</td>
-        <td style="color:#c9a84c;">2,000人</td>
+        <td style="color:#c9a84c;" data-i18n="s4_comp_r4c1">MILEA（目標）</td>
+        <td style="color:#c9a84c;" data-i18n="s4_comp_r4c2">2,000人</td>
         <td style="color:#c9a84c;">100+</td>
-        <td style="color:#c9a84c;">リール・雰囲気動画・Googleマップ連携</td>
+        <td style="color:#c9a84c;" data-i18n="s4_comp_r4c4">リール・雰囲気動画・Googleマップ連携</td>
       </tr>
     </table>
   </div>
@@ -763,44 +788,44 @@
 <div class="slide" style="background-image:linear-gradient(rgba(10,10,10,0.88),rgba(10,10,10,0.95)), url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1600&q=80'); background-size:cover; background-position:center;">
   <div class="slide-number">05</div>
   <div class="section-label">Solution — Web</div>
-  <h2>Webサイト制作<span class="jp">高級感あるブランドサイト</span></h2>
-  <p>Leone BKK・JUNGLE東京・Le Club de Tokyo を参考にした、黒ベース・金アクセントの高級感あるサイトを制作。</p>
+  <h2 data-i18n="s5_title">Webサイト制作<span class="jp" data-i18n="s5_title_jp">高級感あるブランドサイト</span></h2>
+  <p data-i18n="s5_intro">Leone BKK・JUNGLE東京・Le Club de Tokyo を参考にした、黒ベース・金アクセントの高級感あるサイトを制作。</p>
   <div class="pages-grid">
     <div class="page-item">
       <span class="num">01</span>
       <h4>TOP</h4>
-      <p>全面写真 ＋<br>キャッチコピー</p>
+      <p data-i18n="s5_page1">全面写真 ＋<br>キャッチコピー</p>
     </div>
     <div class="page-item">
       <span class="num">02</span>
       <h4>CONCEPT</h4>
-      <p>ミレアの世界観・<br>こだわり</p>
+      <p data-i18n="s5_page2">ミレアの世界観・<br>こだわり</p>
     </div>
     <div class="page-item">
       <span class="num">03</span>
       <h4>CAST</h4>
-      <p>スタッフ個別<br>プロフィール</p>
+      <p data-i18n="s5_page3">スタッフ個別<br>プロフィール</p>
     </div>
     <div class="page-item">
       <span class="num">04</span>
       <h4>SYSTEM</h4>
-      <p>料金・チャージ・<br>ボトル価格</p>
+      <p data-i18n="s5_page4">料金・チャージ・<br>ボトル価格</p>
     </div>
     <div class="page-item">
       <span class="num">05</span>
       <h4>ACCESS</h4>
-      <p>GoogleMap・<br>営業時間</p>
+      <p data-i18n="s5_page5">GoogleMap・<br>営業時間</p>
     </div>
     <div class="page-item">
       <span class="num">06</span>
       <h4>INSTAGRAM</h4>
-      <p>最新投稿<br>自動表示</p>
+      <p data-i18n="s5_page6">最新投稿<br>自動表示</p>
     </div>
   </div>
   <div style="margin-top:30px;">
-    <span class="tag">日本語 / English</span>
-    <span class="tag">スマホ対応</span>
-    <span class="tag">最短3日で公開</span>
+    <span class="tag" data-i18n="s5_tag1">日本語 / English</span>
+    <span class="tag" data-i18n="s5_tag2">スマホ対応</span>
+    <span class="tag" data-i18n="s5_tag3">最短3日で公開</span>
   </div>
 </div>
 
@@ -808,35 +833,35 @@
 <div class="slide" style="background-image:linear-gradient(rgba(10,10,10,0.88),rgba(10,10,10,0.96)), url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1600&q=80'); background-size:cover; background-position:center;">
   <div class="slide-number">06</div>
   <div class="section-label">Action Plan</div>
-  <h2>実施スケジュール<span class="jp">最速で動く</span></h2>
+  <h2 data-i18n="s6_title">実施スケジュール<span class="jp" data-i18n="s6_title_jp">最速で動く</span></h2>
   <div class="timeline">
     <div class="timeline-item">
       <div class="timeline-dot">1</div>
       <div class="timeline-content">
-        <h3>Week 1 — デジタル基盤整備</h3>
-        <p>Webサイト制作・公開</p>
-        <p>Googleマップ タニヤ店舗 新規登録</p>
-        <p>写真15枚以上アップ・基本情報整備</p>
+        <h3 data-i18n="s6_tl1_title">Week 1 — デジタル基盤整備</h3>
+        <p data-i18n="s6_tl1_p1">Webサイト制作・公開</p>
+        <p data-i18n="s6_tl1_p2">Googleマップ タニヤ店舗 新規登録</p>
+        <p data-i18n="s6_tl1_p3">写真15枚以上アップ・基本情報整備</p>
         <span class="tag">URGENT</span>
       </div>
     </div>
     <div class="timeline-item">
       <div class="timeline-dot">2</div>
       <div class="timeline-content">
-        <h3>Week 2 — SNS強化</h3>
-        <p>Instagram リール動画3本制作・投稿</p>
-        <p>X（Twitter）アカウント開設</p>
-        <p>ハッシュタグ・プロフィール最適化</p>
+        <h3 data-i18n="s6_tl2_title">Week 2 — SNS強化</h3>
+        <p data-i18n="s6_tl2_p1">Instagram リール動画3本制作・投稿</p>
+        <p data-i18n="s6_tl2_p2">X（Twitter）アカウント開設</p>
+        <p data-i18n="s6_tl2_p3">ハッシュタグ・プロフィール最適化</p>
         <span class="tag">HIGH PRIORITY</span>
       </div>
     </div>
     <div class="timeline-item">
       <div class="timeline-dot">3</div>
       <div class="timeline-content">
-        <h3>Month 2〜3 — 継続運用</h3>
-        <p>Instagram 週3投稿体制</p>
-        <p>Googleレビュー獲得の仕組み化</p>
-        <p>月次レポート（フォロワー・来店数）</p>
+        <h3 data-i18n="s6_tl3_title">Month 2〜3 — 継続運用</h3>
+        <p data-i18n="s6_tl3_p1">Instagram 週3投稿体制</p>
+        <p data-i18n="s6_tl3_p2">Googleレビュー獲得の仕組み化</p>
+        <p data-i18n="s6_tl3_p3">月次レポート（フォロワー・来店数）</p>
         <span class="tag">ONGOING</span>
       </div>
     </div>
@@ -847,34 +872,33 @@
 <div class="slide">
   <div class="slide-number">07</div>
   <div class="section-label">Execution Plan</div>
-  <h2>具体的な施策と数値目標<span class="jp">何をやって、どの数字をどう上げるか</span></h2>
-  <div class="gold-line"></div>
+  <h2 data-i18n="s7_title">具体的な施策と数値目標<span class="jp" data-i18n="s7_title_jp">何をやって、どの数字をどう上げるか</span></h2>
 
   <!-- Google Maps -->
   <div style="margin-bottom:50px; max-width:900px;">
     <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px;">
       <svg width="24" height="24" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:#c9a84c; font-weight:400;">Google Maps MEO対策</h3>
-      <span style="font-size:11px; color:#8b6914; border:1px solid #8b6914; padding:2px 10px; letter-spacing:2px;">目標：3ヶ月でレビュー30件・検索TOP3</span>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:#c9a84c; font-weight:400;" data-i18n="s7_gmap_title">Google Maps MEO対策</h3>
+      <span style="font-size:11px; color:#8b6914; border:1px solid #8b6914; padding:2px 10px; letter-spacing:2px;" data-i18n="s7_gmap_target">目標：3ヶ月でレビュー30件・検索TOP3</span>
     </div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
       <div style="border:1px solid #1e1a12; padding:20px;">
-        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;">やること</p>
+        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;" data-i18n="s7_gmap_do_label">やること</p>
         <ul style="list-style:none;">
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>タニヤ店舗をGoogleビジネスプロフィールに新規登録</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>内装・スタッフ・ドリンク写真を15枚以上登録</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>「日本語OK」「カラオケあり」「要予約不要」などの属性を設定</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>来店客に「Googleレビューを書いたらドリンク1杯サービス」で口コミ獲得</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>毎月「今月のイベント」投稿でアクティブ維持</li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_gmap_do1">タニヤ店舗をGoogleビジネスプロフィールに新規登録</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_gmap_do2">内装・スタッフ・ドリンク写真を15枚以上登録</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_gmap_do3">「日本語OK」「カラオケあり」「要予約不要」などの属性を設定</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_gmap_do4">来店客に「Googleレビューを書いたらドリンク1杯サービス」で口コミ獲得</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_gmap_do5">毎月「今月のイベント」投稿でアクティブ維持</span></li>
         </ul>
       </div>
       <div style="border:1px solid #1e1a12; padding:20px;">
-        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;">期待できる変化</p>
+        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;" data-i18n="s7_gmap_result_label">期待できる変化</p>
         <ul style="list-style:none;">
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">✓</span>「タニヤ カラオケ」検索で上位表示される</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">✓</span>旅行者が現地検索でMILEAを発見できる</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">✓</span>レビュー30件でタニヤ最多レビュー店に</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; display:flex; gap:10px;"><span style="color:#c9a84c;">✓</span>写真・料金が見えることで来店ハードル低下</li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">✓</span><span data-i18n="s7_gmap_res1">「タニヤ カラオケ」検索で上位表示される</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">✓</span><span data-i18n="s7_gmap_res2">旅行者が現地検索でMILEAを発見できる</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">✓</span><span data-i18n="s7_gmap_res3">レビュー30件でタニヤ最多レビュー店に</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; display:flex; gap:10px;"><span style="color:#c9a84c;">✓</span><span data-i18n="s7_gmap_res4">写真・料金が見えることで来店ハードル低下</span></li>
         </ul>
       </div>
     </div>
@@ -884,28 +908,28 @@
   <div style="margin-bottom:50px; max-width:900px;">
     <div style="display:flex; align-items:center; gap:15px; margin-bottom:20px;">
       <svg width="24" height="24" viewBox="0 0 24 24"><defs><radialGradient id="ig2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig2)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:#c9a84c; font-weight:400;">Instagram 運用</h3>
-      <span style="font-size:11px; color:#8b6914; border:1px solid #8b6914; padding:2px 10px; letter-spacing:2px;">目標：3ヶ月でフォロワー2,000人</span>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; color:#c9a84c; font-weight:400;" data-i18n="s7_ig_title">Instagram 運用</h3>
+      <span style="font-size:11px; color:#8b6914; border:1px solid #8b6914; padding:2px 10px; letter-spacing:2px;" data-i18n="s7_ig_target">目標：3ヶ月でフォロワー2,000人</span>
     </div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
       <div style="border:1px solid #1e1a12; padding:20px;">
-        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;">週次投稿計画（週5回）</p>
+        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;" data-i18n="s7_ig_plan_label">週次投稿計画（週5回）</p>
         <ul style="list-style:none;">
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">月</span>スタッフ紹介リール（30秒・日本語テロップ入り）</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">水</span>個室・ドリンク・雰囲気写真（お見送り動画）</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">金</span>今週のイベント・コスプレテーマ告知</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">土</span>盛り上がりシーン・スパークラー動画</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; display:flex; gap:10px;"><span style="color:#8b6914;">Stories</span>毎日：「今夜空いてます」位置情報スタンプ付き</li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">月</span><span data-i18n="s7_ig_mon">スタッフ紹介リール（30秒・日本語テロップ入り）</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">水</span><span data-i18n="s7_ig_wed">個室・ドリンク・雰囲気写真（お見送り動画）</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">金</span><span data-i18n="s7_ig_fri">今週のイベント・コスプレテーマ告知</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">土</span><span data-i18n="s7_ig_sat">盛り上がりシーン・スパークラー動画</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; display:flex; gap:10px;"><span style="color:#8b6914;">Stories</span><span data-i18n="s7_ig_stories">毎日：「今夜空いてます」位置情報スタンプ付き</span></li>
         </ul>
       </div>
       <div style="border:1px solid #1e1a12; padding:20px;">
-        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;">UGCキャンペーン施策</p>
+        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;" data-i18n="s7_ig_ugc_label">UGCキャンペーン施策</p>
         <ul style="list-style:none;">
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">★</span>来店時に#milea_bangkok でInstagram投稿 → ドリンク1杯サービス</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">★</span>お客さん投稿をMILEAアカウントでリポスト</li>
-          <li style="font-size:13px; color:#8a8070; padding:6px 0; display:flex; gap:10px;"><span style="color:#c9a84c;">★</span>口コミが口コミを呼ぶ拡散サイクルを作る</li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">★</span><span data-i18n="s7_ig_ugc1">来店時に#milea_bangkok でInstagram投稿 → ドリンク1杯サービス</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#c9a84c;">★</span><span data-i18n="s7_ig_ugc2">お客さん投稿をMILEAアカウントでリポスト</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:6px 0; display:flex; gap:10px;"><span style="color:#c9a84c;">★</span><span data-i18n="s7_ig_ugc3">口コミが口コミを呼ぶ拡散サイクルを作る</span></li>
         </ul>
-        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin:15px 0 10px;">ハッシュタグ（毎回固定）</p>
+        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin:15px 0 10px;" data-i18n="s7_ig_hash_label">ハッシュタグ（毎回固定）</p>
         <p style="font-size:12px; color:#5a5040;">#タニヤ #バンコクスナック #バンコクカラオケ #バンコク夜遊び #milea #soithaniya #bangkoknightlife</p>
       </div>
     </div>
@@ -916,15 +940,15 @@
     <div>
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:15px;">
         <svg width="22" height="22" viewBox="0 0 24 24"><path fill="#06C755" d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
-        <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400;">LINE公式アカウント</h3>
+        <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400;" data-i18n="s7_line_title">LINE公式アカウント</h3>
       </div>
       <div style="border:1px solid #1e1a12; padding:20px;">
-        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;">目標：リピーター来店率+30%</p>
+        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;" data-i18n="s7_line_target">目標：リピーター来店率+30%</p>
         <ul style="list-style:none;">
-          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>来店時にLINE友達登録を促す</li>
-          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>「今夜空いてます」を週3回配信</li>
-          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>誕生日クーポン・来店インセンティブ配信</li>
-          <li style="font-size:13px; color:#8a8070; padding:5px 0; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>予約・問い合わせ導線を整備</li>
+          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_line_do1">来店時にLINE友達登録を促す</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_line_do2">「今夜空いてます」を週3回配信</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_line_do3">誕生日クーポン・来店インセンティブ配信</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:5px 0; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_line_do4">予約・問い合わせ導線を整備</span></li>
         </ul>
       </div>
     </div>
@@ -934,12 +958,12 @@
         <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400;">X（Twitter）</h3>
       </div>
       <div style="border:1px solid #1e1a12; padding:20px;">
-        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;">目標：在住者の新規来店を月10組</p>
+        <p style="font-size:12px; color:#8b6914; letter-spacing:3px; margin-bottom:12px;" data-i18n="s7_x_target">目標：在住者の新規来店を月10組</p>
         <ul style="list-style:none;">
-          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>「今夜21時〜空いてます」毎日リアルタイム投稿</li>
-          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>「本日のスタッフ」写真を夕方に投稿</li>
-          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>バンコク在住日本人の人気アカウントとの相互フォロー</li>
-          <li style="font-size:13px; color:#8a8070; padding:5px 0; display:flex; gap:10px;"><span style="color:#8b6914;">→</span>「バンコク夜遊び」「タニヤ」コミュニティへのリーチ</li>
+          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_x_do1">「今夜21時〜空いてます」毎日リアルタイム投稿</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_x_do2">「本日のスタッフ」写真を夕方に投稿</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:5px 0; border-bottom:1px solid #1a1810; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_x_do3">バンコク在住日本人の人気アカウントとの相互フォロー</span></li>
+          <li style="font-size:13px; color:#8a8070; padding:5px 0; display:flex; gap:10px;"><span style="color:#8b6914;">→</span><span data-i18n="s7_x_do4">「バンコク夜遊び」「タニヤ」コミュニティへのリーチ</span></li>
         </ul>
       </div>
     </div>
@@ -950,64 +974,60 @@
 <div class="slide" style="background-image:linear-gradient(rgba(10,10,10,0.88),rgba(10,10,10,0.96)), url('https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1600&q=80'); background-size:cover; background-position:center;">
   <div class="slide-number">08</div>
   <div class="section-label">The Core Value</div>
-  <h2>なぜ続くのか。<span class="jp">仕組みが人を動かす</span></h2>
-  <div class="gold-line"></div>
+  <h2 data-i18n="s8_title">なぜ続くのか。<span class="jp" data-i18n="s8_title_jp">仕組みが人を動かす</span></h2>
 
   <div style="display:grid; grid-template-columns:1fr 1fr; gap:50px; max-width:900px; margin-top:20px;">
     <div>
-      <p style="font-size:13px; color:#8b6914; letter-spacing:3px; margin-bottom:20px;">❌ 自社運用の現実</p>
+      <p style="font-size:13px; color:#8b6914; letter-spacing:3px; margin-bottom:20px;" data-i18n="s8_bad_label">❌ 自社運用の現実</p>
       <div style="border:1px solid #3a1a1a; padding:25px; background:rgba(100,20,20,0.05);">
-        <p style="font-size:14px; color:#7a6060; line-height:2; margin-bottom:10px;">「やらなければ」と思っていても、</p>
-        <p style="font-size:14px; color:#7a6060; line-height:2; margin-bottom:10px;">何を撮ればいいかわからない。</p>
-        <p style="font-size:14px; color:#7a6060; line-height:2; margin-bottom:10px;">投稿しても誰も見てない気がする。</p>
-        <p style="font-size:14px; color:#7a6060; line-height:2; margin-bottom:10px;">忙しい日は後回しになる。</p>
-        <p style="font-size:16px; color:#9a5050; margin-top:20px; font-family:'Cormorant Garamond',serif;">→ 結果、3日坊主で終わる。</p>
+        <p style="font-size:14px; color:#7a6060; line-height:2; margin-bottom:10px;" data-i18n="s8_bad1">「やらなければ」と思っていても、</p>
+        <p style="font-size:14px; color:#7a6060; line-height:2; margin-bottom:10px;" data-i18n="s8_bad2">何を撮ればいいかわからない。</p>
+        <p style="font-size:14px; color:#7a6060; line-height:2; margin-bottom:10px;" data-i18n="s8_bad3">投稿しても誰も見てない気がする。</p>
+        <p style="font-size:14px; color:#7a6060; line-height:2; margin-bottom:10px;" data-i18n="s8_bad4">忙しい日は後回しになる。</p>
+        <p style="font-size:16px; color:#9a5050; margin-top:20px; font-family:'Cormorant Garamond',serif;" data-i18n="s8_bad_result">→ 結果、3日坊主で終わる。</p>
       </div>
     </div>
     <div>
-      <p style="font-size:13px; color:#8b6914; letter-spacing:3px; margin-bottom:20px;">✅ このサービスの仕組み</p>
+      <p style="font-size:13px; color:#8b6914; letter-spacing:3px; margin-bottom:20px;" data-i18n="s8_good_label">✅ このサービスの仕組み</p>
       <div style="border:1px solid #2a3a1a; padding:25px; background:rgba(42,80,20,0.05);">
-        <p style="font-size:14px; color:#8a9870; line-height:2; margin-bottom:10px;">毎週、<strong style="color:#c9a84c;">参考投稿つきの撮影指示書</strong>が届く。</p>
-        <p style="font-size:14px; color:#8a9870; line-height:2; margin-bottom:10px;">「今日はこれを撮ってください」だけ。</p>
-        <p style="font-size:14px; color:#8a9870; line-height:2; margin-bottom:10px;">撮って送るだけ。編集・投稿はこちら。</p>
-        <p style="font-size:14px; color:#8a9870; line-height:2; margin-bottom:10px;"><strong style="color:#c9a84c;">オーナーが月次レポートで確認するから</strong>、店長はやるしかない。</p>
-        <p style="font-size:16px; color:#8aca6c; margin-top:20px; font-family:'Cormorant Garamond',serif;">→ やる気に頼らず、仕組みで動く。</p>
+        <p style="font-size:14px; color:#8a9870; line-height:2; margin-bottom:10px;" data-i18n="s8_good1">毎週、<strong style="color:#c9a84c;">参考投稿つきの撮影指示書</strong>が届く。</p>
+        <p style="font-size:14px; color:#8a9870; line-height:2; margin-bottom:10px;" data-i18n="s8_good2">「今日はこれを撮ってください」だけ。</p>
+        <p style="font-size:14px; color:#8a9870; line-height:2; margin-bottom:10px;" data-i18n="s8_good3">撮って送るだけ。編集・投稿はこちら。</p>
+        <p style="font-size:14px; color:#8a9870; line-height:2; margin-bottom:10px;" data-i18n="s8_good4"><strong style="color:#c9a84c;">オーナーが月次レポートで確認するから</strong>、店長はやるしかない。</p>
+        <p style="font-size:16px; color:#8aca6c; margin-top:20px; font-family:'Cormorant Garamond',serif;" data-i18n="s8_good_result">→ やる気に頼らず、仕組みで動く。</p>
       </div>
     </div>
   </div>
 
   <div style="margin-top:50px; max-width:900px; border:1px solid #8b6914; padding:35px; background:rgba(139,105,20,0.05);">
-    <p style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#c9a84c; text-align:center; font-weight:300; line-height:1.6;">
-      「SNSが続かない」のは、意志の問題ではない。<br>
-      <span style="font-size:18px; color:#8b6914;">指示がないから、誰も見ていないから、続かない。</span>
-    </p>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:26px; color:#c9a84c; text-align:center; font-weight:300; line-height:1.6;" data-i18n="s8_quote">「SNSが続かない」のは、意志の問題ではない。<br><span style="font-size:18px; color:#8b6914;">指示がないから、誰も見ていないから、続かない。</span></p>
     <div style="width:60px; height:1px; background:#8b6914; margin:25px auto;"></div>
-    <p style="font-size:14px; color:#9a9080; text-align:center;">専任ディレクターが「撮影指示」「編集」「投稿」「レポート」を一貫して担当。<br>店舗スタッフはシャッターを押すだけ。</p>
+    <p style="font-size:14px; color:#9a9080; text-align:center;" data-i18n="s8_quote_sub">専任ディレクターが「撮影指示」「編集」「投稿」「レポート」を一貫して担当。<br>店舗スタッフはシャッターを押すだけ。</p>
   </div>
 
   <div style="margin-top:40px; display:flex; gap:20px; flex-wrap:wrap;">
     <div style="border:1px solid #2a2418; padding:20px 30px; text-align:center;">
       <p style="font-size:11px; color:#8b6914; letter-spacing:3px; margin-bottom:8px;">STEP 1</p>
-      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#c9a84c;">撮影指示書が届く</p>
-      <p style="font-size:12px; color:#5a5040; margin-top:5px;">参考投稿つき・毎週</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#c9a84c;" data-i18n="s8_step1">撮影指示書が届く</p>
+      <p style="font-size:12px; color:#5a5040; margin-top:5px;" data-i18n="s8_step1_sub">参考投稿つき・毎週</p>
     </div>
     <div style="color:#5a5040; display:flex; align-items:center; font-size:20px;">→</div>
     <div style="border:1px solid #2a2418; padding:20px 30px; text-align:center;">
       <p style="font-size:11px; color:#8b6914; letter-spacing:3px; margin-bottom:8px;">STEP 2</p>
-      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#c9a84c;">店舗が撮影して送る</p>
-      <p style="font-size:12px; color:#5a5040; margin-top:5px;">スマホで撮るだけ</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#c9a84c;" data-i18n="s8_step2">店舗が撮影して送る</p>
+      <p style="font-size:12px; color:#5a5040; margin-top:5px;" data-i18n="s8_step2_sub">スマホで撮るだけ</p>
     </div>
     <div style="color:#5a5040; display:flex; align-items:center; font-size:20px;">→</div>
     <div style="border:1px solid #2a2418; padding:20px 30px; text-align:center;">
       <p style="font-size:11px; color:#8b6914; letter-spacing:3px; margin-bottom:8px;">STEP 3</p>
-      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#c9a84c;">編集・投稿・管理</p>
-      <p style="font-size:12px; color:#5a5040; margin-top:5px;">ディレクターが一貫対応</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#c9a84c;" data-i18n="s8_step3">編集・投稿・管理</p>
+      <p style="font-size:12px; color:#5a5040; margin-top:5px;" data-i18n="s8_step3_sub">ディレクターが一貫対応</p>
     </div>
     <div style="color:#5a5040; display:flex; align-items:center; font-size:20px;">→</div>
     <div style="border:1px solid #8b6914; padding:20px 30px; text-align:center; background:rgba(139,105,20,0.05);">
       <p style="font-size:11px; color:#8b6914; letter-spacing:3px; margin-bottom:8px;">STEP 4</p>
-      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#c9a84c;">月次レポート</p>
-      <p style="font-size:12px; color:#5a5040; margin-top:5px;">オーナーに数字で報告</p>
+      <p style="font-family:'Cormorant Garamond',serif; font-size:18px; color:#c9a84c;" data-i18n="s8_step4">月次レポート</p>
+      <p style="font-size:12px; color:#5a5040; margin-top:5px;" data-i18n="s8_step4_sub">オーナーに数字で報告</p>
     </div>
   </div>
 </div>
@@ -1016,62 +1036,61 @@
 <div class="slide">
   <div class="slide-number">09</div>
   <div class="section-label">Global Best Practices</div>
-  <h2>世界の成功事例から学ぶ<span class="jp">日本・米国・タイの最新手法</span></h2>
-  <div class="gold-line"></div>
+  <h2 data-i18n="s9_title">世界の成功事例から学ぶ<span class="jp" data-i18n="s9_title_jp">日本・米国・タイの最新手法</span></h2>
 
   <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:25px; max-width:1000px; margin-top:10px;">
 
     <div style="border:1px solid #2a2418; padding:30px; background:rgba(139,105,20,0.03);">
-      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;">🇺🇸 米国 NOTO（フィラデルフィア・ヒューストン）</div>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;">レビューフィルタリング戦略</h3>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;">来店後にアンケートを送り、4〜5点の満足客だけGoogleレビューへ誘導。低評価は店側だけに届く仕組みを構築。</p>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;"><strong style="color:#c9a84c;">結果：</strong>Googleレビュー数が急増し「corporate party venue」など非ブランドキーワードで検索1位を獲得。</p>
+      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;" data-i18n="s9_c1_label">🇺🇸 米国 NOTO（フィラデルフィア・ヒューストン）</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;" data-i18n="s9_c1_title">レビューフィルタリング戦略</h3>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c1_p1">来店後にアンケートを送り、4〜5点の満足客だけGoogleレビューへ誘導。低評価は店側だけに届く仕組みを構築。</p>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c1_p2"><strong style="color:#c9a84c;">結果：</strong>Googleレビュー数が急増し「corporate party venue」など非ブランドキーワードで検索1位を獲得。</p>
       <div style="border-top:1px solid #1e1a12; padding-top:15px; margin-top:5px;">
-        <p style="font-size:12px; color:#5a5040;">MILEAへの応用：来店後にLINEで「お楽しみいただけましたか？」→ 満足の方だけGoogleレビューへ誘導するフローを構築</p>
+        <p style="font-size:12px; color:#5a5040;" data-i18n="s9_c1_apply">MILEAへの応用：来店後にLINEで「お楽しみいただけましたか？」→ 満足の方だけGoogleレビューへ誘導するフローを構築</p>
       </div>
     </div>
 
     <div style="border:1px solid #2a2418; padding:30px; background:rgba(139,105,20,0.03);">
-      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;">🎬 Remotion 動画制作活用</div>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;">ショート動画の自動生成</h3>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;">Remotion（動画生成ツール）を使い、スタッフ紹介・イベント告知・定型動画を自動生成。撮影素材を受け取るだけで、テロップ・BGM・アニメーション入りの動画が即完成。</p>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;"><strong style="color:#c9a84c;">作れる動画：</strong>スタッフ紹介30秒・イベント告知・「今夜空いてます」定型・ハイライトダイジェスト</p>
+      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;" data-i18n="s9_c2_label">🎬 Remotion 動画制作活用</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;" data-i18n="s9_c2_title">ショート動画の自動生成</h3>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c2_p1">Remotion（動画生成ツール）を使い、スタッフ紹介・イベント告知・定型動画を自動生成。撮影素材を受け取るだけで、テロップ・BGM・アニメーション入りの動画が即完成。</p>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c2_p2"><strong style="color:#c9a84c;">作れる動画：</strong>スタッフ紹介30秒・イベント告知・「今夜空いてます」定型・ハイライトダイジェスト</p>
       <div style="border-top:1px solid #1e1a12; padding-top:15px; margin-top:5px;">
-        <p style="font-size:12px; color:#5a5040;">MILEAへの応用：写真を送るだけでInstagramリール用の動画が自動完成。毎日投稿が現実的に</p>
+        <p style="font-size:12px; color:#5a5040;" data-i18n="s9_c2_apply">MILEAへの応用：写真を送るだけでInstagramリール用の動画が自動完成。毎日投稿が現実的に</p>
       </div>
     </div>
 
     <div style="border:1px solid #2a2418; padding:30px; background:rgba(139,105,20,0.03);">
-      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;">🇯🇵 日本 LIRIC TOKYO・cabatok</div>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;">お見送り動画 × TikTok</h3>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;">「本日のお見送り」動画がTikTokで69万再生を記録。特別な編集不要、スタッフが手を振るだけ。</p>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;"><strong style="color:#c9a84c;">なぜバズる：</strong>「人」との別れの瞬間は普遍的に感情を動かす。来たくなる気持ちが生まれる。</p>
+      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;" data-i18n="s9_c3_label">🇯🇵 日本 LIRIC TOKYO・cabatok</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;" data-i18n="s9_c3_title">お見送り動画 × TikTok</h3>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c3_p1">「本日のお見送り」動画がTikTokで69万再生を記録。特別な編集不要、スタッフが手を振るだけ。</p>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c3_p2"><strong style="color:#c9a84c;">なぜバズる：</strong>「人」との別れの瞬間は普遍的に感情を動かす。来たくなる気持ちが生まれる。</p>
       <div style="border-top:1px solid #1e1a12; padding-top:15px; margin-top:5px;">
-        <p style="font-size:12px; color:#5a5040;">MILEAへの応用：毎晩閉店前に「お見送り動画」をInstagram Storiesに投稿。週1本はリールに</p>
+        <p style="font-size:12px; color:#5a5040;" data-i18n="s9_c3_apply">MILEAへの応用：毎晩閉店前に「お見送り動画」をInstagram Storiesに投稿。週1本はリールに</p>
       </div>
     </div>
 
     <div style="border:1px solid #2a2418; padding:30px; background:rgba(139,105,20,0.03);">
-      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;">🌍 Google Think with Google 調査</div>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;">イベント構造化データ</h3>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;">消費者の8割はオンラインで複数の接触点を経て来店を決める。Webサイトにイベント情報を正しい形式で記載すると、Google検索結果に「今夜のイベント」として直接表示される。</p>
+      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;" data-i18n="s9_c4_label">🌍 Google Think with Google 調査</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;" data-i18n="s9_c4_title">イベント構造化データ</h3>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c4_p1">消費者の8割はオンラインで複数の接触点を経て来店を決める。Webサイトにイベント情報を正しい形式で記載すると、Google検索結果に「今夜のイベント」として直接表示される。</p>
       <div style="border-top:1px solid #1e1a12; padding-top:15px; margin-top:5px;">
-        <p style="font-size:12px; color:#5a5040;">MILEAへの応用：Webサイトに「今週のイベント」ページを設置し、構造化データを実装</p>
+        <p style="font-size:12px; color:#5a5040;" data-i18n="s9_c4_apply">MILEAへの応用：Webサイトに「今週のイベント」ページを設置し、構造化データを実装</p>
       </div>
     </div>
 
     <div style="border:1px solid #2a2418; padding:30px; background:rgba(139,105,20,0.03);">
-      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;">🇯🇵 日本 ナイト店舗 共通手法</div>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;">UGCキャンペーン</h3>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;">「#milea_bangkokで投稿したらドリンク1杯サービス」。お客さんが拡散してくれることで、広告費ゼロで認知が広がる。</p>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9;"><strong style="color:#c9a84c;">ポイント：</strong>同じ消費者目線の投稿は、店舗公式より信頼されやすい。</p>
+      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;" data-i18n="s9_c5_label">🇯🇵 日本 ナイト店舗 共通手法</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;" data-i18n="s9_c5_title">UGCキャンペーン</h3>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c5_p1">「#milea_bangkokで投稿したらドリンク1杯サービス」。お客さんが拡散してくれることで、広告費ゼロで認知が広がる。</p>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9;" data-i18n="s9_c5_p2"><strong style="color:#c9a84c;">ポイント：</strong>同じ消費者目線の投稿は、店舗公式より信頼されやすい。</p>
     </div>
 
     <div style="border:1px solid #2a2418; padding:30px; background:rgba(139,105,20,0.03);">
-      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;">🌍 グローバル トレンド 2025</div>
-      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;">アンビエント・ASMR動画</h3>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;">ドリンクを作る音・氷が鳴る音・ネオン照明の雰囲気をそのまま撮った「編集なし動画」がInstagramで高エンゲージ。制作コストゼロ。</p>
-      <p style="font-size:13px; color:#8a8070; line-height:1.9;"><strong style="color:#c9a84c;">なぜ効く：</strong>「本物感」が伝わり、行きたい気持ちが自然に生まれる。</p>
+      <div style="font-size:11px; color:#8b6914; letter-spacing:4px; margin-bottom:15px;" data-i18n="s9_c6_label">🌍 グローバル トレンド 2025</div>
+      <h3 style="font-family:'Cormorant Garamond',serif; font-size:20px; color:#c9a84c; font-weight:400; margin-bottom:15px;" data-i18n="s9_c6_title">アンビエント・ASMR動画</h3>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9; margin-bottom:15px;" data-i18n="s9_c6_p1">ドリンクを作る音・氷が鳴る音・ネオン照明の雰囲気をそのまま撮った「編集なし動画」がInstagramで高エンゲージ。制作コストゼロ。</p>
+      <p style="font-size:13px; color:#8a8070; line-height:1.9;" data-i18n="s9_c6_p2"><strong style="color:#c9a84c;">なぜ効く：</strong>「本物感」が伝わり、行きたい気持ちが自然に生まれる。</p>
     </div>
 
   </div>
@@ -1081,71 +1100,71 @@
 <div class="slide">
   <div class="slide-number">10</div>
   <div class="section-label">Pricing</div>
-  <h2>料金プラン<span class="jp">シンプルな3プラン</span></h2>
+  <h2 data-i18n="s10_title">料金プラン<span class="jp" data-i18n="s10_title_jp">シンプルな3プラン</span></h2>
   <div class="plans-grid">
     <div class="plan">
-      <h3>スタータープラン</h3>
-      <div class="price">5,000 <span>THB / 月</span></div>
+      <h3 data-i18n="s10_plan1_name">スタータープラン</h3>
+      <div class="price">5,000 <span>THB / <span data-i18n="s10_per_month">月</span></span></div>
       <ul>
-        <li>Instagram 週3投稿</li>
-        <li>X（Twitter）週5投稿</li>
-        <li>Googleマップ管理</li>
-        <li>月次簡易レポート</li>
+        <li data-i18n="s10_p1_li1">Instagram 週3投稿</li>
+        <li data-i18n="s10_p1_li2">X（Twitter）週5投稿</li>
+        <li data-i18n="s10_p1_li3">Googleマップ管理</li>
+        <li data-i18n="s10_p1_li4">月次簡易レポート</li>
       </ul>
     </div>
-    <div class="plan featured">
-      <h3>スタンダード</h3>
-      <div class="price">10,000 <span>THB / 月</span></div>
+    <div class="plan featured" data-recommended="RECOMMENDED" data-i18n-attr-data-recommended="s10_recommended">
+      <h3 data-i18n="s10_plan2_name">スタンダード</h3>
+      <div class="price">10,000 <span>THB / <span data-i18n="s10_per_month2">月</span></span></div>
       <ul>
-        <li>Instagram 週5投稿（リール含む）</li>
-        <li>X（Twitter）毎日投稿</li>
-        <li>Googleマップ最適化</li>
-        <li>月次詳細レポート</li>
-        <li>コンテンツ企画・撮影指示</li>
+        <li data-i18n="s10_p2_li1">Instagram 週5投稿（リール含む）</li>
+        <li data-i18n="s10_p2_li2">X（Twitter）毎日投稿</li>
+        <li data-i18n="s10_p2_li3">Googleマップ最適化</li>
+        <li data-i18n="s10_p2_li4">月次詳細レポート</li>
+        <li data-i18n="s10_p2_li5">コンテンツ企画・撮影指示</li>
       </ul>
     </div>
     <div class="plan">
-      <h3>フルサポート</h3>
-      <div class="price">要相談</div>
+      <h3 data-i18n="s10_plan3_name">フルサポート</h3>
+      <div class="price" data-i18n="s10_plan3_price">要相談</div>
       <ul>
-        <li>全媒体フル運用</li>
-        <li>Webサイト制作含む</li>
-        <li>撮影サポート（現地同行）</li>
-        <li>競合分析・戦略立案</li>
-        <li>専任ディレクター制</li>
-        <li>Remotion動画制作</li>
-        <li>レビュー獲得施策</li>
+        <li data-i18n="s10_p3_li1">全媒体フル運用</li>
+        <li data-i18n="s10_p3_li2">Webサイト制作含む</li>
+        <li data-i18n="s10_p3_li3">撮影サポート（現地同行）</li>
+        <li data-i18n="s10_p3_li4">競合分析・戦略立案</li>
+        <li data-i18n="s10_p3_li5">専任ディレクター制</li>
+        <li data-i18n="s10_p3_li6">Remotion動画制作</li>
+        <li data-i18n="s10_p3_li7">レビュー獲得施策</li>
       </ul>
     </div>
   </div>
-  <p style="margin-top:30px; font-size:13px; color:#3a3020;">※ Webサイト制作は初期費用として別途お見積もり</p>
+  <p style="margin-top:30px; font-size:13px; color:#3a3020;" data-i18n="s10_note">※ Webサイト制作は初期費用として別途お見積もり</p>
 </div>
 
 <!-- SLIDE 11: KPI -->
 <div class="slide">
   <div class="slide-number">11</div>
   <div class="section-label">Expected Results</div>
-  <h2>3ヶ月後の目標<span class="jp">数字で見る成果</span></h2>
+  <h2 data-i18n="s11_title">3ヶ月後の目標<span class="jp" data-i18n="s11_title_jp">数字で見る成果</span></h2>
   <div class="kpi-grid">
     <div class="kpi-card">
       <span class="metric">30+</span>
-      <span class="label">GOOGLE REVIEWS</span>
-      <p class="current">現状：0件</p>
+      <span class="label" data-i18n="s11_kpi1_label">GOOGLE REVIEWS</span>
+      <p class="current" data-i18n="s11_kpi1_current">現状：0件</p>
     </div>
     <div class="kpi-card">
       <span class="metric">2,000</span>
-      <span class="label">IG FOLLOWERS</span>
-      <p class="current">現状：119人</p>
+      <span class="label" data-i18n="s11_kpi2_label">IG FOLLOWERS</span>
+      <p class="current" data-i18n="s11_kpi2_current">現状：119人</p>
     </div>
     <div class="kpi-card">
       <span class="metric">30</span>
-      <span class="label">SNS経由来店 / 月</span>
-      <p class="current">現状：不明（ほぼゼロ）</p>
+      <span class="label" data-i18n="s11_kpi3_label">SNS経由来店 / 月</span>
+      <p class="current" data-i18n="s11_kpi3_current">現状：不明（ほぼゼロ）</p>
     </div>
     <div class="kpi-card">
       <span class="metric">TOP3</span>
-      <span class="label">タニヤ Google 検索順位</span>
-      <p class="current">現状：圏外</p>
+      <span class="label" data-i18n="s11_kpi4_label">タニヤ Google 検索順位</span>
+      <p class="current" data-i18n="s11_kpi4_current">現状：圏外</p>
     </div>
   </div>
 </div>
@@ -1153,14 +1172,321 @@
 <!-- FINAL -->
 <div class="final">
   <div class="divider-gold"></div>
-  <h2>タニヤで最初に動いた店が、<br>勝つ。</h2>
-  <p>客引き禁止から1週間。<br>今この瞬間が、最大のチャンスです。</p>
+  <h2 data-i18n="final_title">タニヤで最初に動いた店が、<br>勝つ。</h2>
+  <p data-i18n="final_body">客引き禁止から1週間。<br>今この瞬間が、最大のチャンスです。</p>
   <div class="contact-box">
-    <p>お問い合わせ・ご相談</p>
+    <p data-i18n="final_contact">お問い合わせ・ご相談</p>
   </div>
   <div class="divider-gold" style="margin-top:50px;"></div>
   <p style="font-size:12px; color:#2a2418; margin-top:20px;">Confidential — March 2026</p>
 </div>
 
+<script>
+const translations = {
+  ja: {
+    cover_label: "Confidential Proposal",
+    cover_subtitle: "Web & SNS 運用代行 提案書",
+    s1_title: "Why Now?",
+    s1_title_jp: "なぜ今なのか",
+    s1_urgency_title: "2026年3月 ── タニヤ、客引き全面禁止",
+    s1_urgency_p1: 'これまでタニヤの集客を支えてきた「路上での客引き」が突然禁止された。<br>これまでの集客手段が一夜にして消えた今、新しい集客の仕組みが必要です。',
+    s1_urgency_p2: "ウェブ上に存在しない店は、存在しないのと同じ。",
+    s1_body: "客引きがなくなった今、お客様はGoogle・Instagram・SNSでお店を探します。<br>MILEAが最初に見つかる店になるために、今すぐデジタル基盤を整える必要があります。",
+    s2_title: "Who Are They?",
+    s2_title_jp: "ターゲット顧客の行動",
+    s2_card1_title: "在住日本人",
+    s2_card2_title: "旅行者",
+    s2_card3_title: "中国人・韓国人",
+    s3_title: "お客様はどう動くか",
+    s3_title_jp: "来店までの行動プロセス",
+    s3_intro: '客引きがなくなった今、お客様の来店判断は<strong style="color:#c9a84c;">すべてスマホの中で完結</strong>します。',
+    s3_resident_label: "🏙️ 在住日本人の場合",
+    s3_tourist_label: "✈️ 旅行者の場合",
+    s3_insight_title: "💡 重要な気づき",
+    s4_title: "現状分析",
+    s4_title_jp: "ミレアのデジタル存在感",
+    s4_intro: 'お客様が来店を決める場所に、MILEAは<strong style="color:#c9a84c;">存在していない</strong>。',
+    s4_th_item: "項目",
+    s4_th_status: "現状",
+    s4_th_impact: "お客様への影響",
+    s4_comp_label: "📊 競合との比較（実データ）",
+    s4_comp_th1: "アカウント",
+    s4_comp_th2: "フォロワー",
+    s4_comp_th3: "投稿いいね（最高）",
+    s4_comp_th4: "特徴",
+    s5_title: "Webサイト制作",
+    s5_title_jp: "高級感あるブランドサイト",
+    s5_tag1: "日本語 / English",
+    s5_tag2: "スマホ対応",
+    s5_tag3: "最短3日で公開",
+    s6_title: "実施スケジュール",
+    s6_title_jp: "最速で動く",
+    s6_tl1_title: "Week 1 — デジタル基盤整備",
+    s6_tl2_title: "Week 2 — SNS強化",
+    s6_tl3_title: "Month 2〜3 — 継続運用",
+    s7_title: "具体的な施策と数値目標",
+    s7_title_jp: "何をやって、どの数字をどう上げるか",
+    s7_gmap_title: "Google Maps MEO対策",
+    s7_gmap_target: "目標：3ヶ月でレビュー30件・検索TOP3",
+    s7_gmap_do_label: "やること",
+    s7_gmap_result_label: "期待できる変化",
+    s7_ig_title: "Instagram 運用",
+    s7_ig_target: "目標：3ヶ月でフォロワー2,000人",
+    s7_ig_plan_label: "週次投稿計画（週5回）",
+    s7_ig_ugc_label: "UGCキャンペーン施策",
+    s7_ig_hash_label: "ハッシュタグ（毎回固定）",
+    s7_line_title: "LINE公式アカウント",
+    s7_line_target: "目標：リピーター来店率+30%",
+    s7_x_target: "目標：在住者の新規来店を月10組",
+    s8_title: "なぜ続くのか。",
+    s8_title_jp: "仕組みが人を動かす",
+    s8_bad_label: "❌ 自社運用の現実",
+    s8_good_label: "✅ このサービスの仕組み",
+    s8_step1: "撮影指示書が届く",
+    s8_step1_sub: "参考投稿つき・毎週",
+    s8_step2: "店舗が撮影して送る",
+    s8_step2_sub: "スマホで撮るだけ",
+    s8_step3: "編集・投稿・管理",
+    s8_step3_sub: "ディレクターが一貫対応",
+    s8_step4: "月次レポート",
+    s8_step4_sub: "オーナーに数字で報告",
+    s9_title: "世界の成功事例から学ぶ",
+    s9_title_jp: "日本・米国・タイの最新手法",
+    s10_title: "料金プラン",
+    s10_title_jp: "シンプルな3プラン",
+    s10_plan1_name: "スタータープラン",
+    s10_per_month: "月",
+    s10_plan2_name: "スタンダード",
+    s10_per_month2: "月",
+    s10_recommended: "RECOMMENDED",
+    s10_plan3_name: "フルサポート",
+    s10_plan3_price: "要相談",
+    s10_note: "※ Webサイト制作は初期費用として別途お見積もり",
+    s11_title: "3ヶ月後の目標",
+    s11_title_jp: "数字で見る成果",
+    s11_kpi1_label: "GOOGLE REVIEWS",
+    s11_kpi1_current: "現状：0件",
+    s11_kpi2_label: "IG FOLLOWERS",
+    s11_kpi2_current: "現状：119人",
+    s11_kpi3_label: "SNS経由来店 / 月",
+    s11_kpi3_current: "現状：不明（ほぼゼロ）",
+    s11_kpi4_label: "タニヤ Google 検索順位",
+    s11_kpi4_current: "現状：圏外",
+    final_title: "タニヤで最初に動いた店が、<br>勝つ。",
+    final_body: "客引き禁止から1週間。<br>今この瞬間が、最大のチャンスです。",
+    final_contact: "お問い合わせ・ご相談",
+  },
+  en: {
+    cover_label: "Confidential Proposal",
+    cover_subtitle: "Web & SNS Management Proposal",
+    s1_title: "Why Now?",
+    s1_title_jp: "The Urgency",
+    s1_urgency_title: "March 2026 — Thaniya Bans All Street Touting",
+    s1_urgency_p1: 'Street touting, which has long been the primary customer acquisition method in Thaniya, was suddenly banned.<br>The old way of attracting customers disappeared overnight. A new system is needed now.',
+    s1_urgency_p2: "A bar that doesn't exist online doesn't exist at all.",
+    s1_body: "Without street touting, customers now search on Google, Instagram, and SNS.<br>MILEA needs to build its digital foundation immediately to be the first bar they find.",
+    s2_title: "Who Are They?",
+    s2_title_jp: "Target Customer Behavior",
+    s2_card1_title: "Japanese Residents",
+    s2_card2_title: "Tourists",
+    s2_card3_title: "Chinese & Korean",
+    s3_title: "How Customers Decide",
+    s3_title_jp: "The Path to Visit",
+    s3_intro: 'Without street touting, the visit decision is <strong style="color:#c9a84c;">made entirely on smartphones</strong>.',
+    s3_resident_label: "🏙️ Japanese Residents",
+    s3_tourist_label: "✈️ Tourists",
+    s3_insight_title: "💡 Key Insight",
+    s4_title: "Current Status",
+    s4_title_jp: "MILEA's Digital Presence",
+    s4_intro: 'Where customers decide to visit, MILEA <strong style="color:#c9a84c;">does not exist</strong>.',
+    s4_th_item: "Item",
+    s4_th_status: "Status",
+    s4_th_impact: "Impact on Customers",
+    s4_comp_label: "📊 Competitor Comparison (Real Data)",
+    s4_comp_th1: "Account",
+    s4_comp_th2: "Followers",
+    s4_comp_th3: "Top Likes",
+    s4_comp_th4: "Features",
+    s5_title: "Website Development",
+    s5_title_jp: "Premium Brand Site",
+    s5_tag1: "Japanese / English",
+    s5_tag2: "Mobile Responsive",
+    s5_tag3: "Live in 3 Days",
+    s6_title: "Implementation Schedule",
+    s6_title_jp: "Move Fast",
+    s6_tl1_title: "Week 1 — Digital Foundation",
+    s6_tl2_title: "Week 2 — SNS Boost",
+    s6_tl3_title: "Month 2–3 — Ongoing Ops",
+    s7_title: "Specific Actions & KPIs",
+    s7_title_jp: "What We Do, What Numbers We Move",
+    s7_gmap_title: "Google Maps MEO Strategy",
+    s7_gmap_target: "Goal: 30 Reviews & TOP3 in 3 Months",
+    s7_gmap_do_label: "Actions",
+    s7_gmap_result_label: "Expected Results",
+    s7_ig_title: "Instagram Management",
+    s7_ig_target: "Goal: 2,000 Followers in 3 Months",
+    s7_ig_plan_label: "Weekly Post Plan (5x/week)",
+    s7_ig_ugc_label: "UGC Campaign",
+    s7_ig_hash_label: "Hashtags (Fixed)",
+    s7_line_title: "LINE Official Account",
+    s7_line_target: "Goal: +30% Repeat Visit Rate",
+    s7_x_target: "Goal: 10 New Groups/Month from Residents",
+    s8_title: "Why It Lasts.",
+    s8_title_jp: "Systems Move People",
+    s8_bad_label: "❌ Reality of In-House Management",
+    s8_good_label: "✅ How This Service Works",
+    s8_step1: "Shooting Brief Arrives",
+    s8_step1_sub: "With references, weekly",
+    s8_step2: "Staff Shoots & Sends",
+    s8_step2_sub: "Just use a smartphone",
+    s8_step3: "Edit, Post & Manage",
+    s8_step3_sub: "Director handles everything",
+    s8_step4: "Monthly Report",
+    s8_step4_sub: "Numbers reported to owner",
+    s9_title: "Global Best Practices",
+    s9_title_jp: "Latest Methods from Japan, US & Thailand",
+    s10_title: "Pricing Plans",
+    s10_title_jp: "Simple 3 Plans",
+    s10_plan1_name: "Starter Plan",
+    s10_per_month: "mo",
+    s10_plan2_name: "Standard",
+    s10_per_month2: "mo",
+    s10_recommended: "RECOMMENDED",
+    s10_plan3_name: "Full Support",
+    s10_plan3_price: "Custom Quote",
+    s10_note: "* Website development quoted separately as initial cost",
+    s11_title: "3-Month Targets",
+    s11_title_jp: "Results in Numbers",
+    s11_kpi1_label: "GOOGLE REVIEWS",
+    s11_kpi1_current: "Current: 0",
+    s11_kpi2_label: "IG FOLLOWERS",
+    s11_kpi2_current: "Current: 119",
+    s11_kpi3_label: "SNS-DRIVEN VISITS / MO",
+    s11_kpi3_current: "Current: Unknown (near zero)",
+    s11_kpi4_label: "THANIYA GOOGLE RANK",
+    s11_kpi4_current: "Current: Not ranked",
+    final_title: "The first bar in Thaniya to move<br>wins.",
+    final_body: "One week since the touting ban.<br>Right now is the biggest opportunity.",
+    final_contact: "Contact & Inquiries",
+  },
+  th: {
+    cover_label: "เอกสารเสนอโครงการ (ลับ)",
+    cover_subtitle: "ข้อเสนอบริการจัดการ Web & SNS",
+    s1_title: "Why Now?",
+    s1_title_jp: "ทำไมต้องตอนนี้",
+    s1_urgency_title: "มีนาคม 2026 — ธนิยะ ห้ามดึงแขกทั้งหมด",
+    s1_urgency_p1: 'การดึงแขกบนถนนที่เคยเป็นวิธีหลักในการดึงลูกค้าของธนิยะ ถูกห้ามอย่างกะทันหัน<br>วิธีเก่าหายไปชั่วข้ามคืน ต้องมีระบบใหม่ทันที',
+    s1_urgency_p2: "ร้านที่ไม่มีตัวตนบนออนไลน์ ก็เหมือนไม่มีอยู่จริง",
+    s1_body: "เมื่อไม่มีการดึงแขก ลูกค้าค้นหาร้านผ่าน Google, Instagram และ SNS<br>MILEA ต้องสร้างฐานดิจิทัลทันทีเพื่อเป็นร้านแรกที่ลูกค้าเจอ",
+    s2_title: "Who Are They?",
+    s2_title_jp: "พฤติกรรมกลุ่มเป้าหมาย",
+    s2_card1_title: "ชาวญี่ปุ่นที่อาศัยอยู่",
+    s2_card2_title: "นักท่องเที่ยว",
+    s2_card3_title: "ชาวจีนและเกาหลี",
+    s3_title: "ลูกค้าตัดสินใจอย่างไร",
+    s3_title_jp: "กระบวนการตัดสินใจเข้าร้าน",
+    s3_intro: 'เมื่อไม่มีการดึงแขก การตัดสินใจเข้าร้าน<strong style="color:#c9a84c;">เกิดขึ้นทั้งหมดในสมาร์ทโฟน</strong>',
+    s3_resident_label: "🏙️ กรณีชาวญี่ปุ่นที่อาศัยอยู่",
+    s3_tourist_label: "✈️ กรณีนักท่องเที่ยว",
+    s3_insight_title: "💡 ข้อสังเกตสำคัญ",
+    s4_title: "สถานะปัจจุบัน",
+    s4_title_jp: "ตัวตนดิจิทัลของ MILEA",
+    s4_intro: 'ในที่ที่ลูกค้าตัดสินใจเข้าร้าน MILEA <strong style="color:#c9a84c;">ไม่มีตัวตน</strong>',
+    s4_th_item: "รายการ",
+    s4_th_status: "สถานะ",
+    s4_th_impact: "ผลกระทบต่อลูกค้า",
+    s4_comp_label: "📊 เปรียบเทียบคู่แข่ง (ข้อมูลจริง)",
+    s4_comp_th1: "บัญชี",
+    s4_comp_th2: "ผู้ติดตาม",
+    s4_comp_th3: "ไลค์สูงสุด",
+    s4_comp_th4: "ลักษณะเด่น",
+    s5_title: "พัฒนาเว็บไซต์",
+    s5_title_jp: "เว็บไซต์แบรนด์ระดับพรีเมียม",
+    s5_tag1: "ญี่ปุ่น / อังกฤษ",
+    s5_tag2: "รองรับมือถือ",
+    s5_tag3: "เปิดใช้ภายใน 3 วัน",
+    s6_title: "แผนดำเนินงาน",
+    s6_title_jp: "เคลื่อนไหวเร็วที่สุด",
+    s6_tl1_title: "สัปดาห์ 1 — วางรากฐานดิจิทัล",
+    s6_tl2_title: "สัปดาห์ 2 — เสริมแกร่ง SNS",
+    s6_tl3_title: "เดือน 2–3 — ดำเนินการต่อเนื่อง",
+    s7_title: "แผนปฏิบัติการและ KPI",
+    s7_title_jp: "ทำอะไร เลขอะไรจะขึ้น",
+    s7_gmap_title: "กลยุทธ์ Google Maps MEO",
+    s7_gmap_target: "เป้าหมาย: 30 รีวิว & TOP3 ใน 3 เดือน",
+    s7_gmap_do_label: "สิ่งที่ต้องทำ",
+    s7_gmap_result_label: "ผลลัพธ์ที่คาดหวัง",
+    s7_ig_title: "จัดการ Instagram",
+    s7_ig_target: "เป้าหมาย: 2,000 ผู้ติดตามใน 3 เดือน",
+    s7_ig_plan_label: "แผนโพสต์รายสัปดาห์ (5 ครั้ง/สัปดาห์)",
+    s7_ig_ugc_label: "แคมเปญ UGC",
+    s7_ig_hash_label: "แฮชแท็ก (ใช้ประจำ)",
+    s7_line_title: "LINE Official Account",
+    s7_line_target: "เป้าหมาย: อัตราลูกค้ากลับมา +30%",
+    s7_x_target: "เป้าหมาย: ลูกค้าใหม่ 10 กลุ่ม/เดือน",
+    s8_title: "ทำไมถึงยั่งยืน",
+    s8_title_jp: "ระบบขับเคลื่อนคน",
+    s8_bad_label: "❌ ความเป็นจริงของการทำเอง",
+    s8_good_label: "✅ ระบบของบริการนี้",
+    s8_step1: "คู่มือถ่ายภาพมาถึง",
+    s8_step1_sub: "พร้อมตัวอย่าง ทุกสัปดาห์",
+    s8_step2: "ร้านถ่ายและส่ง",
+    s8_step2_sub: "แค่ใช้มือถือถ่าย",
+    s8_step3: "ตัดต่อ โพสต์ จัดการ",
+    s8_step3_sub: "ผู้กำกับดูแลทั้งหมด",
+    s8_step4: "รายงานรายเดือน",
+    s8_step4_sub: "รายงานตัวเลขต่อเจ้าของ",
+    s9_title: "เรียนรู้จากกรณีศึกษาระดับโลก",
+    s9_title_jp: "วิธีล่าสุดจากญี่ปุ่น สหรัฐ และไทย",
+    s10_title: "แผนราคา",
+    s10_title_jp: "3 แผนเรียบง่าย",
+    s10_plan1_name: "แผนเริ่มต้น",
+    s10_per_month: "เดือน",
+    s10_plan2_name: "มาตรฐาน",
+    s10_per_month2: "เดือน",
+    s10_recommended: "แนะนำ",
+    s10_plan3_name: "สนับสนุนเต็มรูปแบบ",
+    s10_plan3_price: "สอบถามราคา",
+    s10_note: "* ค่าพัฒนาเว็บไซต์เสนอราคาแยกเป็นค่าเริ่มต้น",
+    s11_title: "เป้าหมาย 3 เดือน",
+    s11_title_jp: "ผลลัพธ์เป็นตัวเลข",
+    s11_kpi1_label: "GOOGLE REVIEWS",
+    s11_kpi1_current: "ปัจจุบัน: 0",
+    s11_kpi2_label: "IG FOLLOWERS",
+    s11_kpi2_current: "ปัจจุบัน: 119",
+    s11_kpi3_label: "ลูกค้าจาก SNS / เดือน",
+    s11_kpi3_current: "ปัจจุบัน: ไม่ทราบ (เกือบศูนย์)",
+    s11_kpi4_label: "อันดับ Google ธนิยะ",
+    s11_kpi4_current: "ปัจจุบัน: ไม่ติดอันดับ",
+    final_title: "ร้านแรกในธนิยะที่ลงมือ<br>คือผู้ชนะ",
+    final_body: "1 สัปดาห์หลังห้ามดึงแขก<br>ตอนนี้คือโอกาสที่ใหญ่ที่สุด",
+    final_contact: "ติดต่อสอบถาม",
+  }
+};
+
+function switchLang(lang) {
+  document.body.setAttribute('data-lang', lang);
+  // Update active button
+  document.querySelectorAll('.lang-switch-fixed button').forEach(btn => {
+    btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+  });
+  // Update text content
+  const dict = translations[lang];
+  if (!dict) return;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) {
+      el.innerHTML = dict[key];
+    }
+  });
+  // Update data-recommended attribute on featured plan
+  document.querySelectorAll('[data-i18n-attr-data-recommended]').forEach(el => {
+    const key = el.getAttribute('data-i18n-attr-data-recommended');
+    if (dict[key] !== undefined) {
+      el.setAttribute('data-recommended', dict[key]);
+    }
+  });
+}
+</script>
 </body>
 </html>
