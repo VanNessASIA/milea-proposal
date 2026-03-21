@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karaoke Snack SAMPLE — Bangkok Thaniya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Reset & Base ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Noto Serif JP', serif;
+  background: #0f0a14;
+  color: #e8e0f0;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: #e0a0ff; text-decoration: none; transition: color .2s; }
+a:hover { color: #f5c542; }
+
+/* ===== Typography ===== */
+h1, h2, h3, h4 { font-family: 'Lora', serif; font-weight: 700; }
+.section-title {
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  color: #f5c542;
+  margin-bottom: .4em;
+  letter-spacing: .05em;
+}
+.section-subtitle {
+  text-align: center;
+  font-size: .9rem;
+  color: #e0a0ff;
+  margin-bottom: 2.5rem;
+  font-family: 'Lora', serif;
+  font-style: italic;
+}
+
+/* ===== Layout ===== */
+.container { max-width: 1080px; margin: 0 auto; padding: 0 1.2rem; }
+section { padding: 5rem 0; }
+section:nth-child(even) { background: #130e1a; }
+
+/* ===== Nav ===== */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(15,10,20,.92);
+  backdrop-filter: blur(8px);
+  transition: padding .3s, box-shadow .3s;
+  padding: 1rem 0;
+}
+.nav.shrink { padding: .5rem 0; box-shadow: 0 2px 20px rgba(0,0,0,.5); }
+.nav-inner {
+  max-width: 1080px; margin: 0 auto; padding: 0 1.2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Lora', serif; font-size: 1.3rem; color: #f5c542;
+  font-weight: 700; letter-spacing: .08em;
+}
+.nav-links { display: flex; gap: 1.5rem; list-style: none; }
+.nav-links a { color: #e8e0f0; font-size: .85rem; transition: color .2s; }
+.nav-links a:hover { color: #f5c542; }
+.nav-toggle { display: none; background: none; border: none; color: #e8e0f0; font-size: 1.5rem; cursor: pointer; }
+
+/* ===== Hero ===== */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(15,10,20,.6) 0%, #0f0a14 100%),
+              url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1400&q=80') center/cover no-repeat;
+  padding: 8rem 1.2rem 4rem;
+}
+.hero-content { max-width: 640px; }
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  color: #f5c542;
+  margin-bottom: .3em;
+  letter-spacing: .1em;
+}
+.hero-tagline {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: #e0a0ff;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+.hero-hours {
+  font-size: .9rem;
+  color: #e8e0f0;
+  margin-bottom: 2rem;
+  opacity: .85;
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center; margin-bottom: 1rem; }
+.btn-line {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: #06c755; color: #fff; font-weight: 700;
+  padding: .85rem 2rem; border-radius: 6px; font-size: 1rem;
+  transition: transform .2s, box-shadow .2s;
+  border: none; cursor: pointer;
+}
+.btn-line:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(6,199,85,.35); color: #fff; }
+.btn-line svg { width: 22px; height: 22px; fill: currentColor; }
+.hero-tel { color: #e8e0f0; font-size: 1.1rem; }
+.hero-tel span { font-size: 1.4rem; font-weight: 700; color: #f5c542; letter-spacing: .04em; }
+
+/* ===== Mama ===== */
+.mama-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+.mama-photo {
+  width: 280px; height: 350px;
+  object-fit: cover; border-radius: 10px;
+  border: 2px solid rgba(224,160,255,.2);
+}
+.mama-message h3 {
+  font-size: 1.4rem; color: #f5c542; margin-bottom: .8rem;
+}
+.mama-message p { margin-bottom: .8rem; line-height: 2; }
+.mama-name { color: #e0a0ff; font-style: italic; font-family: 'Lora', serif; }
+
+/* ===== Features ===== */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.feature-card {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  background: rgba(224,160,255,.05);
+  border: 1px solid rgba(224,160,255,.1);
+  border-radius: 10px;
+  transition: transform .3s;
+}
+.feature-card:hover { transform: translateY(-4px); }
+.feature-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+.feature-card h3 { font-size: 1.1rem; color: #f5c542; margin-bottom: .6rem; }
+.feature-card p { font-size: .9rem; color: #e8e0f0; opacity: .85; }
+
+/* ===== Karaoke ===== */
+.karaoke-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.karaoke-info h3 { color: #f5c542; font-size: 1.3rem; margin-bottom: .5rem; }
+.karaoke-info > p { margin-bottom: 1.5rem; }
+.karaoke-badge {
+  display: inline-block;
+  background: rgba(245,197,66,.15);
+  color: #f5c542;
+  padding: .3rem 1rem;
+  border-radius: 20px;
+  font-size: .85rem;
+  margin-bottom: 1.5rem;
+}
+.ranking { list-style: none; counter-reset: rank; }
+.ranking li {
+  counter-increment: rank;
+  padding: .6rem 0;
+  border-bottom: 1px solid rgba(224,160,255,.1);
+  font-size: .95rem;
+}
+.ranking li::before {
+  content: counter(rank) ".";
+  color: #f5c542;
+  font-weight: 700;
+  margin-right: .6rem;
+  font-family: 'Lora', serif;
+}
+.karaoke-photo {
+  width: 100%; border-radius: 10px;
+  object-fit: cover; aspect-ratio: 4/3;
+  border: 2px solid rgba(224,160,255,.15);
+}
+
+/* ===== Staff ===== */
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.staff-card { text-align: center; }
+.staff-photo {
+  width: 100%; aspect-ratio: 3/4;
+  object-fit: cover; border-radius: 8px;
+  margin-bottom: .8rem;
+  border: 2px solid rgba(224,160,255,.12);
+  transition: border-color .3s;
+}
+.staff-card:hover .staff-photo { border-color: #f5c542; }
+.staff-card h4 { color: #f5c542; font-size: 1.05rem; margin-bottom: .2rem; }
+.staff-card .staff-origin { font-size: .8rem; color: #e0a0ff; margin-bottom: .3rem; }
+.staff-card .staff-song { font-size: .8rem; color: #e8e0f0; opacity: .7; }
+
+/* ===== Pricing ===== */
+.pricing-table {
+  width: 100%; border-collapse: collapse; margin-bottom: 2rem;
+}
+.pricing-table th, .pricing-table td {
+  padding: .9rem 1.2rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(224,160,255,.12);
+}
+.pricing-table th {
+  color: #f5c542;
+  font-family: 'Lora', serif;
+  font-size: .95rem;
+  background: rgba(245,197,66,.06);
+}
+.pricing-table td { font-size: .95rem; }
+.pricing-table .price { color: #f5c542; font-weight: 700; white-space: nowrap; }
+.pricing-note {
+  text-align: center;
+  padding: 1.2rem;
+  background: rgba(245,197,66,.08);
+  border-radius: 8px;
+  color: #f5c542;
+  font-size: .95rem;
+}
+.pricing-note strong { font-size: 1.05rem; }
+
+/* ===== Reviews ===== */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.review-card {
+  background: rgba(224,160,255,.05);
+  border: 1px solid rgba(224,160,255,.1);
+  border-radius: 10px;
+  padding: 1.8rem 1.5rem;
+}
+.review-stars { color: #f5c542; font-size: 1rem; margin-bottom: .8rem; letter-spacing: .1em; }
+.review-card p { font-size: .9rem; line-height: 1.8; margin-bottom: 1rem; }
+.review-author { font-size: .85rem; color: #e0a0ff; font-style: italic; }
+
+/* ===== Gallery ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: .8rem;
+}
+.gallery-grid img {
+  width: 100%; aspect-ratio: 4/3;
+  object-fit: cover; border-radius: 6px;
+  transition: transform .3s;
+  cursor: pointer;
+}
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* ===== Access ===== */
+.access-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+.access-info h3 { color: #f5c542; font-size: 1.2rem; margin-bottom: 1rem; }
+.access-info dl { display: grid; grid-template-columns: 5.5rem 1fr; gap: .4rem .8rem; }
+.access-info dt { color: #e0a0ff; font-size: .85rem; font-weight: 500; }
+.access-info dd { font-size: .9rem; }
+.access-map { border-radius: 10px; overflow: hidden; border: 2px solid rgba(224,160,255,.12); }
+.access-map iframe { width: 100%; height: 100%; min-height: 300px; border: none; }
+
+/* ===== Footer ===== */
+.footer {
+  background: #0a0710;
+  padding: 3rem 0 2rem;
+  text-align: center;
+}
+.footer-cta { margin-bottom: 2rem; }
+.footer-cta p { margin-bottom: 1rem; font-size: .95rem; color: #e0a0ff; }
+.footer-sns { display: flex; gap: 1.5rem; justify-content: center; margin-bottom: 1.5rem; }
+.footer-sns a { color: #e8e0f0; font-size: .9rem; transition: color .2s; }
+.footer-sns a:hover { color: #f5c542; }
+.footer-copy { font-size: .75rem; color: rgba(232,224,240,.4); }
+
+/* ===== Fade-in ===== */
+.fade-in {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(15,10,20,.97); flex-direction: column; padding: 1.5rem; gap: 1rem; }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: block; }
+  .mama-grid { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .mama-photo { width: 200px; height: 260px; }
+  .features-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .karaoke-grid { grid-template-columns: 1fr; }
+  .staff-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .access-grid { grid-template-columns: 1fr; }
+  section { padding: 3.5rem 0; }
+}
+@media (max-width: 480px) {
+  .staff-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">Snack SAMPLE</a>
+    <button class="nav-toggle" id="navToggle" aria-label="メニュー">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#mama">ご挨拶</a></li>
+      <li><a href="#features">当店の特徴</a></li>
+      <li><a href="#karaoke">カラオケ</a></li>
+      <li><a href="#staff">スタッフ</a></li>
+      <li><a href="#pricing">料金</a></li>
+      <li><a href="#reviews">お客様の声</a></li>
+      <li><a href="#access">アクセス</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="hero">
+  <div class="hero-content">
+    <h1>Snack SAMPLE</h1>
+    <p class="hero-tagline">あなたの"帰る場所"が、バンコクにある</p>
+    <p class="hero-hours">営業時間｜月〜土 19:00 – 01:00（日曜定休）</p>
+    <div class="hero-cta">
+      <a href="https://line.me/R/" class="btn-line">
+        <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.508.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINE予約
+      </a>
+      <div class="hero-tel">
+        TEL: <span>02-234-XXXX</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MAMA ===== -->
+<section id="mama">
+  <div class="container">
+    <h2 class="section-title fade-in">ご挨拶</h2>
+    <p class="section-subtitle fade-in">Welcome Message</p>
+    <div class="mama-grid fade-in">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80" alt="ママの写真" class="mama-photo" loading="lazy">
+      <div class="mama-message">
+        <h3>はじめまして。ママの美咲です。</h3>
+        <p>バンコク・タニヤで当店を開いて15年になります。<br>
+        お仕事帰りのひととき、懐かしい日本の歌、気心の知れたスタッフとの会話。<br>
+        ここは「もう一つの自分の居場所」——そんなお店でありたいと思っています。</p>
+        <p>おひとりでも、ご接待でも、どうぞお気軽にお越しください。<br>
+        スタッフ一同、心よりお待ちしております。</p>
+        <p class="mama-name">— ママ 美咲</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section id="features">
+  <div class="container">
+    <h2 class="section-title fade-in">当店の特徴</h2>
+    <p class="section-subtitle fade-in">Why Choose Us</p>
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🏠</div>
+        <h3>アットホーム</h3>
+        <p>初めてでも安心。ママとスタッフが<br>温かくお迎えします。</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🎤</div>
+        <h3>カラオケ充実</h3>
+        <p>最新DAM導入。日本語・タイ語・英語<br>10,000曲以上をご用意。</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">🥃</div>
+        <h3>ボトルキープ</h3>
+        <p>お好みの一本をキープ。<br>次回来店がもっと楽しみに。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== KARAOKE ===== -->
+<section id="karaoke">
+  <div class="container">
+    <h2 class="section-title fade-in">カラオケ</h2>
+    <p class="section-subtitle fade-in">Karaoke</p>
+    <div class="karaoke-grid fade-in">
+      <div class="karaoke-info">
+        <h3>日本語・タイ語・英語 10,000曲以上</h3>
+        <p>最新のDAMシステム完備。毎月新曲追加で、最新ヒットから懐メロまで幅広く楽しめます。</p>
+        <span class="karaoke-badge">✨ 採点機能あり — 仲間と盛り上がろう！</span>
+        <h3 style="margin-top: 1rem;">人気曲ランキング TOP5</h3>
+        <ol class="ranking">
+          <li>糸 — 中島みゆき</li>
+          <li>残酷な天使のテーゼ — 高橋洋子</li>
+          <li>ハナミズキ — 一青窈</li>
+          <li>Pretender — Official髭男dism</li>
+          <li>I LOVE YOU — 尾崎豊</li>
+        </ol>
+      </div>
+      <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=600&q=80" alt="カラオケイメージ" class="karaoke-photo" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== STAFF ===== -->
+<section id="staff">
+  <div class="container">
+    <h2 class="section-title fade-in">スタッフ紹介</h2>
+    <p class="section-subtitle fade-in">Our Staff</p>
+    <div class="staff-grid">
+      <div class="staff-card fade-in">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&q=80" alt="ナナ" class="staff-photo" loading="lazy">
+        <h4>ナナ</h4>
+        <p class="staff-origin">チェンマイ出身</p>
+        <p class="staff-song">♪ First Love — 宇多田ヒカル</p>
+      </div>
+      <div class="staff-card fade-in">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=300&q=80" alt="モモ" class="staff-photo" loading="lazy">
+        <h4>モモ</h4>
+        <p class="staff-origin">バンコク出身</p>
+        <p class="staff-song">♪ 恋するフォーチュンクッキー — AKB48</p>
+      </div>
+      <div class="staff-card fade-in">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" alt="リナ" class="staff-photo" loading="lazy">
+        <h4>リナ</h4>
+        <p class="staff-origin">コンケン出身</p>
+        <p class="staff-song">♪ 涙そうそう — 夏川りみ</p>
+      </div>
+      <div class="staff-card fade-in">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&q=80" alt="ユキ" class="staff-photo" loading="lazy">
+        <h4>ユキ</h4>
+        <p class="staff-origin">ウドンタニ出身</p>
+        <p class="staff-song">♪ 三日月 — 絢香</p>
+      </div>
+      <div class="staff-card fade-in">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=300&q=80" alt="サクラ" class="staff-photo" loading="lazy">
+        <h4>サクラ</h4>
+        <p class="staff-origin">チェンライ出身</p>
+        <p class="staff-song">♪ 未来予想図II — DREAMS COME TRUE</p>
+      </div>
+      <div class="staff-card fade-in">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="マイ" class="staff-photo" loading="lazy">
+        <h4>マイ</h4>
+        <p class="staff-origin">ナコンラチャシマ出身</p>
+        <p class="staff-song">♪ LOVE LOVE LOVE — DREAMS COME TRUE</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing">
+  <div class="container">
+    <h2 class="section-title fade-in">料金システム</h2>
+    <p class="section-subtitle fade-in">Price System</p>
+    <div class="fade-in">
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>メニュー</th>
+            <th>料金</th>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>テーブルチャージ</td>
+            <td class="price">700B / 1時間</td>
+            <td>飲み放題（ウイスキー水割り・ビール・ソフトドリンク）</td>
+          </tr>
+          <tr>
+            <td>延長</td>
+            <td class="price">700B / 1時間</td>
+            <td>引き続き飲み放題</td>
+          </tr>
+          <tr>
+            <td>レディースドリンク</td>
+            <td class="price">200B / 1杯</td>
+            <td>スタッフへのお飲み物</td>
+          </tr>
+          <tr>
+            <td>カラオケ</td>
+            <td class="price">無料</td>
+            <td>チャージ料金に含まれます</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="color:#f5c542; font-size:1.1rem; margin-bottom:.8rem; font-family:'Lora',serif;">ボトルキープ</h3>
+      <table class="pricing-table" style="margin-bottom:2rem;">
+        <tbody>
+          <tr>
+            <td>ウイスキー各種</td>
+            <td class="price">2,500B 〜</td>
+            <td>角・ジムビーム・ジョニーウォーカー 他</td>
+          </tr>
+          <tr>
+            <td>焼酎各種</td>
+            <td class="price">2,000B 〜</td>
+            <td>芋・麦・黒糖 各種</td>
+          </tr>
+          <tr>
+            <td>ワイン</td>
+            <td class="price">3,000B 〜</td>
+            <td>赤・白 各種</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="pricing-note">
+        <strong>💎 明朗会計</strong><br>
+        お会計はすべてテーブルで明細をご確認いただけます。<br>
+        追加料金やサービスチャージはございません。安心してお楽しみください。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVIEWS ===== -->
+<section id="reviews">
+  <div class="container">
+    <h2 class="section-title fade-in">お客様の声</h2>
+    <p class="section-subtitle fade-in">Voice of Our Guests</p>
+    <div class="reviews-grid">
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <p>バンコク出張のたびに必ず寄ります。ママの人柄と、スタッフの笑顔に癒されます。料金も明朗で安心。</p>
+        <p class="review-author">— T.S 様（50代・商社勤務）</p>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <p>カラオケの曲数がすごい！最新の曲もちゃんと入ってて、採点で盛り上がります。接待にもぴったり。</p>
+        <p class="review-author">— K.M 様（40代・メーカー勤務）</p>
+      </div>
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★☆</div>
+        <p>初めて一人で来ましたが、ママが気さくに話しかけてくれて全然寂しくなかった。ボトルキープしちゃいました。</p>
+        <p class="review-author">— Y.H 様（30代・IT企業）</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section id="gallery">
+  <div class="container">
+    <h2 class="section-title fade-in">店内ギャラリー</h2>
+    <p class="section-subtitle fade-in">Gallery</p>
+    <div class="gallery-grid fade-in">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=500&q=80" alt="店内1" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=500&q=80" alt="店内2" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=500&q=80" alt="店内3" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=500&q=80" alt="店内4" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=500&q=80" alt="店内5" loading="lazy">
+      <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=500&q=80" alt="店内6" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACCESS ===== -->
+<section id="access">
+  <div class="container">
+    <h2 class="section-title fade-in">アクセス</h2>
+    <p class="section-subtitle fade-in">Access</p>
+    <div class="access-grid fade-in">
+      <div class="access-info">
+        <h3>店舗情報</h3>
+        <dl>
+          <dt>店名</dt>
+          <dd>Karaoke Snack SAMPLE</dd>
+          <dt>住所</dt>
+          <dd>Thaniya Plaza 2F, Silom, Bang Rak, Bangkok 10500</dd>
+          <dt>営業時間</dt>
+          <dd>月〜土 19:00 – 01:00</dd>
+          <dt>定休日</dt>
+          <dd>日曜日</dd>
+          <dt>TEL</dt>
+          <dd><a href="tel:+6622340000" style="color:#f5c542;">02-234-XXXX</a></dd>
+          <dt>LINE</dt>
+          <dd><a href="https://line.me/R/">@snack-sample</a></dd>
+        </dl>
+      </div>
+      <div class="access-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.755!2d100.5169!3d13.7279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f2c70e5b3e7%3A0x1!2sThaniya+Plaza!5e0!3m2!1sja!2sth!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-cta">
+      <p>ご予約・お問い合わせはお気軽に</p>
+      <a href="https://line.me/R/" class="btn-line">
+        <svg viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.508.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINE予約はこちら
+      </a>
+    </div>
+    <div class="footer-sns">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Twitter</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Karaoke Snack SAMPLE — Bangkok Thaniya. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// Nav shrink
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('shrink', window.scrollY > 60);
+});
+
+// Mobile menu toggle
+const toggle = document.getElementById('navToggle');
+const links = document.getElementById('navLinks');
+toggle.addEventListener('click', () => links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

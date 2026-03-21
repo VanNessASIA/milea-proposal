@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MILEA Executive Club — Thaniya, Bangkok</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: #0a0a0a;
+  color: #e8e0d0;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: #c9a84c; text-decoration: none; transition: opacity .2s; }
+a:hover { opacity: .8; }
+
+/* ===== TYPOGRAPHY ===== */
+.heading-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.section-title .en {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: clamp(28px, 5vw, 42px);
+  color: #c9a84c;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  display: block;
+}
+.section-title .jp {
+  font-size: 13px;
+  color: #998a6e;
+  letter-spacing: .2em;
+  margin-top: 4px;
+  display: block;
+}
+.gold { color: #c9a84c; }
+
+/* ===== LAYOUT ===== */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+section { padding: 80px 0; }
+@media (min-width: 768px) { section { padding: 100px 0; } }
+
+/* ===== FADE-IN ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== NAV ===== */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(10,10,10,.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(201,168,76,.15);
+  transition: padding .3s;
+  padding: 16px 0;
+}
+.nav.scrolled { padding: 10px 0; }
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #c9a84c;
+  letter-spacing: .1em;
+}
+.nav-links { display: flex; gap: 24px; align-items: center; }
+.nav-links a {
+  color: #e8e0d0;
+  font-size: 12px;
+  letter-spacing: .1em;
+  transition: color .2s;
+}
+.nav-links a:hover { color: #c9a84c; opacity: 1; }
+.nav-tel {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  color: #c9a84c !important;
+  font-weight: 600;
+}
+@media (max-width: 767px) {
+  .nav-links a:not(.nav-tel) { display: none; }
+}
+
+/* ===== CTA BUTTON ===== */
+.btn-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #06C755;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px 32px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background .2s, transform .15s;
+  letter-spacing: .04em;
+}
+.btn-line:hover { background: #05b34c; color: #fff; opacity: 1; transform: translateY(-1px); }
+.btn-line svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #c9a84c;
+  color: #c9a84c;
+  font-size: 14px;
+  padding: 12px 28px;
+  border-radius: 4px;
+  transition: background .2s, color .2s;
+  letter-spacing: .06em;
+}
+.btn-outline:hover { background: #c9a84c; color: #0a0a0a; opacity: 1; }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(10,10,10,.3) 0%, rgba(10,10,10,.85) 100%),
+              url('https://images.unsplash.com/photo-1566417713940-fe7c7b3c9a5e?w=1400&q=80') center/cover no-repeat;
+  padding: 120px 20px 80px;
+}
+.hero-content { max-width: 700px; }
+.hero-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: clamp(42px, 10vw, 80px);
+  color: #c9a84c;
+  letter-spacing: .15em;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: #998a6e;
+  letter-spacing: .3em;
+  margin-bottom: 24px;
+}
+.hero-catch {
+  font-size: clamp(16px, 3vw, 22px);
+  color: #e8e0d0;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; align-items: center; margin-bottom: 24px; }
+.hero-tel {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 4vw, 28px);
+  color: #c9a84c;
+  font-weight: 600;
+  letter-spacing: .06em;
+}
+.hero-tel-label { font-size: 11px; color: #998a6e; letter-spacing: .15em; display: block; }
+.hero-info {
+  font-size: 13px;
+  color: #998a6e;
+  letter-spacing: .1em;
+  margin-top: 16px;
+}
+
+/* ===== CONCEPT ===== */
+.concept-text {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+  font-size: 15px;
+  line-height: 2.2;
+  color: #c8bfa8;
+}
+.concept-img {
+  width: 100%;
+  max-height: 480px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+/* ===== CAST ===== */
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (min-width: 600px) { .cast-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .cast-grid { grid-template-columns: repeat(4, 1fr); } }
+.cast-card { text-align: center; }
+.cast-card img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-bottom: 12px;
+  filter: brightness(.95);
+  transition: filter .3s;
+}
+.cast-card:hover img { filter: brightness(1.05); }
+.cast-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #e8e0d0;
+  margin-bottom: 4px;
+}
+.cast-comment {
+  font-size: 12px;
+  color: #998a6e;
+}
+.cast-more {
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* ===== PRICING ===== */
+.pricing-wrap {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.pricing-badge {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.pricing-badge span {
+  display: inline-block;
+  border: 1px solid #c9a84c;
+  color: #c9a84c;
+  font-size: 13px;
+  letter-spacing: .2em;
+  padding: 6px 24px;
+  border-radius: 2px;
+}
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.pricing-table th,
+.pricing-table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid rgba(201,168,76,.15);
+  font-size: 14px;
+}
+.pricing-table th {
+  color: #998a6e;
+  font-weight: 400;
+  width: 50%;
+}
+.pricing-table td {
+  color: #e8e0d0;
+  font-weight: 500;
+  text-align: right;
+}
+.pricing-note {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 12px;
+  color: #998a6e;
+}
+
+/* ===== TODAY'S SCHEDULE ===== */
+.schedule-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (min-width: 600px) { .schedule-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 900px) { .schedule-grid { grid-template-columns: repeat(4, 1fr); } }
+.schedule-card { text-align: center; }
+.schedule-card img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(201,168,76,.2);
+}
+.schedule-card .name {
+  font-size: 14px;
+  color: #e8e0d0;
+}
+.schedule-card .time {
+  font-size: 11px;
+  color: #998a6e;
+}
+.schedule-note {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 13px;
+  color: #998a6e;
+}
+
+/* ===== GALLERY ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+@media (min-width: 600px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+.gallery-grid img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 2px;
+  transition: transform .3s;
+  cursor: pointer;
+}
+.gallery-grid img:hover { transform: scale(1.03); }
+
+/* ===== ACCESS ===== */
+.access-wrap {
+  display: grid;
+  gap: 40px;
+}
+@media (min-width: 768px) {
+  .access-wrap { grid-template-columns: 1fr 1fr; }
+}
+.access-info dt {
+  color: #998a6e;
+  font-size: 12px;
+  letter-spacing: .15em;
+  margin-bottom: 4px;
+  margin-top: 20px;
+}
+.access-info dt:first-child { margin-top: 0; }
+.access-info dd {
+  font-size: 14px;
+  color: #e8e0d0;
+}
+.access-map {
+  width: 100%;
+  min-height: 300px;
+  border: 0;
+  border-radius: 2px;
+  filter: brightness(.85) contrast(1.1);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  border-top: 1px solid rgba(201,168,76,.15);
+  padding: 60px 0 32px;
+  text-align: center;
+}
+.footer-cta { margin-bottom: 32px; }
+.footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.footer-social a {
+  color: #998a6e;
+  font-size: 13px;
+  letter-spacing: .1em;
+  transition: color .2s;
+}
+.footer-social a:hover { color: #c9a84c; }
+.footer-copy {
+  font-size: 11px;
+  color: #665e4f;
+  letter-spacing: .08em;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  width: 40px;
+  height: 1px;
+  background: #c9a84c;
+  margin: 0 auto 32px;
+  opacity: .5;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">MILEA</a>
+    <div class="nav-links">
+      <a href="#cast">CAST</a>
+      <a href="#pricing">SYSTEM</a>
+      <a href="#gallery">GALLERY</a>
+      <a href="#access">ACCESS</a>
+      <a href="tel:+6620001234" class="nav-tel">02-000-1234</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <h1 class="hero-logo">MILEA</h1>
+    <p class="hero-sub">Executive Club — Thaniya, Bangkok</p>
+    <p class="hero-catch">大人の紳士に、最上の夜を。</p>
+    <div class="hero-cta">
+      <a href="https://line.me/R/" class="btn-line" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.95 2 10.7c0 4.29 3.8 7.88 8.94 8.56.35.08.82.23.94.54.11.27.07.7.03.98l-.15.92c-.05.28-.22 1.1.96.6s6.39-3.76 8.71-6.44C23.08 13.96 22 12.44 22 10.7 22 5.95 17.52 2 12 2zm-3.39 11.28h-2.1a.48.48 0 01-.48-.48V8.56c0-.27.22-.48.48-.48s.48.22.48.48v3.76h1.62c.27 0 .48.22.48.48s-.22.48-.48.48zm1.68-.48a.48.48 0 01-.96 0V8.56a.48.48 0 01.96 0v4.24zm4.32 0c0 .2-.12.37-.3.44a.47.47 0 01-.52-.1l-2.16-2.94v2.6a.48.48 0 01-.96 0V8.56c0-.2.12-.37.3-.44a.47.47 0 01.52.1l2.16 2.94V8.56a.48.48 0 01.96 0v4.24zm3.12-3.28a.48.48 0 010 .96h-1.62v.88h1.62a.48.48 0 010 .96h-2.1a.48.48 0 01-.48-.48V8.56c0-.27.22-.48.48-.48h2.1a.48.48 0 010 .96h-1.62v.88h1.62z"/></svg>
+        LINE予約
+      </a>
+      <div>
+        <span class="hero-tel-label">RESERVATION</span>
+        <a href="tel:+6620001234" class="hero-tel">02-000-1234</a>
+      </div>
+    </div>
+    <p class="hero-info">OPEN 19:00 – 01:00 ｜ 年中無休</p>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="container fade-in">
+    <div class="section-title">
+      <span class="en">Concept</span>
+      <span class="jp">コンセプト</span>
+    </div>
+    <div class="divider"></div>
+    <p class="concept-text">
+      バンコク・タニヤの喧騒の中に、静かに灯る大人のための空間。<br>
+      厳選されたキャストと洗練された空間が、<br>
+      日常を離れた特別な夜をお約束します。<br>
+      MILEAは、品格ある紳士のための社交場です。
+    </p>
+    <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&q=80" alt="店内の雰囲気" class="concept-img">
+  </div>
+</section>
+
+<!-- CAST -->
+<section id="cast" style="background: #0e0e0e;">
+  <div class="container fade-in">
+    <div class="section-title">
+      <span class="en">Cast</span>
+      <span class="jp">在籍キャスト</span>
+    </div>
+    <div class="divider"></div>
+    <div class="cast-grid">
+      <div class="cast-card">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80" alt="Mina">
+        <p class="cast-name">Mina</p>
+        <p class="cast-comment">笑顔でお出迎えします♪</p>
+      </div>
+      <div class="cast-card">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80" alt="Aoi">
+        <p class="cast-name">Aoi</p>
+        <p class="cast-comment">楽しい時間を一緒に</p>
+      </div>
+      <div class="cast-card">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" alt="Rina">
+        <p class="cast-name">Rina</p>
+        <p class="cast-comment">癒しの時間をお届けします</p>
+      </div>
+      <div class="cast-card">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80" alt="Yuki">
+        <p class="cast-name">Yuki</p>
+        <p class="cast-comment">お話しましょう♪</p>
+      </div>
+      <div class="cast-card">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&q=80" alt="Hana">
+        <p class="cast-name">Hana</p>
+        <p class="cast-comment">カラオケ大好き！</p>
+      </div>
+      <div class="cast-card">
+        <img src="https://images.unsplash.com/photo-1502823403499-6ccfcf4fb453?w=400&q=80" alt="Saki">
+        <p class="cast-name">Saki</p>
+        <p class="cast-comment">最高の夜にしましょう</p>
+      </div>
+      <div class="cast-card">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="Nana">
+        <p class="cast-name">Nana</p>
+        <p class="cast-comment">会えるのを楽しみに♡</p>
+      </div>
+      <div class="cast-card">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80" alt="Mei">
+        <p class="cast-name">Mei</p>
+        <p class="cast-comment">お酒の席、お任せください</p>
+      </div>
+    </div>
+    <div class="cast-more">
+      <a href="#" class="btn-outline">キャスト一覧をもっと見る →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="container fade-in">
+    <div class="section-title">
+      <span class="en">System</span>
+      <span class="jp">料金システム</span>
+    </div>
+    <div class="divider"></div>
+    <div class="pricing-wrap">
+      <div class="pricing-badge"><span>明 朗 会 計</span></div>
+      <table class="pricing-table">
+        <tr><th>セット料金（1時間・飲み放題）</th><td>700 B</td></tr>
+        <tr><th>延長（30分）</th><td>350 B</td></tr>
+        <tr><th>指名料</th><td>300 B</td></tr>
+        <tr><th>レディースドリンク</th><td>200 B / 杯</td></tr>
+        <tr><th>ボトルキープ（ウイスキー各種）</th><td>2,500 B 〜</td></tr>
+        <tr><th>カラオケ</th><td>セット料金に含む</td></tr>
+      </table>
+      <p class="pricing-note">※ 上記は税・サービス料込みの料金です。追加料金は一切ございません。</p>
+    </div>
+  </div>
+</section>
+
+<!-- TODAY'S SCHEDULE -->
+<section id="schedule" style="background: #0e0e0e;">
+  <div class="container fade-in">
+    <div class="section-title">
+      <span class="en">Today</span>
+      <span class="jp">本日の出勤</span>
+    </div>
+    <div class="divider"></div>
+    <div class="schedule-grid">
+      <div class="schedule-card">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=300&q=80" alt="Mina">
+        <p class="name">Mina</p>
+        <p class="time">19:00 – 01:00</p>
+      </div>
+      <div class="schedule-card">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" alt="Rina">
+        <p class="name">Rina</p>
+        <p class="time">19:00 – 00:00</p>
+      </div>
+      <div class="schedule-card">
+        <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=300&q=80" alt="Hana">
+        <p class="name">Hana</p>
+        <p class="time">20:00 – 01:00</p>
+      </div>
+      <div class="schedule-card">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&q=80" alt="Nana">
+        <p class="name">Nana</p>
+        <p class="time">19:00 – 01:00</p>
+      </div>
+    </div>
+    <p class="schedule-note">最新の出勤情報は<a href="https://line.me/R/" target="_blank" rel="noopener">LINE</a>でお問い合わせください</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container fade-in">
+    <div class="section-title">
+      <span class="en">Gallery</span>
+      <span class="jp">店内ギャラリー</span>
+    </div>
+    <div class="divider"></div>
+    <div class="gallery-grid">
+      <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=600&q=80" alt="店内1">
+      <img src="https://images.unsplash.com/photo-1574391884720-bbc3740c59d1?w=600&q=80" alt="店内2">
+      <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&q=80" alt="店内3">
+      <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=600&q=80" alt="店内4">
+      <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?w=600&q=80" alt="店内5">
+      <img src="https://images.unsplash.com/photo-1566417713940-fe7c7b3c9a5e?w=600&q=80" alt="店内6">
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access" style="background: #0e0e0e;">
+  <div class="container fade-in">
+    <div class="section-title">
+      <span class="en">Access</span>
+      <span class="jp">アクセス</span>
+    </div>
+    <div class="divider"></div>
+    <div class="access-wrap">
+      <dl class="access-info">
+        <dt>店名</dt>
+        <dd>MILEA Executive Club</dd>
+        <dt>住所</dt>
+        <dd>Thaniya Plaza 2F, Silom Rd,<br>Bang Rak, Bangkok 10500</dd>
+        <dt>最寄り駅</dt>
+        <dd>BTS サラデーン駅 徒歩2分<br>MRT シーロム駅 徒歩5分</dd>
+        <dt>営業時間</dt>
+        <dd>19:00 – 01:00（年中無休）</dd>
+        <dt>電話番号</dt>
+        <dd><a href="tel:+6620001234" style="color:#c9a84c;">02-000-1234</a></dd>
+        <dt>LINE</dt>
+        <dd><a href="https://line.me/R/" target="_blank" rel="noopener" style="color:#c9a84c;">@milea-bkk</a></dd>
+      </dl>
+      <div>
+        <iframe class="access-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1938.5!2d100.5183!3d13.7275!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f2b5b25e8e5%3A0x5219ae4bbfbce2b3!2sThaniya+Plaza!5e0!3m2!1sen!2sth!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-cta fade-in">
+      <p style="font-size:14px; color:#998a6e; margin-bottom:16px; letter-spacing:.15em;">ご予約・お問い合わせ</p>
+      <a href="https://line.me/R/" class="btn-line" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.95 2 10.7c0 4.29 3.8 7.88 8.94 8.56.35.08.82.23.94.54.11.27.07.7.03.98l-.15.92c-.05.28-.22 1.1.96.6s6.39-3.76 8.71-6.44C23.08 13.96 22 12.44 22 10.7 22 5.95 17.52 2 12 2zm-3.39 11.28h-2.1a.48.48 0 01-.48-.48V8.56c0-.27.22-.48.48-.48s.48.22.48.48v3.76h1.62c.27 0 .48.22.48.48s-.22.48-.48.48zm1.68-.48a.48.48 0 01-.96 0V8.56a.48.48 0 01.96 0v4.24zm4.32 0c0 .2-.12.37-.3.44a.47.47 0 01-.52-.1l-2.16-2.94v2.6a.48.48 0 01-.96 0V8.56c0-.2.12-.37.3-.44a.47.47 0 01.52.1l2.16 2.94V8.56a.48.48 0 01.96 0v4.24zm3.12-3.28a.48.48 0 010 .96h-1.62v.88h1.62a.48.48 0 010 .96h-2.1a.48.48 0 01-.48-.48V8.56c0-.27.22-.48.48-.48h2.1a.48.48 0 010 .96h-1.62v.88h1.62z"/></svg>
+        LINEで予約する
+      </a>
+    </div>
+    <div class="footer-social">
+      <a href="#" target="_blank" rel="noopener">Instagram</a>
+      <a href="#" target="_blank" rel="noopener">LINE</a>
+      <a href="#" target="_blank" rel="noopener">X (Twitter)</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 MILEA Executive Club. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+// Scroll: Nav shrink
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// Scroll: Fade-in (IntersectionObserver)
+const faders = document.querySelectorAll('.fade-in');
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); } });
+}, { threshold: 0.15 });
+faders.forEach(el => fadeObs.observe(el));
+</script>
+
+</body>
+</html>
