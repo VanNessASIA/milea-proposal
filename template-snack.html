@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karaoke Snack SAMPLE — Bangkok Thaniya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Noto+Serif+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0f0a14;--bg-light:#1a1222;--bg-card:#1e1529;
+  --accent1:#e0a0ff;--accent2:#f5c542;
+  --text:#e8e0f0;--text-dim:#a89bb8;
+  --heading:'Lora',serif;--body:'Noto Serif JP',serif;
+}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.8;overflow-x:hidden;cursor:none}
+
+/* cursor */
+.cursor{position:fixed;width:20px;height:20px;border:2px solid var(--accent1);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .15s,opacity .15s;mix-blend-mode:difference}
+.cursor-dot{position:fixed;width:6px;height:6px;background:var(--accent1);border-radius:50%;pointer-events:none;z-index:9999}
+@media(max-width:768px){.cursor,.cursor-dot{display:none}body{cursor:auto}}
+
+/* particles */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent1);border-radius:3px}
+
+/* ===== NAV ===== */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 40px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(15,10,20,.8);border-bottom:1px solid rgba(224,160,255,.1);transition:all .3s}
+.nav-logo{font-family:var(--heading);font-size:1.3rem;color:var(--accent2);letter-spacing:.05em}
+.nav-logo span{color:var(--accent1)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--text-dim);text-decoration:none;font-size:.85rem;transition:color .3s;position:relative}
+.nav-links a:hover{color:var(--accent1)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--accent1);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer}
+.nav-toggle span{width:24px;height:2px;background:var(--accent1);transition:.3s}
+@media(max-width:768px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(15,10,20,.95);flex-direction:column;padding:20px 40px;gap:16px}
+  .nav-links.active{display:flex}
+  .nav-toggle{display:flex}
+}
+
+/* ===== SECTIONS BASE ===== */
+section{position:relative;z-index:1;padding:100px 5%}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{font-family:var(--heading);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
+.section-title{font-family:var(--heading);font-size:clamp(1.8rem,4vw,2.8rem);color:var(--accent1);margin-bottom:16px;line-height:1.3}
+.section-sub{color:var(--text-dim);max-width:640px;margin-bottom:48px;font-size:.95rem}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.reveal.visible{opacity:1;transform:none}
+
+/* ===== HERO ===== */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+#hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1600&q=80') center/cover;opacity:.2;filter:blur(2px)}
+#hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,10,20,.3) 0%,var(--bg) 100%)}
+.hero-content{position:relative;z-index:2}
+.hero-badge{display:inline-block;padding:8px 24px;border:1px solid var(--accent2);border-radius:40px;font-size:.8rem;color:var(--accent2);margin-bottom:24px;letter-spacing:.15em}
+.hero-title{font-family:var(--heading);font-size:clamp(2rem,5.5vw,3.6rem);color:#fff;margin-bottom:16px;line-height:1.25}
+.hero-title em{font-style:normal;color:var(--accent2)}
+.hero-sub{font-size:clamp(.95rem,2vw,1.15rem);color:var(--text-dim);margin-bottom:40px;letter-spacing:.1em}
+.hero-cta{display:inline-block;padding:14px 40px;background:linear-gradient(135deg,var(--accent1),#c080e0);color:var(--bg);font-family:var(--heading);font-weight:600;text-decoration:none;border-radius:40px;transition:transform .3s,box-shadow .3s}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(224,160,255,.3)}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);z-index:2;animation:float 2s infinite}
+.hero-scroll span{display:block;width:24px;height:40px;border:2px solid var(--accent1);border-radius:12px;position:relative}
+.hero-scroll span::after{content:'';position:absolute;top:8px;left:50%;transform:translateX(-50%);width:4px;height:8px;background:var(--accent1);border-radius:2px;animation:scrollDot 1.5s infinite}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+@keyframes scrollDot{0%{opacity:1;top:8px}100%{opacity:0;top:22px}}
+
+/* ===== MAMA ===== */
+#mama{background:var(--bg-light)}
+.mama-grid{display:grid;grid-template-columns:300px 1fr;gap:60px;align-items:center}
+.mama-img{position:relative}
+.mama-img img{width:100%;border-radius:16px;object-fit:cover;aspect-ratio:3/4}
+.mama-img::after{content:'';position:absolute;inset:12px -12px -12px 12px;border:2px solid var(--accent2);border-radius:16px;z-index:-1}
+.mama-text blockquote{font-family:var(--heading);font-size:1.2rem;font-style:italic;color:var(--accent1);margin-bottom:20px;line-height:1.6;position:relative;padding-left:24px;border-left:3px solid var(--accent2)}
+.mama-text p{color:var(--text-dim);margin-bottom:16px}
+.mama-name{font-family:var(--heading);color:var(--accent2);font-size:1rem}
+@media(max-width:768px){.mama-grid{grid-template-columns:1fr;gap:32px}.mama-img{max-width:260px;margin:0 auto}}
+
+/* ===== CONCEPT ===== */
+.concept-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.concept-card{background:var(--bg-card);border:1px solid rgba(224,160,255,.1);border-radius:16px;padding:36px 28px;text-align:center;transition:transform .3s,border-color .3s}
+.concept-card:hover{transform:translateY(-6px);border-color:var(--accent1)}
+.concept-icon{font-size:2.4rem;margin-bottom:16px}
+.concept-card h3{font-family:var(--heading);color:var(--accent1);margin-bottom:12px;font-size:1.1rem}
+.concept-card p{color:var(--text-dim);font-size:.9rem}
+@media(max-width:768px){.concept-cards{grid-template-columns:1fr}}
+
+/* ===== KARAOKE ===== */
+#karaoke{background:var(--bg-light)}
+.karaoke-hero{text-align:center;margin-bottom:60px}
+.karaoke-hero .big-num{font-family:var(--heading);font-size:clamp(3rem,8vw,5rem);color:var(--accent2);font-weight:700;line-height:1}
+.karaoke-hero .big-label{font-size:1rem;color:var(--text-dim);margin-top:4px}
+.karaoke-features{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:60px}
+.karaoke-feat{background:var(--bg-card);border-radius:12px;padding:28px;text-align:center;border:1px solid rgba(224,160,255,.08)}
+.karaoke-feat .feat-icon{font-size:2rem;margin-bottom:12px}
+.karaoke-feat h4{font-family:var(--heading);color:var(--accent1);margin-bottom:8px}
+.karaoke-feat p{font-size:.85rem;color:var(--text-dim)}
+.top-songs{background:var(--bg-card);border-radius:16px;padding:40px;border:1px solid rgba(245,197,66,.15)}
+.top-songs h3{font-family:var(--heading);color:var(--accent2);margin-bottom:24px;text-align:center;font-size:1.3rem}
+.song-list{list-style:none}
+.song-item{display:flex;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid rgba(224,160,255,.08)}
+.song-item:last-child{border:none}
+.song-rank{font-family:var(--heading);font-size:1.4rem;color:var(--accent2);width:36px;text-align:center;font-weight:700}
+.song-info strong{color:var(--accent1);display:block;font-size:.95rem}
+.song-info span{color:var(--text-dim);font-size:.8rem}
+@media(max-width:768px){.karaoke-features{grid-template-columns:1fr}}
+
+/* ===== STAFF ===== */
+.staff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.staff-card{background:var(--bg-card);border-radius:16px;overflow:hidden;border:1px solid rgba(224,160,255,.08);transition:transform .3s,border-color .3s}
+.staff-card:hover{transform:translateY(-6px);border-color:var(--accent2)}
+.staff-card img{width:100%;aspect-ratio:3/4;object-fit:cover}
+.staff-info{padding:20px}
+.staff-info h4{font-family:var(--heading);color:var(--accent1);margin-bottom:4px}
+.staff-info .staff-from{font-size:.8rem;color:var(--accent2);margin-bottom:8px}
+.staff-info .staff-song{font-size:.8rem;color:var(--text-dim)}
+.staff-info .staff-msg{font-size:.85rem;color:var(--text);margin-top:8px;font-style:italic}
+@media(max-width:900px){.staff-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.staff-grid{grid-template-columns:1fr}}
+
+/* ===== PRICING ===== */
+#pricing{background:var(--bg-light)}
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.pricing-explain{padding-right:20px}
+.pricing-explain h3{font-family:var(--heading);color:var(--accent2);margin-bottom:16px;font-size:1.2rem}
+.pricing-explain p{color:var(--text-dim);margin-bottom:16px;font-size:.95rem}
+.pricing-table{background:var(--bg-card);border-radius:16px;padding:36px;border:1px solid rgba(245,197,66,.15)}
+.pricing-table h3{font-family:var(--heading);color:var(--accent2);text-align:center;margin-bottom:24px}
+.price-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(224,160,255,.08)}
+.price-row:last-child{border:none}
+.price-row .label{color:var(--text-dim)}
+.price-row .value{font-family:var(--heading);color:var(--accent1);font-size:1.1rem;font-weight:600}
+.price-note{text-align:center;margin-top:20px;padding:12px;background:rgba(245,197,66,.1);border-radius:8px;color:var(--accent2);font-size:.9rem}
+@media(max-width:768px){.pricing-grid{grid-template-columns:1fr}}
+
+/* ===== TESTIMONIALS ===== */
+.testimonial-slider{position:relative;overflow:hidden;max-width:700px;margin:0 auto}
+.testimonial-track{display:flex;transition:transform .6s ease}
+.testimonial-card{min-width:100%;padding:40px;background:var(--bg-card);border-radius:16px;border:1px solid rgba(224,160,255,.1);text-align:center}
+.testimonial-stars{color:var(--accent2);font-size:1.2rem;margin-bottom:16px}
+.testimonial-text{font-family:var(--heading);font-style:italic;font-size:1.1rem;color:var(--accent1);margin-bottom:20px;line-height:1.6}
+.testimonial-author{color:var(--text-dim);font-size:.85rem}
+.slider-dots{display:flex;justify-content:center;gap:10px;margin-top:24px}
+.slider-dot{width:10px;height:10px;border-radius:50%;background:rgba(224,160,255,.2);border:none;cursor:pointer;transition:background .3s}
+.slider-dot.active{background:var(--accent1)}
+
+/* ===== FAQ ===== */
+#faq{background:var(--bg-light)}
+.faq-list{max-width:750px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(224,160,255,.1);overflow:hidden}
+.faq-q{width:100%;background:none;border:none;color:var(--text);font-family:var(--body);font-size:1rem;padding:20px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left}
+.faq-q:hover{color:var(--accent1)}
+.faq-q .faq-icon{font-size:1.4rem;color:var(--accent2);transition:transform .3s;flex-shrink:0;margin-left:16px}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s}
+.faq-a-inner{padding:0 0 20px;color:var(--text-dim);font-size:.9rem;line-height:1.8}
+
+/* ===== ACCESS ===== */
+.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.access-map{border-radius:16px;overflow:hidden;aspect-ratio:16/10;background:var(--bg-card)}
+.access-map iframe{width:100%;height:100%;border:0}
+.access-info-item{margin-bottom:24px}
+.access-info-item .access-label{font-family:var(--heading);color:var(--accent2);font-size:.85rem;margin-bottom:4px}
+.access-info-item p{color:var(--text-dim);font-size:.95rem}
+@media(max-width:768px){.access-grid{grid-template-columns:1fr}}
+
+/* ===== FOOTER ===== */
+footer{background:var(--bg-light);border-top:1px solid rgba(224,160,255,.1);padding:40px 5%;text-align:center;position:relative;z-index:1}
+.footer-sns{display:flex;justify-content:center;gap:24px;margin-bottom:16px}
+.footer-sns a{color:var(--text-dim);text-decoration:none;font-size:.9rem;transition:color .3s}
+.footer-sns a:hover{color:var(--accent1)}
+footer p{color:var(--text-dim);font-size:.75rem}
+
+/* ===== DEMO BADGE ===== */
+.demo-badge{position:fixed;top:20px;right:20px;z-index:200;background:var(--accent2);color:var(--bg);padding:6px 16px;border-radius:20px;font-family:var(--heading);font-size:.75rem;font-weight:600;letter-spacing:.1em}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<canvas id="particles"></canvas>
+<div class="demo-badge">DEMO</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>Karaoke</span> Snack</div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#mama">ママの挨拶</a></li>
+    <li><a href="#concept">コンセプト</a></li>
+    <li><a href="#karaoke">カラオケ</a></li>
+    <li><a href="#staff">スタッフ</a></li>
+    <li><a href="#pricing">料金</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#access">アクセス</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Bangkok Thaniya — Karaoke Snack</div>
+    <h1 class="hero-title">あなたの<em>"帰る場所"</em>が、<br>バンコクにある</h1>
+    <p class="hero-sub">笑顔とお酒と歌がある、大人の隠れ家</p>
+    <a href="#mama" class="hero-cta">お店を見る</a>
+  </div>
+  <div class="hero-scroll"><span></span></div>
+</section>
+
+<!-- MAMA -->
+<section id="mama">
+  <div class="section-inner reveal">
+    <div class="section-label">Welcome Message</div>
+    <div class="section-title">ママからのご挨拶</div>
+    <div class="mama-grid">
+      <div class="mama-img">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80" alt="ママ" loading="lazy">
+      </div>
+      <div class="mama-text">
+        <blockquote>「初めての方も、常連さんも、みんなが居心地いい場所を作っています」</blockquote>
+        <p>バンコク・タニヤで15年。お客様一人ひとりとの出会いを大切にしてきました。仕事で疲れた日も、嬉しいことがあった日も、気軽にふらっと立ち寄ってほしい。</p>
+        <p>ここは「お店」というより、あなたの「もう一つの居場所」です。おいしいお酒と楽しいカラオケ、そして温かいスタッフがお待ちしています。</p>
+        <div class="mama-name">— ママ より</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<section id="concept">
+  <div class="section-inner reveal">
+    <div class="section-label">Concept</div>
+    <div class="section-title">仕事の後の一杯を、笑顔と歌と一緒に</div>
+    <div class="section-sub">キャバクラとは違う、スナックならではの「気楽さ」がここにあります。</div>
+    <div class="concept-cards">
+      <div class="concept-card">
+        <div class="concept-icon">🍶</div>
+        <h3>気取らない空間</h3>
+        <p>自分のペースでお酒を楽しめます。無理な営業やコール一切なし。ゆっくり飲みたい人も、ワイワイ盛り上がりたい人も。</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">🎤</div>
+        <h3>カラオケで距離が縮まる</h3>
+        <p>歌えば自然と打ち解ける。スタッフも一緒に歌ってくれるから、1人でも寂しくありません。</p>
+      </div>
+      <div class="concept-card">
+        <div class="concept-icon">👔</div>
+        <h3>指名なし・フリースタイル</h3>
+        <p>キャバクラのような指名制度はありません。席についてくれる子はお店が決めますが、リクエストはもちろんOK。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KARAOKE -->
+<section id="karaoke">
+  <div class="section-inner reveal">
+    <div class="section-label">Karaoke</div>
+    <div class="section-title">スナックの主役は、やっぱりカラオケ</div>
+    <div class="karaoke-hero">
+      <div class="big-num">10,000<span style="font-size:.5em;color:var(--accent1)">曲+</span></div>
+      <div class="big-label">日本語・タイ語・英語に対応</div>
+    </div>
+    <div class="karaoke-features">
+      <div class="karaoke-feat">
+        <div class="feat-icon">🎵</div>
+        <h4>最新曲から懐メロまで</h4>
+        <p>毎月更新。演歌もJ-POPもアニソンも。タイ語・英語の曲も充実。</p>
+      </div>
+      <div class="karaoke-feat">
+        <div class="feat-icon">📊</div>
+        <h4>採点機能で盛り上がろう</h4>
+        <p>精密採点で真剣勝負！高得点を出したらドリンクサービスも!?</p>
+      </div>
+      <div class="karaoke-feat">
+        <div class="feat-icon">🎙️</div>
+        <h4>スタッフも一緒に歌います♪</h4>
+        <p>デュエットも大歓迎。スタッフと一緒に歌えば盛り上がること間違いなし。</p>
+      </div>
+    </div>
+    <div class="top-songs">
+      <h3>🏆 お客様に人気の曲 TOP 5</h3>
+      <ul class="song-list">
+        <li class="song-item">
+          <div class="song-rank">1</div>
+          <div class="song-info"><strong>糸 / 中島みゆき</strong><span>不動の1位！世代を超えて愛される名曲</span></div>
+        </li>
+        <li class="song-item">
+          <div class="song-rank">2</div>
+          <div class="song-info"><strong>残酷な天使のテーゼ / 高橋洋子</strong><span>盛り上がり度MAX。採点でも高得点が狙える</span></div>
+        </li>
+        <li class="song-item">
+          <div class="song-rank">3</div>
+          <div class="song-info"><strong>First Love / 宇多田ヒカル</strong><span>しっとり歌いたい夜に。スタッフも大好きな一曲</span></div>
+        </li>
+        <li class="song-item">
+          <div class="song-rank">4</div>
+          <div class="song-info"><strong>乾杯 / 長渕剛</strong><span>お祝いの席で必ずリクエストされます</span></div>
+        </li>
+        <li class="song-item">
+          <div class="song-rank">5</div>
+          <div class="song-info"><strong>แค่คุณ (Kae Khun) / Palmy</strong><span>タイ語の名曲。デュエットにぴったり</span></div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section id="staff">
+  <div class="section-inner reveal">
+    <div class="section-label">Staff</div>
+    <div class="section-title">ワイシャツスタイルのスタッフがお出迎え</div>
+    <div class="section-sub">清潔感のある白シャツスタイルで、笑顔でお迎えします。</div>
+    <div class="staff-grid">
+      <div class="staff-card">
+        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&q=80" alt="スタッフ" loading="lazy">
+        <div class="staff-info">
+          <h4>ノイ</h4>
+          <div class="staff-from">🇹🇭 チェンマイ出身</div>
+          <div class="staff-song">♪ 好きな曲：First Love</div>
+          <div class="staff-msg">「日本語勉強中です！一緒に歌いましょう♪」</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80" alt="スタッフ" loading="lazy">
+        <div class="staff-info">
+          <h4>プリーム</h4>
+          <div class="staff-from">🇹🇭 バンコク出身</div>
+          <div class="staff-song">♪ 好きな曲：糸</div>
+          <div class="staff-msg">「お酒作りならお任せ！ウイスキーが得意です」</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&q=80" alt="スタッフ" loading="lazy">
+        <div class="staff-info">
+          <h4>ミント</h4>
+          <div class="staff-from">🇹🇭 コンケーン出身</div>
+          <div class="staff-song">♪ 好きな曲：残酷な天使のテーゼ</div>
+          <div class="staff-msg">「カラオケ大好き！デュエットしましょ♪」</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&q=80" alt="スタッフ" loading="lazy">
+        <div class="staff-info">
+          <h4>ベル</h4>
+          <div class="staff-from">🇹🇭 ウドンタニ出身</div>
+          <div class="staff-song">♪ 好きな曲：乾杯</div>
+          <div class="staff-msg">「笑顔が取り柄です😊 楽しい夜にしましょう！」</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="section-inner reveal">
+    <div class="section-label">Price</div>
+    <div class="section-title">ボトルキープ＆料金のご案内</div>
+    <div class="pricing-grid">
+      <div class="pricing-explain">
+        <h3>🍾 ボトルキープとは？</h3>
+        <p>お好きなウイスキーやブランデーをボトルで購入し、お店にキープ（保管）しておくシステムです。次回来店時に続きから楽しめます。</p>
+        <p>キープ期間はお店によって異なりますが、当店では<strong style="color:var(--accent1)">最大3ヶ月間</strong>キープ可能。バンコク出張のたびに自分のボトルで楽しめます。</p>
+        <h3 style="margin-top:24px">💡 スナックの過ごし方</h3>
+        <p>カウンターでもボックス席でもOK。お酒を飲みながらスタッフとおしゃべり、気が向いたらカラオケ。気楽に自分のペースで過ごせます。</p>
+      </div>
+      <div class="pricing-table">
+        <h3>料金目安</h3>
+        <div class="price-row">
+          <span class="label">チャージ（飲み放題込）</span>
+          <span class="value">700B / 1h</span>
+        </div>
+        <div class="price-row">
+          <span class="label">延長</span>
+          <span class="value">700B / 1h</span>
+        </div>
+        <div class="price-row">
+          <span class="label">レディースドリンク</span>
+          <span class="value">200B / 杯</span>
+        </div>
+        <div class="price-row">
+          <span class="label">ボトル（ウイスキー）</span>
+          <span class="value">2,500B〜</span>
+        </div>
+        <div class="price-row">
+          <span class="label">ボトル（ブランデー）</span>
+          <span class="value">3,000B〜</span>
+        </div>
+        <div class="price-note">✨ 明朗会計です。追加料金やぼったくりは一切ありません。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner reveal">
+    <div class="section-label">Voice</div>
+    <div class="section-title">常連さんの声</div>
+    <div class="testimonial-slider">
+      <div class="testimonial-track" id="testimonialTrack">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">「出張のたびに来てます。ボトルキープしてるから、自分の部屋に帰ってきたみたいで落ち着く。ママの『おかえり』が嬉しいんだよね。」</div>
+          <div class="testimonial-author">— T.S. さん（50代・商社勤務・月1バンコク出張）</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">「ママの笑顔に癒される。疲れた日でもここに来ると元気になる。スタッフの子たちも明るくて、ついつい長居しちゃいます。」</div>
+          <div class="testimonial-author">— K.M. さん（40代・バンコク駐在3年目）</div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <div class="testimonial-text">「カラオケが最高！採点で盛り上がって、スタッフの子とデュエットして。気づいたら3時間経ってた（笑）。1人で来ても全然楽しめます。」</div>
+          <div class="testimonial-author">— Y.H. さん（30代・IT企業・初タニヤ）</div>
+        </div>
+      </div>
+      <div class="slider-dots" id="sliderDots">
+        <button class="slider-dot active" data-index="0"></button>
+        <button class="slider-dot" data-index="1"></button>
+        <button class="slider-dot" data-index="2"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner reveal">
+    <div class="section-label">FAQ</div>
+    <div class="section-title">よくあるご質問</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">1人で行っても大丈夫？<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">もちろんです！お一人様のお客様も多いですよ。カウンターでゆっくり飲むもよし、カラオケで盛り上がるもよし。スタッフが楽しい時間をお手伝いします。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">日本語は通じる？<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">はい、スタッフは日本語でコミュニケーションできます。日本語勉強中の子もいますが、簡単な会話は問題ありません。ママは日本語ペラペラです！</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">ボトルキープってどういうこと？<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">お好きなボトルを購入して、お店に保管しておくシステムです。次回来店時にそのボトルの続きを飲めます。当店では最大3ヶ月キープ可能。出張族の方に特に人気です。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">どんな曲が歌える？<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">10,000曲以上！日本語（J-POP、演歌、アニソン）、タイ語、英語に対応しています。最新曲も毎月更新しているので、流行りの曲もバッチリです。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">予算はどのくらい？<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">チャージ700B/h（飲み放題込み）+ レディースドリンクが基本です。2時間で2,000〜3,000B程度が目安。ボトルキープすると次回からさらにお得に楽しめます。</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">ドレスコードは？<span class="faq-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">特にありません。仕事帰りのスーツでも、カジュアルな服装でもOKです。リラックスして楽しんでください。サンダルやタンクトップはご遠慮ください。</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section id="access">
+  <div class="section-inner reveal">
+    <div class="section-label">Access</div>
+    <div class="section-title">アクセス</div>
+    <div class="access-grid">
+      <div class="access-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1937.5!2d100.5185!3d13.7278!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f2d2c4b5f7d%3A0x8a0baf5e24b5c5e0!2sThaniya%20Plaza!5e0!3m2!1sen!2sth!4v1" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="access-info">
+        <div class="access-info-item">
+          <div class="access-label">📍 住所</div>
+          <p>Soi Thaniya, Silom Rd, Suriyawong,<br>Bangrak, Bangkok 10500</p>
+        </div>
+        <div class="access-info-item">
+          <div class="access-label">🚆 最寄り駅</div>
+          <p>BTS サラデーン駅（Sala Daeng）徒歩2分<br>MRT シーロム駅（Si Lom）徒歩5分</p>
+        </div>
+        <div class="access-info-item">
+          <div class="access-label">🕖 営業時間</div>
+          <p>月〜土　19:00 – 01:00<br>日曜・祝日　定休</p>
+        </div>
+        <div class="access-info-item">
+          <div class="access-label">📱 ご予約・お問い合わせ</div>
+          <p>LINE / Instagram からお気軽にどうぞ</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-sns">
+    <a href="#">📸 Instagram</a>
+    <a href="#">💬 LINE</a>
+    <a href="#">🐦 X (Twitter)</a>
+  </div>
+  <p>© 2026 Karaoke Snack SAMPLE — This is a demo website.</p>
+</footer>
+
+<script>
+// ===== CUSTOM CURSOR =====
+const cursor = document.getElementById('cursor');
+const cursorDot = document.getElementById('cursorDot');
+let mx = 0, my = 0, cx = 0, cy = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursorDot.style.left = mx - 3 + 'px'; cursorDot.style.top = my - 3 + 'px'; });
+(function animCursor(){ cx += (mx - cx) * .15; cy += (my - cy) * .15; cursor.style.left = cx - 10 + 'px'; cursor.style.top = cy - 10 + 'px'; requestAnimationFrame(animCursor); })();
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(1.8)');
+  el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
+});
+
+// ===== PARTICLES =====
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H;
+function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+resize(); window.addEventListener('resize', resize);
+const particles = Array.from({length: 50}, () => ({
+  x: Math.random() * innerWidth,
+  y: Math.random() * innerHeight,
+  r: Math.random() * 2.5 + 1,
+  dx: (Math.random() - .5) * .3,
+  dy: (Math.random() - .5) * .3,
+  color: Math.random() > .5 ? 'rgba(224,160,255,' : 'rgba(245,197,66,',
+  alpha: Math.random() * .4 + .1
+}));
+(function drawParticles(){
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => {
+    p.x += p.dx; p.y += p.dy;
+    if(p.x < 0) p.x = W; if(p.x > W) p.x = 0;
+    if(p.y < 0) p.y = H; if(p.y > H) p.y = 0;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color + p.alpha + ')';
+    ctx.fill();
+  });
+  requestAnimationFrame(drawParticles);
+})();
+
+// ===== SCROLL REVEAL =====
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }});
+}, { threshold: 0.15 });
+reveals.forEach(el => revealObs.observe(el));
+
+// ===== NAV TOGGLE =====
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('active');
+});
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active'));
+});
+
+// ===== FAQ ACCORDION =====
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = null; });
+    if(!isOpen){
+      item.classList.add('open');
+      const answer = item.querySelector('.faq-a');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// ===== TESTIMONIAL SLIDER =====
+const track = document.getElementById('testimonialTrack');
+const dots = document.querySelectorAll('.slider-dot');
+let currentSlide = 0;
+const totalSlides = 3;
+function goToSlide(n){
+  currentSlide = n;
+  track.style.transform = `translateX(-${n * 100}%)`;
+  dots.forEach((d,i) => d.classList.toggle('active', i === n));
+}
+dots.forEach(d => d.addEventListener('click', () => goToSlide(+d.dataset.index)));
+setInterval(() => goToSlide((currentSlide + 1) % totalSlides), 5000);
+
+// ===== NAV SCROLL EFFECT =====
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  nav.style.padding = scrollY > 80 ? '10px 40px' : '16px 40px';
+});
+</script>
+</body>
+</html>

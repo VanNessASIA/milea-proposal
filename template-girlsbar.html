@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Girls Bar SAMPLE — Bangkok Thaniya</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0d0d1a;--bg-light:#151528;--bg-card:#1a1a2e;
+  --pink:#ff4d6d;--pink-glow:#ff4d6d80;--yellow:#ffd166;--yellow-glow:#ffd16680;
+  --text:#f0e8e0;--text-dim:#a09890;--text-bright:#fff;
+  --radius:14px;--radius-sm:8px;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.8;
+  overflow-x:hidden;cursor:none;
+}
+h1,h2,h3,h4,h5,h6{font-family:'Outfit','Noto Sans JP',sans-serif;line-height:1.3}
+a{color:var(--pink);text-decoration:none;transition:color .3s}
+a:hover{color:var(--yellow)}
+img{max-width:100%;display:block}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* ===== CUSTOM CURSOR ===== */
+.cursor-dot,.cursor-ring{pointer-events:none;position:fixed;top:0;left:0;z-index:99999;border-radius:50%;transform:translate(-50%,-50%)}
+.cursor-dot{width:8px;height:8px;background:var(--pink)}
+.cursor-ring{width:36px;height:36px;border:2px solid var(--pink);opacity:.5;transition:width .15s,height .15s,opacity .15s}
+
+/* ===== PARTICLES ===== */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ===== NAV ===== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:background .4s,box-shadow .4s}
+.nav.scrolled{background:rgba(13,13,26,.92);backdrop-filter:blur(12px);box-shadow:0 2px 20px rgba(0,0,0,.4)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Outfit',sans-serif;font-size:1.3rem;font-weight:700;color:var(--pink);letter-spacing:.04em}
+.nav-logo span{color:var(--yellow)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--text-dim);font-size:.85rem;font-weight:500;transition:color .3s;position:relative}
+.nav-links a:hover{color:var(--pink)}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--pink);transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--pink);color:#fff;padding:8px 22px;border-radius:40px;font-size:.85rem;font-weight:600;border:none;cursor:pointer;transition:transform .3s,box-shadow .3s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 6px 24px var(--pink-glow);color:#fff}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{display:block;width:24px;height:2px;background:var(--text);transition:transform .3s,opacity .3s}
+
+/* ===== REVEAL ===== */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== SECTION COMMON ===== */
+section{position:relative;z-index:1;padding:100px 0}
+.section-label{font-family:'Outfit',sans-serif;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--pink);margin-bottom:10px}
+.section-title{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;color:var(--text-bright);margin-bottom:20px}
+.section-title span{color:var(--yellow)}
+.section-sub{color:var(--text-dim);font-size:1rem;max-width:600px;margin-bottom:48px}
+
+/* ===== HERO ===== */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.3) saturate(.7)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,26,.4) 0%,rgba(13,13,26,.85) 70%,var(--bg) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;text-align:center;width:100%}
+.hero-catch{font-family:'Outfit','Noto Sans JP',sans-serif;font-size:clamp(2.2rem,6vw,4.2rem);font-weight:800;color:var(--text-bright);margin-bottom:12px;text-shadow:0 4px 40px rgba(255,77,109,.3)}
+.hero-catch em{font-style:normal;color:var(--pink)}
+.hero-sub{font-family:'Outfit',sans-serif;font-size:clamp(1rem,2.5vw,1.4rem);font-weight:300;color:var(--text-dim);letter-spacing:.12em;margin-bottom:40px}
+.hero-badges{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:40px}
+.hero-badge{background:rgba(255,77,109,.12);border:1px solid rgba(255,77,109,.3);color:var(--pink);padding:10px 24px;border-radius:40px;font-size:.85rem;font-weight:500;backdrop-filter:blur(4px);display:flex;align-items:center;gap:8px}
+.hero-badge .icon{font-size:1.1rem}
+.hero-scroll{display:inline-flex;align-items:center;gap:8px;color:var(--text-dim);font-size:.85rem;animation:float 2s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* ===== ABOUT ===== */
+.about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-img{border-radius:var(--radius);overflow:hidden;position:relative}
+.about-img img{width:100%;height:400px;object-fit:cover}
+.about-img::after{content:'';position:absolute;inset:0;border:2px solid var(--pink);border-radius:var(--radius);opacity:.3}
+.about-points{display:flex;flex-direction:column;gap:20px;margin-top:32px}
+.about-point{display:flex;align-items:flex-start;gap:14px;background:var(--bg-card);padding:18px 22px;border-radius:var(--radius-sm);border-left:3px solid var(--pink)}
+.about-point .ap-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px}
+.about-point .ap-text{font-size:.92rem;color:var(--text)}
+.about-point strong{color:var(--yellow)}
+
+/* ===== DRINKS ===== */
+.drinks{background:var(--bg-light)}
+.drinks-header{text-align:center;margin-bottom:48px}
+.drink-cats{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:40px}
+.drink-cat{background:var(--bg-card);border:1px solid rgba(255,77,109,.2);color:var(--text-dim);padding:8px 20px;border-radius:40px;font-size:.82rem;cursor:pointer;transition:all .3s}
+.drink-cat:hover,.drink-cat.active{background:var(--pink);color:#fff;border-color:var(--pink)}
+.drink-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+.drink-card{background:var(--bg-card);border-radius:var(--radius);overflow:hidden;border:1px solid rgba(255,255,255,.05);transition:transform .3s,box-shadow .3s}
+.drink-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(255,77,109,.15)}
+.drink-card-img{height:180px;overflow:hidden}
+.drink-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.drink-card:hover .drink-card-img img{transform:scale(1.08)}
+.drink-card-body{padding:20px}
+.drink-card-name{font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:600;color:var(--text-bright);margin-bottom:6px}
+.drink-card-desc{font-size:.8rem;color:var(--text-dim);margin-bottom:12px}
+.drink-card-price{font-family:'Outfit',sans-serif;font-size:1.1rem;font-weight:700;color:var(--yellow)}
+.drink-card-price small{font-size:.75rem;font-weight:400;color:var(--text-dim)}
+.ladies-drink{text-align:center;margin-top:40px;padding:28px;background:linear-gradient(135deg,rgba(255,77,109,.1),rgba(255,209,102,.1));border-radius:var(--radius);border:1px dashed var(--pink)}
+.ladies-drink h4{font-family:'Outfit',sans-serif;color:var(--pink);font-size:1.2rem;margin-bottom:6px}
+.ladies-drink p{color:var(--text-dim);font-size:.9rem}
+.ladies-drink .ld-price{font-family:'Outfit',sans-serif;font-size:1.8rem;font-weight:700;color:var(--yellow);margin-top:8px}
+
+/* ===== STAFF ===== */
+.staff{background:var(--bg)}
+.staff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px}
+.staff-card{background:var(--bg-card);border-radius:var(--radius);overflow:hidden;text-align:center;border:1px solid rgba(255,255,255,.05);transition:transform .3s}
+.staff-card:hover{transform:translateY(-6px)}
+.staff-card-img{height:280px;overflow:hidden;position:relative}
+.staff-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.staff-card:hover .staff-card-img img{transform:scale(1.06)}
+.staff-card-img::after{content:'';position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(transparent,var(--bg-card))}
+.staff-card-body{padding:20px 20px 28px}
+.staff-card-name{font-family:'Outfit',sans-serif;font-size:1.15rem;font-weight:600;color:var(--text-bright);margin-bottom:4px}
+.staff-card-quote{font-size:.82rem;color:var(--pink);font-style:italic;margin-bottom:10px}
+.staff-card-fav{font-size:.78rem;color:var(--text-dim);display:flex;align-items:center;justify-content:center;gap:6px}
+
+/* ===== GUIDE ===== */
+.guide{background:var(--bg-light)}
+.guide-steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:28px;margin-top:48px}
+.guide-step{background:var(--bg-card);border-radius:var(--radius);padding:32px 24px;text-align:center;border:1px solid rgba(255,255,255,.05);position:relative}
+.guide-step-num{font-family:'Outfit',sans-serif;font-size:3rem;font-weight:800;color:var(--pink);opacity:.15;position:absolute;top:12px;right:18px}
+.guide-step-icon{font-size:2.2rem;margin-bottom:16px}
+.guide-step h4{font-family:'Outfit',sans-serif;color:var(--text-bright);font-size:1.05rem;margin-bottom:10px}
+.guide-step p{font-size:.85rem;color:var(--text-dim)}
+.guide-flow{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:48px;padding:28px;background:var(--bg-card);border-radius:var(--radius)}
+.guide-flow-step{display:flex;align-items:center;gap:8px;color:var(--text);font-size:.9rem;font-weight:500}
+.guide-flow-step .gf-icon{font-size:1.3rem}
+.guide-flow-arrow{color:var(--pink);font-size:1.2rem}
+
+/* ===== FAQ ===== */
+.faq{background:var(--bg)}
+.faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--bg-card);border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.05);overflow:hidden}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;transition:background .3s}
+.faq-q:hover{background:rgba(255,77,109,.05)}
+.faq-q h4{font-size:.95rem;font-weight:500;color:var(--text-bright)}
+.faq-q .faq-toggle{font-size:1.4rem;color:var(--pink);transition:transform .3s;flex-shrink:0;margin-left:16px}
+.faq-item.open .faq-toggle{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .4s ease}
+.faq-a-inner{padding:0 24px 20px;font-size:.88rem;color:var(--text-dim);line-height:1.8}
+
+/* ===== ACCESS ===== */
+.access{background:var(--bg-light)}
+.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.access-map{border-radius:var(--radius);overflow:hidden;height:360px;background:var(--bg-card)}
+.access-map iframe{width:100%;height:100%;border:0;filter:invert(.9) hue-rotate(180deg) brightness(.7) contrast(1.1)}
+.access-info{display:flex;flex-direction:column;gap:24px}
+.access-item{display:flex;gap:16px;align-items:flex-start}
+.access-item .ai-icon{font-size:1.5rem;flex-shrink:0;width:48px;height:48px;background:rgba(255,77,109,.1);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.access-item h4{font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:600;color:var(--text-bright);margin-bottom:4px}
+.access-item p{font-size:.85rem;color:var(--text-dim)}
+
+/* ===== FOOTER ===== */
+.footer{background:var(--bg);border-top:1px solid rgba(255,255,255,.05);padding:48px 0 32px;text-align:center}
+.footer-sns{display:flex;justify-content:center;gap:20px;margin-bottom:24px}
+.footer-sns a{width:44px;height:44px;border-radius:50%;background:var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--text-dim);transition:background .3s,color .3s,transform .3s}
+.footer-sns a:hover{background:var(--pink);color:#fff;transform:translateY(-3px)}
+.footer-copy{font-size:.78rem;color:var(--text-dim)}
+.footer-copy span{color:var(--pink)}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .nav-links.open{display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(13,13,26,.96);backdrop-filter:blur(12px);padding:24px;gap:20px;align-items:center}
+  .about-grid{grid-template-columns:1fr;gap:32px}
+  .about-img img{height:260px}
+  .drink-grid{grid-template-columns:1fr 1fr}
+  .staff-grid{grid-template-columns:1fr 1fr}
+  .guide-steps{grid-template-columns:1fr 1fr}
+  .access-grid{grid-template-columns:1fr}
+  .hero-catch{font-size:clamp(1.8rem,8vw,2.8rem)}
+  .cursor-dot,.cursor-ring{display:none!important}
+  body{cursor:auto}
+}
+@media(max-width:480px){
+  .drink-grid{grid-template-columns:1fr}
+  .staff-grid{grid-template-columns:1fr}
+  .guide-steps{grid-template-columns:1fr}
+  .hero-badges{flex-direction:column;align-items:center}
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
+
+<!-- Particles -->
+<canvas id="particles"></canvas>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">GIRLS<span>BAR</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#drinks">Drinks</a></li>
+      <li><a href="#staff">Staff</a></li>
+      <li><a href="#guide">初めての方へ</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#access">Access</a></li>
+    </ul>
+    <a href="#access" class="nav-cta">Visit Us</a>
+    <button class="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1600&q=80" alt="Bar counter">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content container">
+    <p class="hero-sub" style="margin-bottom:16px">Bangkok Thaniya — Girls Bar</p>
+    <h1 class="hero-catch">今夜、<em>ふらっと</em><br>寄ってみない？</h1>
+    <p class="hero-sub">カウンター越しの、気軽で楽しいひととき</p>
+    <div class="hero-badges">
+      <div class="hero-badge"><span class="icon">🍺</span>1杯からOK</div>
+      <div class="hero-badge"><span class="icon">🇯🇵</span>日本語OK</div>
+      <div class="hero-badge"><span class="icon">😊</span>初めてでも安心</div>
+    </div>
+    <a href="#about" class="hero-scroll">↓ Scroll Down</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid reveal">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&q=80" alt="Bar atmosphere">
+      </div>
+      <div>
+        <p class="section-label">Concept</p>
+        <h2 class="section-title">カウンターで隣に座る、<br>それだけで<span>楽しい夜</span></h2>
+        <p class="section-sub">キャバクラみたいに堅苦しくない。指名もセット料金もなし。チャージとドリンク代だけのシンプル明朗会計。カウンター越しに女の子とおしゃべりしながら、好きなお酒を楽しむ。それがガールズバーです。</p>
+        <div class="about-points">
+          <div class="about-point">
+            <span class="ap-icon">✕</span>
+            <p class="ap-text"><strong>指名なし</strong> — 好きなタイミングで好きな子と話せる</p>
+          </div>
+          <div class="about-point">
+            <span class="ap-icon">✕</span>
+            <p class="ap-text"><strong>セット料金なし</strong> — 時間制じゃないから焦らない</p>
+          </div>
+          <div class="about-point">
+            <span class="ap-icon">○</span>
+            <p class="ap-text"><strong>チャージ + ドリンク代だけ</strong> — 明朗会計で安心</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRINKS -->
+<section class="drinks" id="drinks">
+  <div class="container">
+    <div class="drinks-header reveal">
+      <p class="section-label">Drink Menu</p>
+      <h2 class="section-title" style="text-align:center">好きな一杯、<span>見つけよう</span></h2>
+      <p class="section-sub" style="text-align:center;margin:0 auto 32px">ビールからカクテル、ショットまで。お財布にやさしい価格で。</p>
+    </div>
+
+    <div class="drink-grid reveal">
+      <!-- Beer -->
+      <div class="drink-card">
+        <div class="drink-card-img">
+          <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&q=80" alt="Beer">
+        </div>
+        <div class="drink-card-body">
+          <div class="drink-card-name">ビール / Beer</div>
+          <div class="drink-card-desc">生ビール、瓶ビール各種。タイビールも日本のビールも。</div>
+          <div class="drink-card-price">150B〜 <small>/ glass</small></div>
+        </div>
+      </div>
+      <!-- Cocktail -->
+      <div class="drink-card">
+        <div class="drink-card-img">
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=600&q=80" alt="Cocktail">
+        </div>
+        <div class="drink-card-body">
+          <div class="drink-card-name">カクテル / Cocktail</div>
+          <div class="drink-card-desc">モヒート、ジントニック、カシスオレンジなど定番揃い。</div>
+          <div class="drink-card-price">200B〜 <small>/ glass</small></div>
+        </div>
+      </div>
+      <!-- Shot -->
+      <div class="drink-card">
+        <div class="drink-card-img">
+          <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600&q=80" alt="Shot">
+        </div>
+        <div class="drink-card-body">
+          <div class="drink-card-name">ショット / Shot</div>
+          <div class="drink-card-desc">テキーラ、イエガー、バイソン。みんなで乾杯！</div>
+          <div class="drink-card-price">100B〜 <small>/ shot</small></div>
+        </div>
+      </div>
+      <!-- Whiskey -->
+      <div class="drink-card">
+        <div class="drink-card-img">
+          <img src="https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=600&q=80" alt="Whiskey">
+        </div>
+        <div class="drink-card-body">
+          <div class="drink-card-name">ウイスキー / Whiskey</div>
+          <div class="drink-card-desc">ロック、水割り、ハイボール。ゆっくり飲むのもアリ。</div>
+          <div class="drink-card-price">200B〜 <small>/ glass</small></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ladies-drink reveal">
+      <h4>🍹 レディースドリンク</h4>
+      <p>女の子にドリンクをご馳走すると、もっと楽しい会話に。</p>
+      <div class="ld-price">200B <small style="font-size:.7rem;color:var(--text-dim)">/ 1杯</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- STAFF -->
+<section class="staff" id="staff">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <p class="section-label">Staff</p>
+      <h2 class="section-title">今夜の<span>話し相手</span></h2>
+      <p class="section-sub" style="margin:0 auto">明るくて気さくなスタッフがお待ちしています</p>
+    </div>
+    <div class="staff-grid reveal">
+      <div class="staff-card">
+        <div class="staff-card-img">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&q=80" alt="Miki">
+        </div>
+        <div class="staff-card-body">
+          <div class="staff-card-name">Miki</div>
+          <div class="staff-card-quote">「一緒に乾杯しよ！🥂」</div>
+          <div class="staff-card-fav">🍸 好きなお酒：カシスオレンジ</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-card-img">
+          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=500&q=80" alt="Yui">
+        </div>
+        <div class="staff-card-body">
+          <div class="staff-card-name">Yui</div>
+          <div class="staff-card-quote">「今日のお疲れ、聞かせて？」</div>
+          <div class="staff-card-fav">🍺 好きなお酒：ハイボール</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-card-img">
+          <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=500&q=80" alt="Rina">
+        </div>
+        <div class="staff-card-body">
+          <div class="staff-card-name">Rina</div>
+          <div class="staff-card-quote">「ショット一緒にやらない？😆」</div>
+          <div class="staff-card-fav">🥃 好きなお酒：テキーラ</div>
+        </div>
+      </div>
+      <div class="staff-card">
+        <div class="staff-card-img">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&q=80" alt="Saki">
+        </div>
+        <div class="staff-card-body">
+          <div class="staff-card-name">Saki</div>
+          <div class="staff-card-quote">「初めてでも大丈夫、任せて！」</div>
+          <div class="staff-card-fav">🍷 好きなお酒：赤ワイン</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE -->
+<section class="guide" id="guide">
+  <div class="container">
+    <div style="text-align:center" class="reveal">
+      <p class="section-label">First Visit</p>
+      <h2 class="section-title">初めての方へ — <span>完全ガイド</span></h2>
+      <p class="section-sub" style="margin:0 auto">「ガールズバーって何？」そんな疑問、全部答えます。</p>
+    </div>
+
+    <div class="guide-steps reveal">
+      <div class="guide-step">
+        <div class="guide-step-num">01</div>
+        <div class="guide-step-icon">🤔</div>
+        <h4>ガールズバーって何？</h4>
+        <p>カウンター越しに女の子とおしゃべりしながら飲むお店。キャバクラと違って、隣には座りません。気軽でカジュアル。</p>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num">02</div>
+        <div class="guide-step-icon">🙋‍♂️</div>
+        <h4>1人で来ても大丈夫？</h4>
+        <p>むしろ1人客が多いです。ふらっと立ち寄って、カウンターで1杯。それがガールズバーの楽しみ方。</p>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num">03</div>
+        <div class="guide-step-icon">💰</div>
+        <h4>料金は？</h4>
+        <p>チャージ + ドリンク代のみ。セット料金なし、時間制なし。明朗会計だから安心です。</p>
+      </div>
+      <div class="guide-step">
+        <div class="guide-step-num">04</div>
+        <div class="guide-step-icon">📋</div>
+        <h4>どんな流れ？</h4>
+        <p>入店 → カウンター席に座る → ドリンク注文 → おしゃべりを楽しむ → お会計。シンプルでしょ？</p>
+      </div>
+    </div>
+
+    <div class="guide-flow reveal">
+      <div class="guide-flow-step"><span class="gf-icon">🚶</span>入店</div>
+      <span class="guide-flow-arrow">→</span>
+      <div class="guide-flow-step"><span class="gf-icon">🪑</span>カウンター席</div>
+      <span class="guide-flow-arrow">→</span>
+      <div class="guide-flow-step"><span class="gf-icon">🍹</span>ドリンク注文</div>
+      <span class="guide-flow-arrow">→</span>
+      <div class="guide-flow-step"><span class="gf-icon">💬</span>おしゃべり</div>
+      <span class="guide-flow-arrow">→</span>
+      <div class="guide-flow-step"><span class="gf-icon">💳</span>お会計</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <p class="section-label">FAQ</p>
+      <h2 class="section-title">よくある<span>質問</span></h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q"><h4>日本語は通じますか？</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">はい！スタッフ全員日本語対応です。タイ語や英語がわからなくても、まったく問題ありません。日本にいるような感覚でお楽しみいただけます。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>何時頃に行くのがおすすめ？</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">20時〜22時が一番盛り上がります。早めの時間（19時〜）は比較的ゆったり過ごせるので、落ち着いて飲みたい方におすすめです。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>クレジットカードは使えますか？</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">VISA・Mastercard対応しています。ただし、少額の場合は現金がスムーズです。近くにATMもあります。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>予算はどのくらい？</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">チャージ300B + ドリンク代（1杯150B〜）で、1時間あたり1,000B前後が目安です。女の子にドリンクをご馳走する場合は+200B/杯。キャバクラより圧倒的にリーズナブルです。</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><h4>女の子と連絡先を交換できますか？</h4><span class="faq-toggle">+</span></div>
+        <div class="faq-a"><div class="faq-a-inner">お店のルールによりますが、仲良くなったらLINE交換OKなことが多いです。まずはお店で楽しい時間を過ごすことが一番の近道です😊</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCESS -->
+<section class="access" id="access">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px" class="reveal">
+      <p class="section-label">Access</p>
+      <h2 class="section-title"><span>アクセス</span>情報</h2>
+    </div>
+    <div class="access-grid reveal">
+      <div class="access-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1938.8!2d100.5292!3d13.7276!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f2b5b3b3b3b%3A0x0!2sThaniya+Plaza!5e0!3m2!1sen!2sth!4v1" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="access-info">
+        <div class="access-item">
+          <div class="ai-icon">📍</div>
+          <div>
+            <h4>住所</h4>
+            <p>Soi Thaniya, Silom Road,<br>Suriyawong, Bang Rak,<br>Bangkok 10500, Thailand</p>
+          </div>
+        </div>
+        <div class="access-item">
+          <div class="ai-icon">🚇</div>
+          <div>
+            <h4>最寄り駅</h4>
+            <p>BTS サラデーン駅（Sala Daeng）徒歩3分<br>MRT シーロム駅（Si Lom）徒歩5分</p>
+          </div>
+        </div>
+        <div class="access-item">
+          <div class="ai-icon">🕗</div>
+          <div>
+            <h4>営業時間</h4>
+            <p>毎日 19:00 〜 01:00<br><span style="color:var(--pink);font-size:.82rem">※ラストオーダー 00:30</span></p>
+          </div>
+        </div>
+        <div class="access-item">
+          <div class="ai-icon">📞</div>
+          <div>
+            <h4>お問い合わせ</h4>
+            <p>LINE: @girlsbar-sample<br>TEL: 02-XXX-XXXX</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-sns">
+      <a href="#" aria-label="Instagram">📷</a>
+      <a href="#" aria-label="LINE">💬</a>
+      <a href="#" aria-label="X">✖</a>
+    </div>
+    <p class="footer-copy">© 2026 <span>Girls Bar SAMPLE</span> — Bangkok Thaniya. All rights reserved.<br>This is a demo site by <span>Milea</span></p>
+  </div>
+</footer>
+
+<script>
+/* ===== PARTICLES ===== */
+(function(){
+  const c=document.getElementById('particles'),ctx=c.getContext('2d');
+  let w,h,particles=[];
+  function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+  const colors=['#ff4d6d','#ffd166','#ff4d6d80','#ffd16680'];
+  for(let i=0;i<60;i++){
+    particles.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.5+.5,dx:(Math.random()-.5)*.4,dy:(Math.random()-.5)*.4,c:colors[Math.floor(Math.random()*colors.length)],a:Math.random()*.5+.2});
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    particles.forEach(p=>{
+      p.x+=p.dx;p.y+=p.dy;
+      if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.c;ctx.globalAlpha=p.a;ctx.fill();
+    });
+    ctx.globalAlpha=1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ===== CUSTOM CURSOR ===== */
+(function(){
+  if(window.matchMedia('(max-width:768px)').matches)return;
+  const dot=document.querySelector('.cursor-dot'),ring=document.querySelector('.cursor-ring');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  function lerp(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(lerp)}
+  lerp();
+  document.querySelectorAll('a,button,.faq-q,.drink-card,.staff-card').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.opacity='1'});
+    el.addEventListener('mouseleave',()=>{ring.style.width='36px';ring.style.height='36px';ring.style.opacity='.5'});
+  });
+})();
+
+/* ===== NAV SCROLL ===== */
+(function(){
+  const nav=document.querySelector('.nav');
+  window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>60)});
+})();
+
+/* ===== HAMBURGER ===== */
+(function(){
+  const btn=document.querySelector('.hamburger'),links=document.querySelector('.nav-links');
+  btn.addEventListener('click',()=>{links.classList.toggle('open');const spans=btn.querySelectorAll('span');if(links.classList.contains('open')){spans[0].style.transform='rotate(45deg) translate(5px,5px)';spans[1].style.opacity='0';spans[2].style.transform='rotate(-45deg) translate(5px,-5px)'}else{spans[0].style.transform='';spans[1].style.opacity='';spans[2].style.transform=''}});
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');btn.querySelectorAll('span').forEach(s=>{s.style.transform='';s.style.opacity=''})}));
+})();
+
+/* ===== SCROLL REVEAL ===== */
+(function(){
+  const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+})();
+
+/* ===== FAQ ACCORDION ===== */
+(function(){
+  document.querySelectorAll('.faq-q').forEach(q=>{
+    q.addEventListener('click',()=>{
+      const item=q.parentElement,a=item.querySelector('.faq-a'),inner=item.querySelector('.faq-a-inner');
+      const isOpen=item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0'});
+      if(!isOpen){item.classList.add('open');a.style.maxHeight=inner.scrollHeight+'px'}
+    });
+  });
+})();
+</script>
+</body>
+</html>
