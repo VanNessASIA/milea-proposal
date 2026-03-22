@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:1080px;height:1080px;background:#0a0a0a;display:flex;flex-direction:column;font-family:'Noto Sans JP',sans-serif;overflow:hidden;position:relative;}
+.top{flex:1;display:flex;align-items:center;justify-content:center;position:relative;}
+.top::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(transparent,#0a0a0a);}
+.mockup{width:800px;height:500px;background:#111;border-radius:12px;border:1px solid #222;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);position:relative;}
+.mockup-bar{height:30px;background:#1a1a1a;display:flex;align-items:center;padding:0 12px;gap:6px;}
+.mockup-dot{width:8px;height:8px;border-radius:50%;}
+.d1{background:#ff5f56;}.d2{background:#ffbd2e;}.d3{background:#27c93f;}
+.mockup-body{padding:30px;text-align:center;}
+.mockup-title{font-size:28px;color:#c9a84c;font-weight:700;margin-bottom:10px;}
+.mockup-sub{font-size:14px;color:#666;margin-bottom:20px;}
+.mockup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.mockup-grid div{height:80px;background:#1a1a1a;border-radius:4px;}
+.bottom{padding:50px 80px;position:relative;z-index:1;}
+.tag{font-size:14px;color:#c9a84c;letter-spacing:4px;margin-bottom:15px;}
+.title{font-size:42px;font-weight:900;color:#fff;line-height:1.4;margin-bottom:15px;}
+.desc{font-size:18px;color:#666;line-height:1.8;}
+.cta{display:inline-block;margin-top:20px;padding:10px 28px;border:1px solid #c9a84c;color:#c9a84c;font-size:14px;letter-spacing:3px;}
+.logo{position:absolute;bottom:30px;right:40px;font-size:12px;color:#333;letter-spacing:5px;}
+</style></head><body>
+<div class="top">
+  <div class="mockup">
+    <div class="mockup-bar"><div class="mockup-dot d1"></div><div class="mockup-dot d2"></div><div class="mockup-dot d3"></div></div>
+    <div class="mockup-body">
+      <div class="mockup-title">MILEA Executive Club</div>
+      <div class="mockup-sub">Bangkok Thaniya — 5 Languages</div>
+      <div class="mockup-grid"><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+</div>
+<div class="bottom">
+  <div class="tag">SAMPLE SITE</div>
+  <div class="title">最短3日で<br>サイト公開。</div>
+  <div class="desc">5ヶ国語対応・Google Maps最適化込み</div>
+  <div class="cta">DM → サンプルお見せします</div>
+</div>
+<div class="logo">VANNESS ASIA</div>
+</body></html>
