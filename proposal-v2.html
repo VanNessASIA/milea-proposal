@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>タニヤ カラオケ・スナック向け SNS運用提案書</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Noto+Sans+Thai:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans JP',sans-serif;color:#222;background:#fff;line-height:1.8;font-size:16px;}
+html[lang="th"]{font-family:'Noto Sans Thai','Noto Sans JP',sans-serif;}
+
+/* Lang switch */
+.lang-sw{position:fixed;top:16px;right:16px;z-index:999;display:flex;border:1px solid #ddd;border-radius:4px;overflow:hidden;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+.lang-sw button{border:none;background:#fff;color:#888;font-size:12px;padding:6px 12px;cursor:pointer;font-family:inherit;border-right:1px solid #eee;transition:all 0.15s;}
+.lang-sw button:last-child{border-right:none;}
+.lang-sw button.active{background:#222;color:#fff;}
+.lang-sw button:hover{background:#f5f5f5;}
+
+/* Slides */
+.slide{min-height:100vh;padding:80px 8%;display:flex;flex-direction:column;justify-content:center;}
+.slide-alt{background:#f8f7f5;}
+
+/* Cover */
+.cover{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;padding:0;}
+.cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.cover-overlay{position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,0.7) 100%);}
+.cover-content{position:relative;z-index:1;padding:60px 8%;color:#fff;max-width:700px;}
+.cover-content h1{font-size:clamp(28px,4vw,48px);font-weight:900;line-height:1.4;margin-bottom:16px;}
+.cover-content h1 em{font-style:normal;color:#ff4444;}
+.cover-content p{font-size:16px;font-weight:300;color:rgba(255,255,255,0.85);margin-bottom:24px;}
+.cover-badge{display:inline-block;background:#ff4444;color:#fff;padding:8px 20px;font-size:13px;font-weight:700;border-radius:4px;}
+.cover-company{position:absolute;bottom:24px;right:8%;z-index:1;color:rgba(255,255,255,0.5);font-size:12px;letter-spacing:3px;}
+
+/* Headlines */
+h2.s-title{font-size:clamp(24px,3.5vw,40px);font-weight:900;line-height:1.4;margin-bottom:12px;}
+h2.s-title em{font-style:normal;color:#ff4444;}
+.s-sub{font-size:15px;color:#888;margin-bottom:40px;max-width:600px;}
+
+/* Number highlight */
+.big-num{font-size:clamp(48px,8vw,80px);font-weight:900;color:#ff4444;line-height:1;}
+.big-label{font-size:14px;color:#888;margin-top:4px;}
+
+/* Photo + text layout */
+.photo-text{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin:40px 0;}
+.photo-text img{width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+.photo-text-reverse{direction:rtl;}
+.photo-text-reverse>*{direction:ltr;}
+
+/* Data cards */
+.data-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin:40px 0;}
+.data-card{background:#f8f7f5;padding:32px 24px;border-radius:8px;text-align:center;}
+.data-card .num{font-size:36px;font-weight:900;color:#ff4444;}
+.data-card .label{font-size:13px;color:#666;margin-top:4px;}
+
+/* Problem list */
+.problem-list{list-style:none;max-width:700px;}
+.problem-list li{padding:16px 0;border-bottom:1px solid #eee;font-size:15px;display:flex;gap:12px;align-items:flex-start;}
+.problem-list li .icon{font-size:20px;flex-shrink:0;margin-top:2px;}
+.problem-list .bad{color:#ff4444;}
+.problem-list .good{color:#22c55e;}
+
+/* Steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;margin:40px 0;}
+.step{position:relative;padding-top:40px;}
+.step-num{position:absolute;top:0;left:0;font-size:48px;font-weight:900;color:rgba(255,68,68,0.1);line-height:1;}
+.step h3{font-size:18px;font-weight:700;margin-bottom:8px;}
+.step p{font-size:14px;color:#666;line-height:1.8;}
+
+/* Price */
+.price-box{background:#222;color:#fff;padding:48px;border-radius:12px;text-align:center;max-width:500px;margin:40px auto;}
+.price-box .from{font-size:14px;color:#888;}
+.price-box .amount{font-size:48px;font-weight:900;margin:8px 0;}
+.price-box .unit{font-size:16px;color:#888;}
+.price-box .includes{font-size:13px;color:#aaa;margin-top:16px;line-height:2;}
+
+/* CTA */
+.cta-section{text-align:center;padding:100px 8%;}
+.cta-section h2{font-size:clamp(24px,4vw,40px);font-weight:900;margin-bottom:16px;}
+.cta-btn{display:inline-block;background:#06C755;color:#fff;padding:16px 48px;border-radius:8px;font-size:18px;font-weight:700;text-decoration:none;margin-top:24px;}
+.cta-company{margin-top:40px;font-size:13px;color:#aaa;line-height:2;}
+
+/* News */
+.news-card{background:#fff;border:1px solid #eee;border-radius:8px;padding:24px;margin:12px 0;}
+.news-card .date{font-size:12px;color:#888;margin-bottom:4px;}
+.news-card .headline{font-size:16px;font-weight:700;}
+.news-card .source{font-size:12px;color:#aaa;margin-top:8px;}
+
+/* Responsive */
+@media(max-width:768px){
+  .slide{padding:60px 20px;}
+  .photo-text{grid-template-columns:1fr;gap:24px;}
+  .photo-text-reverse{direction:ltr;}
+  .cover-content{padding:40px 20px;}
+  .steps{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="lang-sw">
+  <button class="active" data-lang="ja">JP</button>
+  <button data-lang="en">EN</button>
+  <button data-lang="th">TH</button>
+</div>
+
+<!-- SLIDE 1: COVER -->
+<div class="cover">
+  <img class="cover-img" src="img-thaniya-empty.jpg" alt="Empty Thaniya Street">
+  <div class="cover-overlay"></div>
+  <div class="cover-content">
+    <div class="cover-badge" data-i18n="cover_badge">2026年3月16日</div>
+    <h1 data-i18n="cover_title">タニヤから<br><em>客引き</em>が消えた。</h1>
+    <p data-i18n="cover_sub">あなたの店は、この状況で<br>どうやってお客さんを呼びますか？</p>
+  </div>
+  <div class="cover-company">VANNESS ASIA CO., LTD.</div>
+</div>
+
+<!-- SLIDE 2: WHAT HAPPENED -->
+<div class="slide slide-alt">
+  <h2 class="s-title" data-i18n="s2_title">タニヤで<em>何が起きたか</em></h2>
+  <p class="s-sub" data-i18n="s2_sub">2026年3月、タニヤ通りに大きな変化が起きました。</p>
+  <div class="news-card">
+    <div class="date">2026.03.16</div>
+    <div class="headline" data-i18n="s2_news1">タニヤ通りで客引き行為が全面禁止。店の前に女性が座ることも禁止に。</div>
+    <div class="source">X-bomber Thailand</div>
+  </div>
+  <div class="news-card">
+    <div class="date">2026.03.18</div>
+    <div class="headline" data-i18n="s2_news2">警察が14店舗に一斉強制捜査。284人に薬物検査を実施。不法就労者3人逮捕。</div>
+    <div class="source">X-bomber Thailand</div>
+  </div>
+  <div class="news-card">
+    <div class="date">2026.03.19</div>
+    <div class="headline" data-i18n="s2_news3">タニヤ4階の店舗で追加摘発。ミャンマー人女性の不法就労で管理者とともに逮捕。</div>
+    <div class="source">X-bomber Thailand</div>
+  </div>
+  <p style="margin-top:32px;font-size:18px;font-weight:700;" data-i18n="s2_conclusion">客引きに頼れない時代が、始まりました。</p>
+</div>
+
+<!-- SLIDE 3: THE QUESTION -->
+<div class="slide" style="text-align:center;">
+  <h2 class="s-title" data-i18n="s3_title">では、お客さんは<br><em>どこから来ますか？</em></h2>
+  <div class="data-grid" style="max-width:800px;margin:40px auto;">
+    <div class="data-card">
+      <div class="num">82%</div>
+      <div class="label" data-i18n="s3_data1">の旅行者がスマホで<br>「タニヤ カラオケ」を検索</div>
+    </div>
+    <div class="data-card">
+      <div class="num">73%</div>
+      <div class="label" data-i18n="s3_data2">がGoogleマップの<br>写真とレビューで店を選ぶ</div>
+    </div>
+    <div class="data-card">
+      <div class="num">0件</div>
+      <div class="label" data-i18n="s3_data3">タニヤの多くの店の<br>Googleレビュー数</div>
+    </div>
+  </div>
+  <p style="font-size:18px;font-weight:700;margin-top:20px;" data-i18n="s3_conclusion">Googleマップに存在しない店は、<br>お客さんの選択肢に入りません。</p>
+</div>
+
+<!-- SLIDE 4: YOUR STORE NOW -->
+<div class="slide slide-alt">
+  <h2 class="s-title" data-i18n="s4_title">あなたの店、<em>こうなっていませんか？</em></h2>
+  <ul class="problem-list">
+    <li><span class="icon bad">✕</span><span data-i18n="s4_p1">Googleマップにレビューがない。写真もない。</span></li>
+    <li><span class="icon bad">✕</span><span data-i18n="s4_p2">Instagramのフォロワーが100人以下。</span></li>
+    <li><span class="icon bad">✕</span><span data-i18n="s4_p3">Webサイトがない。「タニヤ カラオケ」で検索しても出てこない。</span></li>
+    <li><span class="icon bad">✕</span><span data-i18n="s4_p4">SNSは作ったけど、何を投稿すればいいかわからない。</span></li>
+    <li><span class="icon bad">✕</span><span data-i18n="s4_p5">日本語しか対応していない。中国人・韓国人客を逃している。</span></li>
+  </ul>
+</div>
+
+<!-- SLIDE 5: SOLUTION -->
+<div class="slide">
+  <h2 class="s-title" data-i18n="s5_title"><em>全部、こちらでやります。</em></h2>
+  <p class="s-sub" data-i18n="s5_sub">あなたがやることは「写真を撮る」だけ。撮り方も指示書でお伝えします。</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3 data-i18n="s5_step1_h">撮影指示書が届く</h3>
+      <p data-i18n="s5_step1_p">「こういう角度で、こういう写真を撮ってください」と参考画像付きで指示書を送ります。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3 data-i18n="s5_step2_h">店で撮影する</h3>
+      <p data-i18n="s5_step2_p">指示書の通りにスマホで撮影するだけ。特別な機材は不要です。</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3 data-i18n="s5_step3_h">あとは全部こちら</h3>
+      <p data-i18n="s5_step3_p">写真の編集、投稿文作成、Instagram・X・Googleマップへの投稿、月次レポートまで。</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: WHAT WE DO -->
+<div class="slide slide-alt">
+  <h2 class="s-title" data-i18n="s6_title">具体的に<em>何をやるか</em></h2>
+  <ul class="problem-list">
+    <li><span class="icon good">✓</span><span data-i18n="s6_w1">Webサイト制作（5ヶ国語対応 JP/EN/TH/CN/KR）</span></li>
+    <li><span class="icon good">✓</span><span data-i18n="s6_w2">Googleマップ最適化（写真・レビュー・情報整備）</span></li>
+    <li><span class="icon good">✓</span><span data-i18n="s6_w3">Instagram運用（週2〜3回投稿・ストーリー）</span></li>
+    <li><span class="icon good">✓</span><span data-i18n="s6_w4">X（Twitter）運用（キャスト紹介・イベント告知）</span></li>
+    <li><span class="icon good">✓</span><span data-i18n="s6_w5">LINE公式アカウント設計</span></li>
+    <li><span class="icon good">✓</span><span data-i18n="s6_w6">ショート動画制作</span></li>
+    <li><span class="icon good">✓</span><span data-i18n="s6_w7">月次レポート（数字で効果を見せる）</span></li>
+  </ul>
+</div>
+
+<!-- SLIDE 7: SPEED -->
+<div class="slide" style="text-align:center;">
+  <h2 class="s-title" data-i18n="s7_title">スピードが<em>違います。</em></h2>
+  <div class="data-grid" style="max-width:600px;margin:40px auto;">
+    <div class="data-card">
+      <div class="num" style="font-size:28px;">翌日</div>
+      <div class="label" data-i18n="s7_d1">DM → サンプルサイト提出</div>
+    </div>
+    <div class="data-card">
+      <div class="num" style="font-size:28px;">3日</div>
+      <div class="label" data-i18n="s7_d2">サイト公開</div>
+    </div>
+    <div class="data-card">
+      <div class="num" style="font-size:28px;">1週間</div>
+      <div class="label" data-i18n="s7_d3">SNS全チャネル運用開始</div>
+    </div>
+  </div>
+  <p style="font-size:15px;color:#888;" data-i18n="s7_note">一般的な制作会社: 見積もり1週間 → 制作1〜2ヶ月</p>
+</div>
+
+<!-- SLIDE 8: PRICE -->
+<div class="slide slide-alt" style="text-align:center;">
+  <h2 class="s-title" data-i18n="s8_title">料金</h2>
+  <div class="price-box">
+    <div class="from" data-i18n="s8_from">月額</div>
+    <div class="amount">5,000B〜</div>
+    <div class="unit" data-i18n="s8_unit">（約20,000円〜）</div>
+    <div class="includes" data-i18n="s8_includes">Webサイト制作 / Googleマップ最適化 / Instagram運用<br>X運用 / 5ヶ国語対応 / 月次レポート込み</div>
+  </div>
+  <p style="font-size:14px;color:#888;margin-top:20px;" data-i18n="s8_note">※ Webサイト制作は初月のみ別途お見積もり</p>
+</div>
+
+<!-- SLIDE 9: CTA -->
+<div class="cta-section">
+  <h2 data-i18n="s9_title">客引きが戻る保証は、<br>どこにもありません。</h2>
+  <p style="font-size:16px;color:#666;margin-top:16px;" data-i18n="s9_sub">今動いた店だけが、次のお客さんを掴めます。</p>
+  <a href="#" class="cta-btn" data-i18n="s9_btn">LINEで相談する</a>
+  <div class="cta-company">
+    VANNESS ASIA CO., LTD.<br>
+    64/1 Room No. 210, Soi Pasi 1, Ekamai Road<br>
+    Klong Tan Nuea, Wattana, Bangkok 10110<br>
+    TAX ID: 0105567229649
+  </div>
+</div>
+
+<script>
+const i18n={
+  ja:{
+    cover_badge:'2026年3月16日',cover_title:'タニヤから<br><em>客引き</em>が消えた。',cover_sub:'あなたの店は、この状況で<br>どうやってお客さんを呼びますか？',
+    s2_title:'タニヤで<em>何が起きたか</em>',s2_sub:'2026年3月、タニヤ通りに大きな変化が起きました。',s2_news1:'タニヤ通りで客引き行為が全面禁止。店の前に女性が座ることも禁止に。',s2_news2:'警察が14店舗に一斉強制捜査。284人に薬物検査を実施。不法就労者3人逮捕。',s2_news3:'タニヤ4階の店舗で追加摘発。ミャンマー人女性の不法就労で管理者とともに逮捕。',s2_conclusion:'客引きに頼れない時代が、始まりました。',
+    s3_title:'では、お客さんは<br><em>どこから来ますか？</em>',s3_data1:'の旅行者がスマホで<br>「タニヤ カラオケ」を検索',s3_data2:'がGoogleマップの<br>写真とレビューで店を選ぶ',s3_data3:'タニヤの多くの店の<br>Googleレビュー数',s3_conclusion:'Googleマップに存在しない店は、<br>お客さんの選択肢に入りません。',
+    s4_title:'あなたの店、<em>こうなっていませんか？</em>',s4_p1:'Googleマップにレビューがない。写真もない。',s4_p2:'Instagramのフォロワーが100人以下。',s4_p3:'Webサイトがない。「タニヤ カラオケ」で検索しても出てこない。',s4_p4:'SNSは作ったけど、何を投稿すればいいかわからない。',s4_p5:'日本語しか対応していない。中国人・韓国人客を逃している。',
+    s5_title:'<em>全部、こちらでやります。</em>',s5_sub:'あなたがやることは「写真を撮る」だけ。撮り方も指示書でお伝えします。',s5_step1_h:'撮影指示書が届く',s5_step1_p:'「こういう角度で、こういう写真を撮ってください」と参考画像付きで指示書を送ります。',s5_step2_h:'店で撮影する',s5_step2_p:'指示書の通りにスマホで撮影するだけ。特別な機材は不要です。',s5_step3_h:'あとは全部こちら',s5_step3_p:'写真の編集、投稿文作成、Instagram・X・Googleマップへの投稿、月次レポートまで。',
+    s6_title:'具体的に<em>何をやるか</em>',s6_w1:'Webサイト制作（5ヶ国語対応 JP/EN/TH/CN/KR）',s6_w2:'Googleマップ最適化（写真・レビュー・情報整備）',s6_w3:'Instagram運用（週2〜3回投稿・ストーリー）',s6_w4:'X（Twitter）運用（キャスト紹介・イベント告知）',s6_w5:'LINE公式アカウント設計',s6_w6:'ショート動画制作',s6_w7:'月次レポート（数字で効果を見せる）',
+    s7_title:'スピードが<em>違います。</em>',s7_d1:'DM → サンプルサイト提出',s7_d2:'サイト公開',s7_d3:'SNS全チャネル運用開始',s7_note:'一般的な制作会社: 見積もり1週間 → 制作1〜2ヶ月',
+    s8_title:'料金',s8_from:'月額',s8_unit:'（約20,000円〜）',s8_includes:'Webサイト制作 / Googleマップ最適化 / Instagram運用<br>X運用 / 5ヶ国語対応 / 月次レポート込み',s8_note:'※ Webサイト制作は初月のみ別途お見積もり',
+    s9_title:'客引きが戻る保証は、<br>どこにもありません。',s9_sub:'今動いた店だけが、次のお客さんを掴めます。',s9_btn:'LINEで相談する'
+  },
+  en:{
+    cover_badge:'March 16, 2026',cover_title:'The touts<br>have <em>disappeared</em><br>from Thaniya.',cover_sub:'How will your bar<br>attract customers now?',
+    s2_title:'What <em>happened</em> in Thaniya',s2_sub:'In March 2026, a major change hit Thaniya Street.',s2_news1:'Street touting banned entirely on Thaniya. Women prohibited from sitting outside shops.',s2_news2:'Police raid 14 venues. 284 people drug-tested. 3 arrested for illegal employment.',s2_news3:'Additional raid on 4th floor Thaniya building. Myanmar worker and manager arrested.',s2_conclusion:'The era of relying on street touts is over.',
+    s3_title:'So where will<br><em>customers come from?</em>',s3_data1:'of travelers search<br>"Thaniya karaoke" on their phones',s3_data2:'choose a bar based on<br>Google Maps photos & reviews',s3_data3:'Google reviews for<br>most Thaniya venues',s3_conclusion:'If your bar doesn\'t exist on Google Maps,<br>it doesn\'t exist for customers.',
+    s4_title:'Does this <em>sound like your bar?</em>',s4_p1:'No reviews on Google Maps. No photos.',s4_p2:'Fewer than 100 Instagram followers.',s4_p3:'No website. Can\'t be found searching "Thaniya karaoke".',s4_p4:'Created SNS accounts but don\'t know what to post.',s4_p5:'Japanese only. Missing Chinese and Korean customers.',
+    s5_title:'<em>We handle everything.</em>',s5_sub:'All you do is take photos. We even tell you how.',s5_step1_h:'Shooting guide arrives',s5_step1_p:'We send detailed photo instructions with reference images.',s5_step2_h:'Shoot at your venue',s5_step2_p:'Just follow the guide with your smartphone. No special equipment needed.',s5_step3_h:'We do the rest',s5_step3_p:'Photo editing, captions, posting to Instagram/X/Google Maps, monthly reports.',
+    s6_title:'What <em>we deliver</em>',s6_w1:'Website (5 languages: JP/EN/TH/CN/KR)',s6_w2:'Google Maps optimization (photos, reviews, info)',s6_w3:'Instagram management (2-3 posts/week + stories)',s6_w4:'X (Twitter) management (cast intros, events)',s6_w5:'LINE Official Account setup',s6_w6:'Short video production',s6_w7:'Monthly performance reports',
+    s7_title:'We\'re <em>fast.</em>',s7_d1:'DM → Sample site delivered',s7_d2:'Site goes live',s7_d3:'Full SNS operations begin',s7_note:'Typical agency: 1 week for quote → 1-2 months to deliver',
+    s8_title:'Pricing',s8_from:'Monthly',s8_unit:'(approx. ¥20,000〜)',s8_includes:'Website / Google Maps / Instagram<br>X / 5 languages / Monthly reports included',s8_note:'※ Website setup fee quoted separately for first month',
+    s9_title:'There\'s no guarantee<br>the touts are coming back.',s9_sub:'Only the bars that act now will get the next customers.',s9_btn:'Chat on LINE'
+  },
+  th:{
+    cover_badge:'16 มีนาคม 2026',cover_title:'หมอนวด<br><em>หายไป</em><br>จากธนิยะ',cover_sub:'ร้านของคุณจะดึงลูกค้า<br>ได้อย่างไร?',
+    s2_title:'เกิด<em>อะไรขึ้น</em>ที่ธนิยะ',s2_sub:'มีนาคม 2026 เกิดการเปลี่ยนแปลงครั้งใหญ่ที่ซอยธนิยะ',s2_news1:'ห้ามชักชวนลูกค้าบนถนนธนิยะทั้งหมด ห้ามผู้หญิงนั่งหน้าร้าน',s2_news2:'ตำรวจบุกค้น 14 ร้าน ตรวจสารเสพติด 284 คน จับกุม 3 คนทำงานผิดกฎหมาย',s2_news3:'บุกค้นเพิ่มเติมที่อาคารชั้น 4 ธนิยะ จับแรงงานเมียนมาร์และผู้จัดการ',s2_conclusion:'ยุคที่พึ่งพาหมอนวดจบลงแล้ว',
+    s3_title:'แล้วลูกค้า<br><em>จะมาจากไหน?</em>',s3_data1:'ของนักท่องเที่ยวค้นหา<br>"ธนิยะ คาราโอเกะ" บนมือถือ',s3_data2:'เลือกร้านจาก<br>รูปภาพและรีวิวบน Google Maps',s3_data3:'จำนวนรีวิว Google<br>ของร้านส่วนใหญ่ในธนิยะ',s3_conclusion:'ถ้าร้านของคุณไม่มีบน Google Maps<br>ลูกค้าจะไม่รู้ว่าคุณมีอยู่',
+    s4_title:'ร้านของคุณ<em>เป็นแบบนี้ไหม?</em>',s4_p1:'ไม่มีรีวิวบน Google Maps ไม่มีรูปภาพ',s4_p2:'ผู้ติดตาม Instagram น้อยกว่า 100 คน',s4_p3:'ไม่มีเว็บไซต์ ค้นหา "ธนิยะ คาราโอเกะ" ไม่เจอ',s4_p4:'สร้างบัญชี SNS แล้ว แต่ไม่รู้จะโพสต์อะไร',s4_p5:'รองรับแค่ภาษาญี่ปุ่น พลาดลูกค้าจีนและเกาหลี',
+    s5_title:'<em>เราทำให้ทั้งหมด</em>',s5_sub:'สิ่งที่คุณต้องทำคือ "ถ่ายรูป" เท่านั้น เราจะบอกวิธีถ่ายให้',s5_step1_h:'คู่มือถ่ายภาพมาถึง',s5_step1_p:'เราส่งคำแนะนำการถ่ายภาพพร้อมรูปตัวอย่าง',s5_step2_h:'ถ่ายที่ร้าน',s5_step2_p:'ถ่ายตามคู่มือด้วยสมาร์ทโฟน ไม่ต้องใช้อุปกรณ์พิเศษ',s5_step3_h:'ที่เหลือเราจัดการ',s5_step3_p:'แต่งรูป เขียนแคปชั่น โพสต์ Instagram/X/Google Maps รายงานรายเดือน',
+    s6_title:'สิ่งที่<em>เราทำให้</em>',s6_w1:'สร้างเว็บไซต์ (5 ภาษา: JP/EN/TH/CN/KR)',s6_w2:'ปรับแต่ง Google Maps (รูปภาพ, รีวิว, ข้อมูล)',s6_w3:'จัดการ Instagram (โพสต์ 2-3 ครั้ง/สัปดาห์)',s6_w4:'จัดการ X (Twitter) (แนะนำแคสต์, อีเวนต์)',s6_w5:'ออกแบบ LINE Official Account',s6_w6:'ผลิตวิดีโอสั้น',s6_w7:'รายงานผลรายเดือน',
+    s7_title:'เร็วกว่า<em>ที่คิด</em>',s7_d1:'DM → ส่งเว็บตัวอย่าง',s7_d2:'เว็บไซต์เปิดใช้',s7_d3:'เริ่มดำเนินการ SNS ทุกช่องทาง',s7_note:'เอเจนซี่ทั่วไป: ใบเสนอราคา 1 สัปดาห์ → ผลิต 1-2 เดือน',
+    s8_title:'ราคา',s8_from:'รายเดือน',s8_unit:'(ประมาณ ¥20,000〜)',s8_includes:'เว็บไซต์ / Google Maps / Instagram<br>X / 5 ภาษา / รายงานรายเดือน รวมทั้งหมด',s8_note:'※ ค่าจัดทำเว็บไซต์เสนอราคาแยกสำหรับเดือนแรก',
+    s9_title:'ไม่มีการรับประกันว่า<br>หมอนวดจะกลับมา',s9_sub:'มีแต่ร้านที่ลงมือตอนนี้เท่านั้นที่จะได้ลูกค้าคนต่อไป',s9_btn:'แชทผ่าน LINE'
+  }
+};
+function setLang(l){
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k=el.getAttribute('data-i18n');
+    if(i18n[l]&&i18n[l][k])el.innerHTML=i18n[l][k];
+  });
+  document.querySelectorAll('.lang-sw button').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+  localStorage.setItem('proposal-v2-lang',l);
+}
+document.querySelectorAll('.lang-sw button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.lang)));
+const saved=localStorage.getItem('proposal-v2-lang');
+if(saved&&i18n[saved])setLang(saved);
+</script>
+</body>
+</html>
