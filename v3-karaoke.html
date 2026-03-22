@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Karaoke SAMPLE — Thaniya, Bangkok</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: #0a0a0a;
+  color: #e0d8c8;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 400;
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+
+.nav-logo {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: #c9a84c;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.nav-links a {
+  color: #e0d8c8;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: #c9a84c; }
+
+.lang-switcher {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+.lang-switcher span {
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+.lang-switcher span:hover,
+.lang-switcher span.active { color: #c9a84c; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: brightness(0.55);
+}
+
+.hero-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 48px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  background: linear-gradient(transparent, rgba(10,10,10,0.9));
+}
+
+.hero-text h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #e0d8c8;
+  line-height: 1.2;
+}
+
+.hero-sub {
+  font-size: 14px;
+  color: #999;
+  margin-top: 8px;
+  letter-spacing: 0.12em;
+  font-weight: 300;
+}
+
+.hero-hours {
+  font-size: 13px;
+  color: #c9a84c;
+  margin-top: 6px;
+  letter-spacing: 0.08em;
+}
+
+.hero-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.hero-tel {
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 12px;
+  letter-spacing: 0.05em;
+}
+
+.btn-line {
+  display: inline-block;
+  background: #06C755;
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 13px;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-line:hover { opacity: 0.85; }
+
+/* ── SECTIONS ── */
+section {
+  padding: 80px 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: #c9a84c;
+  margin-bottom: 24px;
+  font-weight: 400;
+}
+
+/* ── CONCEPT ── */
+.concept {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 100px 40px;
+}
+
+.concept p {
+  font-size: 16px;
+  line-height: 2.2;
+  color: #e0d8c8;
+  font-weight: 300;
+}
+
+.concept-line {
+  width: 40px;
+  height: 1px;
+  background: #c9a84c;
+  margin: 32px auto 0;
+}
+
+/* ── CAST ── */
+.cast-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.cast-item {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+}
+
+.cast-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.3s;
+}
+.cast-item:hover img { opacity: 0.75; }
+
+.cast-name {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 16px;
+  background: linear-gradient(transparent, rgba(10,10,10,0.8));
+}
+
+.cast-name-en {
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  color: #e0d8c8;
+  font-weight: 400;
+}
+
+.cast-name-ja {
+  font-size: 11px;
+  color: #999;
+  margin-top: 2px;
+}
+
+/* ── PRICE ── */
+.price-section {
+  text-align: center;
+  padding: 100px 40px;
+}
+
+.price-main {
+  font-size: clamp(32px, 6vw, 56px);
+  font-weight: 600;
+  color: #e0d8c8;
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+}
+
+.price-main span {
+  color: #c9a84c;
+}
+
+.price-unit {
+  font-size: 16px;
+  color: #999;
+  margin-top: 8px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+}
+
+.price-detail {
+  font-size: 14px;
+  color: #666;
+  margin-top: 32px;
+  line-height: 2;
+  letter-spacing: 0.05em;
+}
+
+.price-note {
+  font-size: 13px;
+  color: #c9a84c;
+  margin-top: 24px;
+  letter-spacing: 0.1em;
+}
+
+/* ── KARAOKE ── */
+.karaoke-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.karaoke-img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  display: block;
+}
+
+.karaoke-text h3 {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #e0d8c8;
+  margin-bottom: 16px;
+}
+
+.karaoke-text p {
+  font-size: 14px;
+  color: #999;
+  line-height: 2;
+  font-weight: 300;
+}
+
+/* ── GALLERY ── */
+.gallery {
+  column-count: 3;
+  column-gap: 4px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+.gallery img {
+  width: 100%;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ── ACCESS ── */
+.access-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+.access-info h3 {
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: #c9a84c;
+  margin-bottom: 32px;
+}
+
+.access-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.access-label {
+  color: #666;
+  min-width: 80px;
+  flex-shrink: 0;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.access-value {
+  color: #e0d8c8;
+  font-weight: 300;
+}
+
+.access-map {
+  width: 100%;
+  aspect-ratio: 4/3;
+  border: 0;
+  filter: grayscale(0.8) brightness(0.8);
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding: 60px 40px;
+  text-align: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.footer-line-btn {
+  display: inline-block;
+  background: #06C755;
+  color: #fff;
+  padding: 16px 48px;
+  font-size: 14px;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-bottom: 32px;
+}
+.footer-line-btn:hover { opacity: 0.85; }
+
+.footer-social {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 24px;
+  letter-spacing: 0.1em;
+}
+
+.footer-social a {
+  color: #666;
+  margin: 0 12px;
+  transition: color 0.2s;
+}
+.footer-social a:hover { color: #c9a84c; }
+
+.footer-copy {
+  font-size: 11px;
+  color: #444;
+  letter-spacing: 0.08em;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 12px 16px; }
+  .nav-links { display: none; }
+
+  .hero-overlay {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 20px;
+    gap: 20px;
+  }
+  .hero-right { text-align: left; }
+
+  section { padding: 60px 20px; }
+  .concept { padding: 60px 20px; }
+
+  .cast-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .price-section { padding: 60px 20px; }
+
+  .karaoke-section {
+    grid-template-columns: 1fr;
+    padding: 60px 20px;
+  }
+
+  .gallery {
+    column-count: 2;
+    padding: 0 20px 60px;
+  }
+
+  .access-section {
+    grid-template-columns: 1fr;
+    padding: 60px 20px;
+  }
+
+  footer { padding: 48px 20px; }
+}
+
+@media (max-width: 480px) {
+  .cast-grid { grid-template-columns: repeat(2, 1fr); }
+  .gallery { column-count: 2; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">KARAOKE SAMPLE</div>
+  <ul class="nav-links">
+    <li><a href="#concept" data-i18n="nav_concept">コンセプト</a></li>
+    <li><a href="#cast" data-i18n="nav_cast">キャスト</a></li>
+    <li><a href="#price" data-i18n="nav_price">料金</a></li>
+    <li><a href="#karaoke" data-i18n="nav_karaoke">カラオケ</a></li>
+    <li><a href="#gallery" data-i18n="nav_gallery">店内</a></li>
+    <li><a href="#access" data-i18n="nav_access">アクセス</a></li>
+  </ul>
+  <div class="lang-switcher">
+    <span class="active" onclick="setLang('ja')">JP</span>
+    <span onclick="setLang('en')">EN</span>
+    <span onclick="setLang('th')">TH</span>
+    <span onclick="setLang('cn')">CN</span>
+    <span onclick="setLang('kr')">KR</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0; max-width:none;">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1600&q=80" alt="Bar interior">
+  <div class="hero-overlay">
+    <div class="hero-text">
+      <h1>Karaoke SAMPLE</h1>
+      <div class="hero-sub">Thaniya, Bangkok</div>
+      <div class="hero-hours">18:30 — 01:00</div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-tel">TEL: 02-234-XXXX</div>
+      <a href="https://line.me/" class="btn-line" data-i18n="btn_line">LINE予約</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<div class="concept" id="concept">
+  <p data-i18n="concept_text">バンコク・タニヤで、日本語でくつろげる夜の社交場。<br>カラオケ、ドリンク、会話。<br>気取らない時間を。</p>
+  <div class="concept-line"></div>
+</div>
+
+<!-- CAST -->
+<section id="cast">
+  <div class="section-label" data-i18n="label_cast">CAST</div>
+  <div class="cast-grid">
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&q=80" alt="Nana" loading="lazy">
+      <div class="cast-name">
+        <div class="cast-name-en">Nana</div>
+        <div class="cast-name-ja">ナナ</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80" alt="Mei" loading="lazy">
+      <div class="cast-name">
+        <div class="cast-name-en">Mei</div>
+        <div class="cast-name-ja">メイ</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80" alt="Suki" loading="lazy">
+      <div class="cast-name">
+        <div class="cast-name-en">Suki</div>
+        <div class="cast-name-ja">スキ</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80" alt="Rin" loading="lazy">
+      <div class="cast-name">
+        <div class="cast-name-en">Rin</div>
+        <div class="cast-name-ja">リン</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=600&q=80" alt="Momo" loading="lazy">
+      <div class="cast-name">
+        <div class="cast-name-en">Momo</div>
+        <div class="cast-name-ja">モモ</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&q=80" alt="Yuki" loading="lazy">
+      <div class="cast-name">
+        <div class="cast-name-en">Yuki</div>
+        <div class="cast-name-ja">ユキ</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600&q=80" alt="Hana" loading="lazy">
+      <div class="cast-name">
+        <div class="cast-name-en">Hana</div>
+        <div class="cast-name-ja">ハナ</div>
+      </div>
+    </div>
+    <div class="cast-item">
+      <img src="https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600&q=80" alt="Aoi" loading="lazy">
+      <div class="cast-name">
+        <div class="cast-name-en">Aoi</div>
+        <div class="cast-name-ja">アオイ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<div class="price-section" id="price">
+  <div class="section-label" data-i18n="label_price">PRICE</div>
+  <div class="price-main" data-i18n="price_main">1<span data-i18n="price_hour">時間</span> <span>700B</span></div>
+  <div class="price-unit" data-i18n="price_unit">飲み放題</div>
+  <div class="price-detail" data-i18n="price_detail">レディースドリンク 200B / 指名 300B / ボトルキープ対応</div>
+  <div class="price-note" data-i18n="price_note">明朗会計</div>
+</div>
+
+<!-- KARAOKE -->
+<div class="karaoke-section" id="karaoke">
+  <img class="karaoke-img" src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800&q=80" alt="Karaoke" loading="lazy">
+  <div class="karaoke-text">
+    <div class="section-label">KARAOKE</div>
+    <h3 data-i18n="karaoke_title">日本語・タイ語・英語<br>10,000曲以上</h3>
+    <p data-i18n="karaoke_desc">最新のDAM・JOYSOUNDを完備。日本の最新曲からタイポップス、洋楽まで幅広くお楽しみいただけます。</p>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section id="gallery" style="max-width:1100px; margin:0 auto;">
+  <div class="section-label" data-i18n="label_gallery">INTERIOR</div>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="Interior" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=600&q=80" alt="Interior" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=600&q=80" alt="Interior" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?w=600&q=80" alt="Interior" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1566417713940-fe7c737a9ef2?w=600&q=80" alt="Interior" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=600&q=80" alt="Interior" loading="lazy">
+  </div>
+</section>
+
+<!-- ACCESS -->
+<div class="access-section" id="access">
+  <div class="access-info">
+    <h3 data-i18n="label_access">ACCESS</h3>
+    <div class="access-row">
+      <div class="access-label" data-i18n="access_address_label">ADDRESS</div>
+      <div class="access-value">Thaniya Plaza, Silom, Bang Rak,<br>Bangkok 10500</div>
+    </div>
+    <div class="access-row">
+      <div class="access-label" data-i18n="access_hours_label">HOURS</div>
+      <div class="access-value">18:30 — 01:00</div>
+    </div>
+    <div class="access-row">
+      <div class="access-label">TEL</div>
+      <div class="access-value">02-234-XXXX</div>
+    </div>
+    <div class="access-row">
+      <div class="access-label">LINE</div>
+      <div class="access-value">@karaoke-sample</div>
+    </div>
+  </div>
+  <iframe class="access-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.7!2d100.5204!3d13.7280!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f2cda3c4a4b%3A0x5e9a4b6f8a1c3d2e!2sThaniya+Plaza!5e0!3m2!1sen!2sth!4v1" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://line.me/" class="footer-line-btn" data-i18n="btn_line_footer">LINE で予約する</a>
+  <div class="footer-social">
+    <a href="#">Instagram</a>
+    <a href="#">X (Twitter)</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Karaoke SAMPLE</div>
+</footer>
+
+<script>
+const translations = {
+  ja: {
+    nav_concept: 'コンセプト',
+    nav_cast: 'キャスト',
+    nav_price: '料金',
+    nav_karaoke: 'カラオケ',
+    nav_gallery: '店内',
+    nav_access: 'アクセス',
+    btn_line: 'LINE予約',
+    btn_line_footer: 'LINE で予約する',
+    concept_text: 'バンコク・タニヤで、日本語でくつろげる夜の社交場。<br>カラオケ、ドリンク、会話。<br>気取らない時間を。',
+    label_cast: 'CAST',
+    label_price: 'PRICE',
+    label_gallery: 'INTERIOR',
+    label_access: 'ACCESS',
+    price_main: '1<span>時間</span> <span>700B</span>',
+    price_unit: '飲み放題',
+    price_detail: 'レディースドリンク 200B / 指名 300B / ボトルキープ対応',
+    price_note: '明朗会計',
+    karaoke_title: '日本語・タイ語・英語<br>10,000曲以上',
+    karaoke_desc: '最新のDAM・JOYSOUNDを完備。日本の最新曲からタイポップス、洋楽まで幅広くお楽しみいただけます。',
+    access_address_label: 'ADDRESS',
+    access_hours_label: 'HOURS'
+  },
+  en: {
+    nav_concept: 'Concept',
+    nav_cast: 'Cast',
+    nav_price: 'Price',
+    nav_karaoke: 'Karaoke',
+    nav_gallery: 'Interior',
+    nav_access: 'Access',
+    btn_line: 'Book via LINE',
+    btn_line_footer: 'Reserve on LINE',
+    concept_text: 'A night lounge in Thaniya, Bangkok, where you can relax in Japanese.<br>Karaoke, drinks, conversation.<br>Your time to unwind.',
+    label_cast: 'CAST',
+    label_price: 'PRICE',
+    label_gallery: 'INTERIOR',
+    label_access: 'ACCESS',
+    price_main: '1 <span>Hour</span> <span>700B</span>',
+    price_unit: 'All-you-can-drink',
+    price_detail: "Lady's drink 200B / Nomination 300B / Bottle keep available",
+    price_note: 'Transparent pricing',
+    karaoke_title: 'Japanese, Thai & English<br>Over 10,000 songs',
+    karaoke_desc: 'Equipped with the latest DAM & JOYSOUND systems. From the newest J-pop to Thai pop and Western hits.',
+    access_address_label: 'ADDRESS',
+    access_hours_label: 'HOURS'
+  },
+  th: {
+    nav_concept: 'แนวคิด',
+    nav_cast: 'นักแสดง',
+    nav_price: 'ราคา',
+    nav_karaoke: 'คาราโอเกะ',
+    nav_gallery: 'ภายในร้าน',
+    nav_access: 'การเดินทาง',
+    btn_line: 'จอง LINE',
+    btn_line_footer: 'จองผ่าน LINE',
+    concept_text: 'เลาจน์ยามค่ำคืนในธนิยะ กรุงเทพฯ<br>ที่คุณสามารถพักผ่อนเป็นภาษาญี่ปุ่น<br>คาราโอเกะ เครื่องดื่ม บทสนทนา',
+    label_cast: 'CAST',
+    label_price: 'PRICE',
+    label_gallery: 'INTERIOR',
+    label_access: 'ACCESS',
+    price_main: '1 <span>ชั่วโมง</span> <span>700B</span>',
+    price_unit: 'ดื่มไม่อั้น',
+    price_detail: 'เครื่องดื่มสุภาพสตรี 200B / เจาะจง 300B / เก็บขวดได้',
+    price_note: 'ราคาโปร่งใส',
+    karaoke_title: 'ญี่ปุ่น ไทย และอังกฤษ<br>มากกว่า 10,000 เพลง',
+    karaoke_desc: 'ติดตั้งระบบ DAM & JOYSOUND รุ่นล่าสุด ตั้งแต่เพลง J-pop ใหม่ล่าสุดไปจนถึงเพลงไทยและเพลงสากล',
+    access_address_label: 'ที่อยู่',
+    access_hours_label: 'เวลา'
+  },
+  cn: {
+    nav_concept: '理念',
+    nav_cast: '演员',
+    nav_price: '价格',
+    nav_karaoke: '卡拉OK',
+    nav_gallery: '店内',
+    nav_access: '交通',
+    btn_line: 'LINE预约',
+    btn_line_footer: '通过LINE预约',
+    concept_text: '曼谷Thaniya，用日语放松的夜间社交场所。<br>卡拉OK、饮品、交谈。<br>轻松自在的时光。',
+    label_cast: 'CAST',
+    label_price: 'PRICE',
+    label_gallery: 'INTERIOR',
+    label_access: 'ACCESS',
+    price_main: '1<span>小时</span> <span>700B</span>',
+    price_unit: '畅饮',
+    price_detail: '女士饮料 200B / 指名 300B / 可存酒',
+    price_note: '明码标价',
+    karaoke_title: '日语・泰语・英语<br>超过10,000首歌曲',
+    karaoke_desc: '配备最新DAM・JOYSOUND系统。从最新日本歌曲到泰国流行乐和西方热门歌曲。',
+    access_address_label: '地址',
+    access_hours_label: '营业时间'
+  },
+  kr: {
+    nav_concept: '컨셉',
+    nav_cast: '캐스트',
+    nav_price: '요금',
+    nav_karaoke: '노래방',
+    nav_gallery: '매장',
+    nav_access: '오시는 길',
+    btn_line: 'LINE 예약',
+    btn_line_footer: 'LINE으로 예약하기',
+    concept_text: '방콕 타니야에서 일본어로 편안하게 즐기는 밤의 사교장.<br>노래방, 음료, 대화.<br>격식 없는 시간을.',
+    label_cast: 'CAST',
+    label_price: 'PRICE',
+    label_gallery: 'INTERIOR',
+    label_access: 'ACCESS',
+    price_main: '1<span>시간</span> <span>700B</span>',
+    price_unit: '무제한 음료',
+    price_detail: '레이디 드링크 200B / 지명 300B / 보틀 키핑 가능',
+    price_note: '명확한 요금제',
+    karaoke_title: '일본어・태국어・영어<br>10,000곡 이상',
+    karaoke_desc: '최신 DAM・JOYSOUND 시스템 완비. 최신 J-pop부터 태국 팝, 서양 음악까지 폭넓게 즐기실 수 있습니다.',
+    access_address_label: '주소',
+    access_hours_label: '영업시간'
+  }
+};
+
+let currentLang = 'ja';
+
+function setLang(lang) {
+  currentLang = lang;
+  const dict = translations[lang];
+  if (!dict) return;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) {
+      el.innerHTML = dict[key];
+    }
+  });
+
+  document.querySelectorAll('.lang-switcher span').forEach(s => {
+    s.classList.toggle('active', s.textContent.toLowerCase() === lang ||
+      (s.textContent === 'JP' && lang === 'ja') ||
+      (s.textContent === 'EN' && lang === 'en') ||
+      (s.textContent === 'TH' && lang === 'th') ||
+      (s.textContent === 'CN' && lang === 'cn') ||
+      (s.textContent === 'KR' && lang === 'kr'));
+  });
+
+  document.documentElement.lang = lang === 'ja' ? 'ja' : lang === 'cn' ? 'zh' : lang === 'kr' ? 'ko' : lang;
+}
+</script>
+
+</body>
+</html>
