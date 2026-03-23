@@ -98,6 +98,18 @@
   .cast{background:var(--mid);}
   .cast-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:60px;}
   .cast-card{position:relative;overflow:hidden;cursor:pointer;}
+  .cast-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+
+  /* LIGHTBOX */
+  .lightbox{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);display:none;align-items:center;justify-content:center;padding:24px;}
+  .lightbox.is-open{display:flex;}
+  .lightbox img{max-width:min(90vw,1200px);max-height:90vh;object-fit:contain;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,0.45);}
+  .lb-btn{position:absolute;background:none;border:none;color:#fff;cursor:pointer;z-index:1;line-height:1;padding:10px;touch-action:manipulation;}
+  .lb-btn:hover{color:var(--gold);}
+  .lb-close{top:20px;right:30px;font-size:40px;}
+  .lb-prev,.lb-next{top:50%;transform:translateY(-50%);font-size:50px;}
+  .lb-prev{left:20px;}
+  .lb-next{right:20px;}
   .cast-card img{width:100%;aspect-ratio:2/3;object-fit:cover;filter:brightness(0.6) grayscale(30%);transition:filter 0.5s,transform 0.6s;}
   .cast-card:hover img{filter:brightness(0.85) grayscale(0%);transform:scale(1.04);}
   .cast-info{position:absolute;bottom:0;left:0;right:0;padding:25px 20px;background:linear-gradient(transparent,rgba(7,6,10,0.95));transform:translateY(10px);opacity:0;transition:all 0.4s;}
@@ -178,6 +190,11 @@
     .counter-grid{grid-template-columns:1fr 1fr;}
     .counter-item .num{font-size:48px;}
     section{padding:60px 5%;}
+    .lightbox{padding:16px;}
+    .lb-close{top:14px;right:16px;font-size:34px;}
+    .lb-prev,.lb-next{font-size:40px;padding:8px;}
+    .lb-prev{left:8px;}
+    .lb-next{right:8px;}
   }
 </style>
 </head>
@@ -286,195 +303,195 @@
   <div class="gold-line reveal"></div>
   <p class="s-text reveal" data-i18n="cast_desc">厳選されたスタッフが、心のこもったおもてなしでお迎えします。日本語でのコミュニケーションも安心してお任せください。</p>
   <div class="cast-grid">
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_1.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_2.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_3.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_4.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_5.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_6.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_7.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_8.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_9.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_10.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_11.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_12.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_13.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_14.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_15.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_16.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_17.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_18.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_19.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_20.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_23.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_24.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_25.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_26.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_27.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_28.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_29.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_30.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_31.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_32.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_41.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_42.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_22.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_36.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_37.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_38.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_39.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_44.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_45.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_47.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_48.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_53.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_58.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_59.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_61.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_66.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_67.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
-    <div class="cast-card reveal">
+    <div class="cast-card reveal" tabindex="0" role="button" aria-label="Open cast photo">
       <img src="assets/milea/cast/LINE_ALBUM_MILEA_260322_69.jpg" alt="MILEA cast" loading="lazy">
       <div class="cast-info"><div class="cast-name">Cast</div><div class="cast-detail"></div></div>
     </div>
@@ -570,6 +587,13 @@
   <div class="footer-copy" data-i18n="footer_copy">© 2026 MILEA Executive Club. All rights reserved.</div>
 </footer>
 
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button id="lb-close" class="lb-btn lb-close" aria-label="Close lightbox">✕</button>
+  <button id="lb-prev" class="lb-btn lb-prev" aria-label="Previous photo">‹</button>
+  <button id="lb-next" class="lb-btn lb-next" aria-label="Next photo">›</button>
+  <img id="lb-img" src="" alt="Expanded cast photo">
+</div>
+
 <script>
 // ── FAQ Accordion ───────────────────────
 const faqs = [
@@ -645,6 +669,73 @@ document.querySelectorAll('a,button,.cast-card,.atm-item,.concept-img').forEach(
   el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(2)';ring.style.borderColor='rgba(201,168,76,0.8)';});
   el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.borderColor='rgba(201,168,76,0.4)';});
 });
+
+// ── Lightbox ────────────────────────────
+const castCards = Array.from(document.querySelectorAll('.cast-card'));
+castCards.forEach(card => {
+  const img = card.querySelector('img');
+  if (img && !card.dataset.src) card.dataset.src = img.getAttribute('src');
+});
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lb-img');
+const lightboxClose = document.getElementById('lb-close');
+const lightboxPrev = document.getElementById('lb-prev');
+const lightboxNext = document.getElementById('lb-next');
+let currentCastIndex = 0;
+let touchStartX = 0;
+let touchEndX = 0;
+
+function showCastPhoto(index) {
+  if (!castCards.length) return;
+  currentCastIndex = (index + castCards.length) % castCards.length;
+  lightboxImg.src = castCards[currentCastIndex].dataset.src;
+  lightbox.classList.add('is-open');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('is-open');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImg.src = '';
+  document.body.style.overflow = '';
+}
+
+function showAdjacentPhoto(direction) {
+  showCastPhoto(currentCastIndex + direction);
+}
+
+castCards.forEach((card, index) => {
+  card.addEventListener('click', () => showCastPhoto(index));
+  card.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      showCastPhoto(index);
+    }
+  });
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+lightboxPrev.addEventListener('click', (event) => { event.stopPropagation(); showAdjacentPhoto(-1); });
+lightboxNext.addEventListener('click', (event) => { event.stopPropagation(); showAdjacentPhoto(1); });
+lightbox.addEventListener('click', (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', (event) => {
+  if (!lightbox.classList.contains('is-open')) return;
+  if (event.key === 'Escape') closeLightbox();
+  if (event.key === 'ArrowLeft') showAdjacentPhoto(-1);
+  if (event.key === 'ArrowRight') showAdjacentPhoto(1);
+});
+lightbox.addEventListener('touchstart', (event) => {
+  touchStartX = event.changedTouches[0].clientX;
+}, { passive: true });
+lightbox.addEventListener('touchend', (event) => {
+  touchEndX = event.changedTouches[0].clientX;
+  const delta = touchEndX - touchStartX;
+  if (Math.abs(delta) < 50) return;
+  showAdjacentPhoto(delta > 0 ? -1 : 1);
+}, { passive: true });
 
 // ── Particles ───────────────────────────
 const canvas=document.getElementById('particles');
