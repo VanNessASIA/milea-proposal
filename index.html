@@ -85,8 +85,9 @@
   /* ATMOSPHERE */
   .atmosphere{background:var(--dark);}
   .atm-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:4px;margin-top:60px;height:600px;}
-  .atm-item{position:relative;overflow:hidden;}
+  .atm-item{position:relative;overflow:hidden;cursor:pointer;background:none;border:none;padding:0;text-align:inherit;font:inherit;color:inherit;}
   .atm-item:first-child{grid-row:1/3;}
+  .atm-item:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
   .atm-item img{width:100%;height:100%;object-fit:cover;filter:brightness(0.65);transition:transform 0.7s,filter 0.5s;}
   .atm-item:hover img{transform:scale(1.06);filter:brightness(0.85);}
   .atm-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,6,10,0.9) 0%,transparent 50%);opacity:0;transition:opacity 0.4s;}
@@ -281,31 +282,36 @@
   <h2 class="s-title reveal" data-i18n="atm_title">空 間</h2>
   <div class="gold-line reveal"></div>
   <div class="atm-grid reveal">
-    <div class="atm-item">
-      <img src="assets/milea/lounge.jpg" alt="MILEA lounge" loading="lazy">
+    <button class="atm-item" type="button" data-gallery-group="shop" data-gallery-src="assets/milea/shop/S__166322220_0.jpg" aria-label="Open shop interior photo 1">
+      <img src="assets/milea/shop/S__166322220_0.jpg" alt="MILEA shop interior photo 1" loading="lazy">
       <div class="atm-overlay"></div>
-      <div class="atm-label">LOUNGE</div>
-    </div>
-    <div class="atm-item">
-      <img src="assets/milea/drink.jpg" alt="MILEA drinks" loading="lazy">
+      <div class="atm-label">MAIN FLOOR</div>
+    </button>
+    <button class="atm-item" type="button" data-gallery-group="shop" data-gallery-src="assets/milea/shop/S__166322221_0.jpg" aria-label="Open shop interior photo 2">
+      <img src="assets/milea/shop/S__166322221_0.jpg" alt="MILEA shop interior photo 2" loading="lazy">
       <div class="atm-overlay"></div>
-      <div class="atm-label">DRINKS</div>
-    </div>
-    <div class="atm-item">
-      <img src="assets/milea/interior.jpg" alt="MILEA karaoke" loading="lazy">
+      <div class="atm-label">BAR COUNTER</div>
+    </button>
+    <button class="atm-item" type="button" data-gallery-group="shop" data-gallery-src="assets/milea/shop/S__166322222_0.jpg" aria-label="Open shop interior photo 3">
+      <img src="assets/milea/shop/S__166322222_0.jpg" alt="MILEA shop interior photo 3" loading="lazy">
       <div class="atm-overlay"></div>
-      <div class="atm-label">KARAOKE</div>
-    </div>
-    <div class="atm-item">
-      <img src="assets/milea/hero.jpg" alt="MILEA night" loading="lazy">
+      <div class="atm-label">SOFA SEAT</div>
+    </button>
+    <button class="atm-item" type="button" data-gallery-group="shop" data-gallery-src="assets/milea/shop/S__166322223_0.jpg" aria-label="Open shop interior photo 4">
+      <img src="assets/milea/shop/S__166322223_0.jpg" alt="MILEA shop interior photo 4" loading="lazy">
       <div class="atm-overlay"></div>
-      <div class="atm-label">NIGHT</div>
-    </div>
-    <div class="atm-item">
-      <img src="assets/milea/lounge.jpg" alt="MILEA VIP" loading="lazy">
+      <div class="atm-label">PRIVATE VIEW</div>
+    </button>
+    <button class="atm-item" type="button" data-gallery-group="shop" data-gallery-src="assets/milea/shop/S__166322224_0.jpg" aria-label="Open shop interior photo 5">
+      <img src="assets/milea/shop/S__166322224_0.jpg" alt="MILEA shop interior photo 5" loading="lazy">
       <div class="atm-overlay"></div>
-      <div class="atm-label">VIP</div>
-    </div>
+      <div class="atm-label">NIGHT MOOD</div>
+    </button>
+    <button class="atm-item" type="button" data-gallery-group="shop" data-gallery-src="assets/milea/shop/S__166322225_0.jpg" aria-label="Open shop interior photo 6">
+      <img src="assets/milea/shop/S__166322225_0.jpg" alt="MILEA shop interior photo 6" loading="lazy">
+      <div class="atm-overlay"></div>
+      <div class="atm-label">VIP TABLE</div>
+    </button>
   </div>
 </section>
 
@@ -701,7 +707,7 @@ document.querySelectorAll('a,button,.cast-card,.access-photo,.atm-item,.concept-
 });
 
 // ── Lightbox ────────────────────────────
-const galleryCards = Array.from(document.querySelectorAll('.cast-card, .access-photo'));
+const galleryCards = Array.from(document.querySelectorAll('.cast-card, .access-photo, .atm-item'));
 galleryCards.forEach(card => {
   const img = card.querySelector('img');
   if (img && !card.dataset.src && !card.dataset.gallerySrc) card.dataset.src = img.getAttribute('src');
