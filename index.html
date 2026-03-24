@@ -153,6 +153,9 @@
   .access-photo:hover img,.access-photo:focus-visible img{transform:scale(1.04);}
   .access-photo:hover::after,.access-photo:focus-visible::after{opacity:1;transform:translateY(0);}
   .access-photo:focus-visible{outline:1px solid var(--gold);outline-offset:2px;}
+  .step-label{position:absolute;bottom:0;left:0;right:0;padding:10px 12px 12px;background:linear-gradient(0deg,rgba(0,0,0,0.82) 0%,rgba(0,0,0,0.45) 70%,transparent 100%);display:flex;flex-direction:column;gap:3px;pointer-events:none;}
+  .step-num{font-size:10px;letter-spacing:3px;color:var(--gold);font-family:'Cormorant Garamond',serif;font-weight:600;}
+  .step-text{font-size:11px;color:rgba(255,255,255,0.88);line-height:1.5;letter-spacing:0.3px;}
   .map-frame{height:380px;background:#12100f;border:1px solid #1a1810;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
   .map-frame::before{content:'THANIYA\A BANGKOK';white-space:pre;font-family:'Cormorant Garamond',serif;font-size:20px;color:#2a2418;letter-spacing:6px;text-align:center;line-height:2;}
 
@@ -583,16 +586,16 @@
         <h3 data-i18n="access_route_title">BTS Saladaeng駅からのルート</h3>
         <p data-i18n="access_route_desc">駅からMILEAまでの道順を写真でまとめました。写真をタップすると拡大表示できます。</p>
         <div class="access-route-grid">
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/5f209aa5-7b23-4380-a61f-63f7aa33020a.jpg" aria-label="Route photo 1"><img src="assets/milea/access/5f209aa5-7b23-4380-a61f-63f7aa33020a.jpg" alt="Route photo 1 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/e3824421-e1db-4157-beda-eeb2c2aee390.jpg" aria-label="Route photo 2"><img src="assets/milea/access/e3824421-e1db-4157-beda-eeb2c2aee390.jpg" alt="Route photo 2 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/ebea1d5b-d407-4bc1-867c-a3cab020436b.jpg" aria-label="Route photo 3"><img src="assets/milea/access/ebea1d5b-d407-4bc1-867c-a3cab020436b.jpg" alt="Route photo 3 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/91ac434a-c9ee-4c15-9e94-ec86bec61d3a.jpg" aria-label="Route photo 4"><img src="assets/milea/access/91ac434a-c9ee-4c15-9e94-ec86bec61d3a.jpg" alt="Route photo 4 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/65746398-f128-485f-ac88-c0b1e8db9815.jpg" aria-label="Route photo 5"><img src="assets/milea/access/65746398-f128-485f-ac88-c0b1e8db9815.jpg" alt="Route photo 5 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/55ebed07-c4ab-478d-aab6-5eb47056ad66.jpg" aria-label="Route photo 6"><img src="assets/milea/access/55ebed07-c4ab-478d-aab6-5eb47056ad66.jpg" alt="Route photo 6 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/78a70cd0-655b-4309-834b-baa47e4f6ea9.jpg" aria-label="Route photo 7"><img src="assets/milea/access/78a70cd0-655b-4309-834b-baa47e4f6ea9.jpg" alt="Route photo 7 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/ed85a330-4da9-4c45-b332-8f320a026168.jpg" aria-label="Route photo 8"><img src="assets/milea/access/ed85a330-4da9-4c45-b332-8f320a026168.jpg" alt="Route photo 8 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/d025dee1-2c97-4282-a119-c5f52a2f0f6a.jpg" aria-label="Route photo 9"><img src="assets/milea/access/d025dee1-2c97-4282-a119-c5f52a2f0f6a.jpg" alt="Route photo 9 from BTS Saladaeng to MILEA"></button>
-          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/db920acc-f678-42b4-8535-00b241cfbcd7.jpg" aria-label="Route photo 10"><img src="assets/milea/access/db920acc-f678-42b4-8535-00b241cfbcd7.jpg" alt="Route photo 10 from BTS Saladaeng to MILEA"></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/5f209aa5-7b23-4380-a61f-63f7aa33020a.jpg" aria-label="Route photo 1"><img src="assets/milea/access/5f209aa5-7b23-4380-a61f-63f7aa33020a.jpg" alt="Route photo 1 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 1</span><span class="step-text" data-i18n="access_step1">BTS Saladaeng駅に到着 → 3・4番出口の改札を出てください</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/e3824421-e1db-4157-beda-eeb2c2aee390.jpg" aria-label="Route photo 2"><img src="assets/milea/access/e3824421-e1db-4157-beda-eeb2c2aee390.jpg" alt="Route photo 2 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 2</span><span class="step-text" data-i18n="access_step2">改札を出て右へ → 階段が見えます、階段を降ります</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/ebea1d5b-d407-4bc1-867c-a3cab020436b.jpg" aria-label="Route photo 3"><img src="assets/milea/access/ebea1d5b-d407-4bc1-867c-a3cab020436b.jpg" alt="Route photo 3 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 3</span><span class="step-text" data-i18n="access_step3">階段を降りたら → 右手にドン・キホーテ、そのまままっすぐ進む</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/91ac434a-c9ee-4c15-9e94-ec86bec61d3a.jpg" aria-label="Route photo 4"><img src="assets/milea/access/91ac434a-c9ee-4c15-9e94-ec86bec61d3a.jpg" alt="Route photo 4 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 4</span><span class="step-text" data-i18n="access_step4">タニヤプラザの看板 → 左に見ながらまっすぐ進む</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/65746398-f128-485f-ac88-c0b1e8db9815.jpg" aria-label="Route photo 5"><img src="assets/milea/access/65746398-f128-485f-ac88-c0b1e8db9815.jpg" alt="Route photo 5 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 5</span><span class="step-text" data-i18n="access_step5">MIYUKIの看板が見えたら右に曲がります</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/55ebed07-c4ab-478d-aab6-5eb47056ad66.jpg" aria-label="Route photo 6"><img src="assets/milea/access/55ebed07-c4ab-478d-aab6-5eb47056ad66.jpg" alt="Route photo 6 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 6</span><span class="step-text" data-i18n="access_step6">突き当たり → 左手のビルにMILEAの看板、4階です</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/78a70cd0-655b-4309-834b-baa47e4f6ea9.jpg" aria-label="Route photo 7"><img src="assets/milea/access/78a70cd0-655b-4309-834b-baa47e4f6ea9.jpg" alt="Route photo 7 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 7</span><span class="step-text" data-i18n="access_step7">タニヤプラザ周辺</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/ed85a330-4da9-4c45-b332-8f320a026168.jpg" aria-label="Route photo 8"><img src="assets/milea/access/ed85a330-4da9-4c45-b332-8f320a026168.jpg" alt="Route photo 8 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 8</span><span class="step-text" data-i18n="access_step8">裏通りを直進</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/d025dee1-2c97-4282-a119-c5f52a2f0f6a.jpg" aria-label="Route photo 9"><img src="assets/milea/access/d025dee1-2c97-4282-a119-c5f52a2f0f6a.jpg" alt="Route photo 9 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 9</span><span class="step-text" data-i18n="access_step9">MILEA 入口</span></div></button>
+          <button class="access-photo" type="button" data-gallery-src="assets/milea/access/db920acc-f678-42b4-8535-00b241cfbcd7.jpg" aria-label="Route photo 10"><img src="assets/milea/access/db920acc-f678-42b4-8535-00b241cfbcd7.jpg" alt="Route photo 10 from BTS Saladaeng to MILEA"><div class="step-label"><span class="step-num">Step 10</span><span class="step-text" data-i18n="access_step10">MILEA 4F — ようこそ</span></div></button>
         </div>
       </div>
     </div>
@@ -881,6 +884,16 @@ const i18n = {
     access_location:'場所', access_hours_label:'営業時間', access_hours:'18:30 〜 Late（年中無休 ※禁酒日除く）',
     access_lang_label:'言語', access_lang:'日本語 / English / ภาษาไทย', access_route_label:'Route Guide',
     access_route_title:'BTS Saladaeng駅からのルート', access_route_desc:'駅からMILEAまでの道順を写真でまとめました。写真をタップすると拡大表示できます。',
+    access_step1:'BTS Saladaeng駅に到着 → 3・4番出口の改札を出てください',
+    access_step2:'改札を出て右へ → 階段が見えます、階段を降ります',
+    access_step3:'階段を降りたら → 右手にドン・キホーテ、そのまままっすぐ進む',
+    access_step4:'タニヤプラザの看板 → 左に見ながらまっすぐ進む',
+    access_step5:'MIYUKIの看板が見えたら右に曲がります',
+    access_step6:'突き当たり → 左手のビルにMILEAの看板、4階です',
+    access_step7:'タニヤプラザ周辺',
+    access_step8:'裏通りを直進',
+    access_step9:'MILEA 入口',
+    access_step10:'MILEA 4F — ようこそ',
     faq_label:'FAQ', faq_title:'初めての方へ',
     faq_intro:'初めてMILEAにいらっしゃる方のよくあるご質問にお答えします。<br>ご不明な点はLINEやInstagramのDMでもお気軽にどうぞ。',
     footer_copy:'© 2026 MILEA Executive Club. All rights reserved.',
@@ -906,6 +919,16 @@ const i18n = {
     access_location:'Location', access_hours_label:'Hours', access_hours:'18:30 – Late (Open daily, except alcohol-restricted days)',
     access_lang_label:'Languages', access_lang:'Japanese / English / Thai', access_route_label:'Route Guide',
     access_route_title:'Route from BTS Sala Daeng Station', access_route_desc:'A step-by-step photo guide from the station to MILEA. Tap any image to view it larger.',
+    access_step1:'Arrive at BTS Sala Daeng → Exit via gate 3 or 4',
+    access_step2:'Turn right after the gate → Head to the stairs and descend',
+    access_step3:'At the bottom of the stairs → Don Quijote on your right, continue straight',
+    access_step4:'Thaniya Plaza sign → Keep it on your left and walk straight',
+    access_step5:'Spot the MIYUKI sign → Turn right at the MIYUKI sign',
+    access_step6:'Dead end → MILEA sign on the building to your left, 4th floor',
+    access_step7:'Around Thaniya Plaza',
+    access_step8:'Continue straight through the alley',
+    access_step9:'MILEA Entrance',
+    access_step10:'MILEA 4F — Welcome',
     faq_label:'FAQ', faq_title:'For First-Time Visitors',
     faq_intro:'Answers to frequently asked questions for first-time guests.<br>Feel free to reach out via LINE or Instagram DM.',
     footer_copy:'© 2026 MILEA Executive Club. All rights reserved.',
@@ -931,6 +954,16 @@ const i18n = {
     access_location:'ที่ตั้ง', access_hours_label:'เวลาทำการ', access_hours:'18:30 – ดึก (เปิดทุกวัน ยกเว้นวันห้ามขายเครื่องดื่มแอลกอฮอล์)',
     access_lang_label:'ภาษา', access_lang:'ญี่ปุ่น / อังกฤษ / ไทย', access_route_label:'เส้นทาง',
     access_route_title:'เส้นทางจาก BTS ศาลาแดง', access_route_desc:'รวมภาพบอกทางจากสถานีมาถึง MILEA แตะที่ภาพเพื่อดูแบบขยายได้',
+    access_step1:'ถึงสถานี BTS ศาลาแดง → ออกทางประตู 3 หรือ 4',
+    access_step2:'เลี้ยวขวาหลังออกประตู → มองหาบันได แล้วเดินลงบันได',
+    access_step3:'ลงบันไดแล้ว → ดอนกิโฮเต้อยู่ทางขวา เดินตรงไป',
+    access_step4:'ป้าย Thaniya Plaza → เดินตรงโดยให้ป้ายอยู่ทางซ้าย',
+    access_step5:'เห็นป้าย MIYUKI → เลี้ยวขวาที่ป้าย MIYUKI',
+    access_step6:'สุดซอย → ป้าย MILEA ที่ตึกฝั่งซ้าย ชั้น 4',
+    access_step7:'บริเวณ Thaniya Plaza',
+    access_step8:'เดินตรงในซอย',
+    access_step9:'ทางเข้า MILEA',
+    access_step10:'MILEA ชั้น 4 — ยินดีต้อนรับ',
     faq_label:'FAQ', faq_title:'สำหรับผู้มาครั้งแรก',
     faq_intro:'คำตอบสำหรับคำถามที่พบบ่อยจากแขกที่มาครั้งแรก<br>สอบถามเพิ่มเติมผ่าน LINE หรือ Instagram DM ได้เลย',
     footer_copy:'© 2026 MILEA Executive Club. สงวนลิขสิทธิ์',
@@ -956,6 +989,16 @@ const i18n = {
     access_location:'地址', access_hours_label:'营业时间', access_hours:'18:30 – 深夜（全年无休 ※禁酒日除外）',
     access_lang_label:'语言', access_lang:'日语 / 英语 / 泰语', access_route_label:'路线',
     access_route_title:'从 BTS Sala Daeng 站前往的路线', access_route_desc:'用照片整理了从车站步行到 MILEA 的路线，点击图片可放大查看。',
+    access_step1:'抵达BTS Sala Daeng站 → 从3或4号出口出站',
+    access_step2:'出闸后右转 → 找到楼梯并下楼',
+    access_step3:'下楼梯后 → 右手边是唐吉诃德，继续直走',
+    access_step4:'看到Thaniya Plaza招牌 → 将其保持在左侧直走',
+    access_step5:'看到MIYUKI招牌 → 在MIYUKI处右转',
+    access_step6:'走到尽头 → 左手边大楼有MILEA招牌，4楼',
+    access_step7:'Thaniya Plaza周边',
+    access_step8:'沿小巷直走',
+    access_step9:'MILEA入口',
+    access_step10:'MILEA 4楼 — 欢迎光临',
     faq_label:'FAQ', faq_title:'初次来访者',
     faq_intro:'以下是初次来访客人的常见问题解答。<br>如有疑问，请通过LINE或Instagram DM随时咨询。',
     footer_copy:'© 2026 MILEA Executive Club. 版权所有。',
@@ -981,6 +1024,16 @@ const i18n = {
     access_location:'위치', access_hours_label:'영업시간', access_hours:'18:30 – 심야 (연중무휴 ※금주일 제외)',
     access_lang_label:'언어', access_lang:'일본어 / 영어 / 태국어', access_route_label:'Route Guide',
     access_route_title:'BTS 살라댕역에서 오는 길', access_route_desc:'역에서 MILEA까지의 길을 사진으로 정리했습니다. 사진을 누르면 크게 볼 수 있습니다.',
+    access_step1:'BTS 살라댕역 도착 → 3·4번 출구로 나오세요',
+    access_step2:'개찰구를 나와 오른쪽으로 → 계단이 보이면 내려가세요',
+    access_step3:'계단을 내려오면 → 오른쪽에 돈키호테, 직진하세요',
+    access_step4:'타니야 플라자 간판 → 왼쪽에 두고 직진',
+    access_step5:'MIYUKI 간판이 보이면 → 오른쪽으로 꺾으세요',
+    access_step6:'막다른 곳 → 왼쪽 건물에 MILEA 간판, 4층입니다',
+    access_step7:'타니야 플라자 주변',
+    access_step8:'골목 직진',
+    access_step9:'MILEA 입구',
+    access_step10:'MILEA 4층 — 환영합니다',
     faq_label:'FAQ', faq_title:'처음 오시는 분께',
     faq_intro:'MILEA를 처음 방문하시는 분들의 자주 묻는 질문에 답변드립니다.<br>궁금한 점은 LINE이나 Instagram DM으로 편하게 문의해 주세요.',
     footer_copy:'© 2026 MILEA Executive Club. All rights reserved.',
